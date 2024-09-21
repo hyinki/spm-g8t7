@@ -16,6 +16,13 @@ class Employees(db.Model):
     
     def __repr__(self):
         return f'<employee_list {self.Staff_FName} {self.Staff_LName}>'
+    @property
+    def is_authenticated(self):
+        return True  # Always return True for this example
+
+    @property
+    def is_active(self):
+        return True  # Adjust based on your application's logic
 
     @staticmethod
     def get_by_id(staff_id):
@@ -26,13 +33,14 @@ class Employees(db.Model):
     def check_pword(staff_id):
         
         user = Employees.query.get(staff_id)
-        print("1")
+        
         # If the user exists, return their password hash
         if user:
             session['employee_id'] = user.Staff_ID
             session['name']= user.Staff_FName
             session['role'] = user.Role
             session['dept'] = user.Dept
+            session['supervisor']=user.Reporting_Manager
             return user.User_Password
         else:
             return "nope"
