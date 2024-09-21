@@ -1,9 +1,10 @@
 <script setup>
+
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 </script>
 
-<template>
+<!-- <template>
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
@@ -14,6 +15,19 @@ import TheWelcome from './components/TheWelcome.vue'
 
   <main>
     <TheWelcome />
+  </main>
+</template> -->
+<template>
+  <header>
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/login">Login</router-link>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Display the current page here -->
+    <router-view />
   </main>
 </template>
 
