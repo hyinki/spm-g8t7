@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update WFH Request</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Update WFH Request</h2>
+        <form action="{{ url_for('update_wfh_request', request_id=wfh_request.request_ID) }}" method="post">
+            <div class="form-group">
+                <label for="selected_date">Selected Date:</label>
+                <input type="date" class="form-control" id="selected_date" name="selected_date" value="{{ wfh_request.selected_date }}" required>
+            </div>
+            <div class="form-group">
+                <label for="day_of_week">Day of Week:</label>
+                <input type="text" class="form-control" id="day_of_week" name="day_of_week" value="{{ wfh_request.day_of_week }}" required>
+            </div>
+            <div class="form-group">
+                <label for="requester_id">Requester ID:</label>
+                <input type="number" class="form-control" id="requester_id" name="requester_id" value="{{ wfh_request.Requester_ID }}" required>
+            </div>
+            <div class="form-group">
+                <label for="requester_supervisor">Requester Supervisor:</label>
+                <input type="number" class="form-control" id="requester_supervisor" name="requester_supervisor" value="{{ wfh_request.Requester_Supervisor }}" required>
+            </div>
+            <div class="form-group">
+                <label for="request_status">Request Status:</label>
+                <select class="form-control" id="request_status" name="request_status" required>
+                    <option value="Pending" {% if wfh_request.Request_Status == 'Pending' %}selected{% endif %}>Pending</option>
+                    <option value="Approved" {% if wfh_request.Request_Status == 'Approved' %}selected{% endif %}>Approved</option>
+                    <option value="Withdrawn" {% if wfh_request.Request_Status == 'Withdrawn' %}selected{% endif %}>Withdrawn</option>
+                    <option value="Rejected" {% if wfh_request.Request_Status == 'Rejected' %}selected{% endif %}>Rejected</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Request</button>
+            <a href="{{ url_for('wfh_request') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
