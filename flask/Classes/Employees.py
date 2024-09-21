@@ -1,5 +1,5 @@
 from .Database import db  # Import the shared db instance
-
+from flask import session
 class Employees(db.Model):
     __tablename__ = 'employee_list'  # Ensure this matches your actual table name
 
@@ -29,11 +29,13 @@ class Employees(db.Model):
         print("1")
         # If the user exists, return their password hash
         if user:
-            print(user.Staff_ID)
-            print(user.User_Password)
+            session['employee_id'] = user.Staff_ID
+            session['name']= user.Staff_FName
+            session['role'] = user.Role
+            session['dept'] = user.Dept
             return user.User_Password
         else:
-            return "retard"
+            return "nope"
 
 
     @staticmethod

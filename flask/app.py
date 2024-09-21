@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for
+from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 from flask_cors import CORS
 from Classes.Database import db  
 from Classes.Employees import Employees
@@ -8,7 +8,7 @@ from werkzeug.security import check_password_hash
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:@localhost:3306/spmtest1'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+app.secret_key="1234567"
 db.init_app(app)  # Initialize the db with the Flask app
 CORS(app)
 
@@ -32,6 +32,7 @@ def check_pword():
 
     # Use the AuthService to check the password
     if login1.check_user_password(user_id, input_password):
+
         return render_template("employees.html")
     else:
         return render_template("success.html")
