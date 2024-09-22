@@ -1,5 +1,5 @@
 <template>
-   <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">PlanPro</a>
       <button
@@ -31,16 +31,12 @@
       </div>
     </div>
   </nav>
-  
-    <div>
-      <h1>Welcome to the view own schedule</h1>
-    </div>
-  
-    <div>
-      
-    </div>
 
-    <div class="container">
+  <div>
+    <h1>Welcome to the view own schedule</h1>
+  </div>
+
+  <div class="container">
     <div class="d-flex justify-content-between mb-3">
       <div>
         <label for="monthSelect">Month</label>
@@ -54,6 +50,7 @@
       </div>
     </div>
 
+    <!-- Calendar View -->
     <div v-if="viewType === 'calendar'" class="calendar">
       <table class="table table-bordered">
         <thead>
@@ -77,17 +74,41 @@
         </tbody>
       </table>
     </div>
+
+    <!-- List View -->
     <div v-else>
-      <!-- Add List View here if needed -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Activity</th>
+            <th>Office/WFH</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="event in dummyEvents" :key="event.name">
+            <td>{{ formatDate(event.date) }}</td>
+            <td>1pm - 2pm</td> <!-- You can customize the time format -->
+            <td>Meeting</td>
+            <td>
+              <div v-if="event.type === 'office'">
+                {{ event.name }} - Office
+              </div>
+              <div v-else>
+                {{ event.name }} - WFH
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  
-  </template>
-  
-  <script>
-  
-  export default {
-    name: "ViewOwnSchedule",
+</template>
+
+<script>
+export default {
+  name: "ViewOwnSchedule",
   data() {
     return {
       selectedMonth: new Date().getMonth() + 1,
@@ -108,9 +129,11 @@
         { name: 'Dec', value: 12 },
       ],
       dummyEvents: [
-        { name: 'Mary Tan', date: '2024-04-11', type: 'office' },
-        { name: 'Sean Goh', date: '2024-04-11', type: 'office' },
-        { name: 'Mary Tan', date: '2024-04-25', type: 'wfh' },
+      { name: 'Sarah Koh', date: '2024-09-10', type: 'office' },
+        { name: 'Mary Tan', date: '2024-10-03', type: 'office' },
+        { name: 'Sean Goh', date: '2024-10-03', type: 'office' },
+        { name: 'Elliot Tay', date: '2024-10-03', type: 'wfh' },
+        // Add more events here
       ],
     };
   },
@@ -134,7 +157,7 @@
       if (week.length) daysArray.push(week);
 
       return daysArray;
-    },
+    }
   },
   methods: {
     toggleView(view) {
@@ -144,7 +167,11 @@
       const today = new Date();
       return today.toDateString() === date.toDateString();
     },
-  },
+    formatDate(dateStr) {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    }
+  }
 };
-  </script>
+</script>
   
