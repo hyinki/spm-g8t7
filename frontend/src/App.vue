@@ -21,7 +21,9 @@ import TheWelcome from './components/TheWelcome.vue'
   <header>
     <nav>
       <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link>
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/homepage">Homepage</router-link> |
+      <router-link to="/viewteamschedule">viewteamschedule</router-link> 
     </nav>
   </header>
 
