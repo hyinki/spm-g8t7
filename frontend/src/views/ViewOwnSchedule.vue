@@ -33,7 +33,7 @@
   </nav>
   
     <div>
-      <h1>Welcome to the view team schedule</h1>
+      <h1>Welcome to the view own schedule</h1>
     </div>
   
     <div>
@@ -87,7 +87,7 @@
   <script>
   
   export default {
-    name: "ViewTeamSchedule",
+    name: "ViewOwnSchedule",
   data() {
     return {
       selectedMonth: new Date().getMonth() + 1,

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">PlanPro</a>
       <button
@@ -31,42 +31,20 @@
       </div>
     </div>
   </nav>
-
-  <div>
-    <h1>Welcome to the HomePage</h1>
-  </div>
-
-  <div>
-    <router-link to="/viewteamschedule">
-  <button type="button" class="btn btn-primary btn-lg m-5">
-    View Team Schedule
-  </button>
-</router-link>
-  </div>
-
-  <div>
-    <router-link to="/viewownschedule">
-  <button type="button" class="btn btn-primary btn-lg m-5">
-    View Own Schedule
-  </button>
-</router-link>
-  </div>
-
-  <div>
-    <router-link to="/applyforarrangement">
-  <button type="button" class="btn btn-primary btn-lg m-5">
-    Apply For Arrangement
-  </button>
-</router-link>
-  </div>
-
-
-
-
-</template>
-
-<script>
-export default {
-  name: "Homepage",
+  
+    <div>
+      <h1>Welcome to apply for arrangement</h1>
+    </div>
+  
+   
+  
+  </template>
+  
+  <script>
+  
+  export default {
+    name: "ApplyForArrangement"
+  
 };
-</script>
+  </script>
+  

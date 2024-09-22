@@ -3,6 +3,9 @@ import Home from '../views/Home.vue';  // Import from views
 import Login from '../views/Login.vue';
 import Homepage from '../views/Homepage.vue';
 import ViewTeamSchedule from '../views/ViewTeamSchedule.vue';
+import ViewOwnSchedule from '../views/ViewOwnSchedule.vue';
+import ApplyForArrangement from '../views/ApplyForArrangement.vue';
+
 
 const routes = [
   {
@@ -24,6 +27,16 @@ const routes = [
     path: '/viewteamschedule',
     name: 'ViewTeamSchedule',
     component: ViewTeamSchedule
+  },
+  {
+    path: '/viewownschedule',
+    name: 'ViewOwnSchedule',
+    component: ViewOwnSchedule
+  },
+  {
+    path: '/applyforarrangement',
+    name: 'ApplyForArrangement',
+    component: ApplyForArrangement
   }
 ];
 
