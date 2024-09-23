@@ -1,4 +1,6 @@
 
+
+
 CREATE DATABASE  if not exists spmtest1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE spmtest1; 
 
@@ -18,11 +20,17 @@ Role int Not Null
 
 select * from employee_list;
 
-Alter table Employee_List
-Add constraint FK_Reporting_Manager
-Foreign key (Reporting_Manager) references Employee_List(Staff_ID);
-Request_Status ENUM('Approved', 'Pending',"Withdrawn","Rejected",'Cancelled') DEFAULT 'Pending'
-);
+
+ALTER TABLE employee_list
+    ADD COLUMN Request_Status ENUM('Approved', 'Pending', 'Withdrawn', 'Rejected', 'Cancelled') 
+    DEFAULT 'Pending';
+
+ALTER TABLE employee_list
+    ADD CONSTRAINT FK_Reporting_Manager
+    FOREIGN KEY (Reporting_Manager) 
+    REFERENCES employee_list(Staff_ID);
+
+
 
 
 #Create booking table
@@ -37,5 +45,8 @@ Requester_Supervisor int not null,
 Foreign key (Requester_Supervisor) references Employee_list(Reporting_Manager),
 Request_Status ENUM('Approved', 'Pending',"Withdrawn","Rejected",'Cancelled') DEFAULT 'Pending'
 );
+
+
+
 
 
