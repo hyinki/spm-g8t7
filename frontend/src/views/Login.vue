@@ -45,7 +45,7 @@ export default {
     ...mapActions(["login"]),
     submitForm() {
       // Simulate a role fetched from the backend after login
-      const fetchedRole = "HR"; // This would come from your backend API in a real scenario
+      const fetchedRole = "Manager"; // This would come from your backend API in a real scenario
 
       // Store the role in Vuex state
       this.login({ role: fetchedRole });
