@@ -149,38 +149,43 @@
               <a class="nav-link active" aria-current="page" href="/homepage"
                 >Home</a
               >
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/viewoverallschedule"
+                >View Overall Schedulet</a
+              >
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/viewteamschedule"
                 >View Team Schedule</a
               >
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/viewoverallschedule"
-                >View Overall Schedule</a
-              >
-            </li>
 
-            <li class="nav-item"></li>
+           
           </ul>
         </div>
       </div>
     </nav>
+
 
     <div>
       <h1>Welcome to the HomePage (HR)</h1>
     </div>
 
     <div>
-      <router-link to="/viewoverallschedule">
+      
+      <router-link to="/viewteamschedule">
         <button type="button" class="btn btn-primary btn-lg m-5">
-          View Overall Schedule
+          View Team Schedule
         </button>
       </router-link>
     </div>
 
     <div>
-      <router-link to="/viewteamschedule">
+      <router-link to="/viewoverallschedule">
         <button type="button" class="btn btn-primary btn-lg m-5">
-          View Team Schedule
+          View Overall Schedule
         </button>
       </router-link>
     </div>
