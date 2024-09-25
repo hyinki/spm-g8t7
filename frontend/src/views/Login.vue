@@ -31,30 +31,30 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie'; // Import js-cookie to manage cookies
-import { mapActions } from 'vuex';
+import Cookies from "js-cookie"; // Import js-cookie to manage cookies
+import { mapActions } from "vuex";
 
 export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
     };
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(["login"]),
     submitForm() {
       // Simulate a role fetched from the backend after login
-      const fetchedRole = 'HR';  // This would come from your backend API in a real scenario
+      const fetchedRole = "HR"; // This would come from your backend API in a real scenario
 
       // Store the role in Vuex state
       this.login({ role: fetchedRole });
 
       // Set a cookie for the role, which expires in 7 days
-      Cookies.set('userRole', fetchedRole, { expires: 7 });
+      Cookies.set("userRole", fetchedRole, { expires: 7 });
 
       alert(`Login successful for ${this.username}`);
-      this.$router.push('/homepage');  // Redirect after login
+      this.$router.push("/homepage"); // Redirect after login
     },
     forgotPassword() {
       if (this.username) {
@@ -62,8 +62,8 @@ export default {
       } else {
         alert("Please enter your username to reset your password.");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
