@@ -1,0 +1,271 @@
+[
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "generate_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "CORS",
+        "importPath": "flask_cors",
+        "description": "flask_cors",
+        "isExtraImport": true,
+        "detail": "flask_cors",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "Classes.Database",
+        "description": "Classes.Database",
+        "isExtraImport": true,
+        "detail": "Classes.Database",
+        "documentation": {}
+    },
+    {
+        "label": "Employees",
+        "importPath": "Classes.Employees",
+        "description": "Classes.Employees",
+        "isExtraImport": true,
+        "detail": "Classes.Employees",
+        "documentation": {}
+    },
+    {
+        "label": "WFHRequests",
+        "importPath": "Classes.Wfh_Request",
+        "description": "Classes.Wfh_Request",
+        "isExtraImport": true,
+        "detail": "Classes.Wfh_Request",
+        "documentation": {}
+    },
+    {
+        "label": "Login",
+        "importPath": "Classes.Login",
+        "description": "Classes.Login",
+        "isExtraImport": true,
+        "detail": "Classes.Login",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "flask.Classes.Database",
+        "description": "flask.Classes.Database",
+        "peekOfCode": "db = SQLAlchemy()",
+        "detail": "flask.Classes.Database",
+        "documentation": {}
+    },
+    {
+        "label": "Employees",
+        "kind": 6,
+        "importPath": "flask.Classes.Employees",
+        "description": "flask.Classes.Employees",
+        "peekOfCode": "class Employees(db.Model):\n    __tablename__ = 'employee_list'  # Ensure this matches your actual table name\n    Staff_ID = db.Column(db.Integer, primary_key=True, nullable=False)\n    Staff_FName = db.Column(db.String(50), nullable=False)\n    Staff_LName = db.Column(db.String(50), nullable=False)\n    Dept = db.Column(db.String(50), nullable=False)\n    Position = db.Column(db.String(50), nullable=False)\n    Country = db.Column(db.String(50), nullable=False)\n    Email = db.Column(db.String(50), nullable=False)\n    Reporting_Manager = db.Column(db.Integer,db.ForeignKey('employee_list.Staff_ID'), nullable=True)",
+        "detail": "flask.Classes.Employees",
+        "documentation": {}
+    },
+    {
+        "label": "Login",
+        "kind": 6,
+        "importPath": "flask.Classes.Login",
+        "description": "flask.Classes.Login",
+        "peekOfCode": "class Login:\n    def check_user_password(self, user_id, input_password):\n        # Get the password hash for the user by their ID\n        pword = Employees.check_pword(user_id)\n        if pword:  # Ensure the password exists for the user\n            # Check if the input password matches the stored hash\n            return check_password_hash(pword, input_password)\n        else:\n            return False",
+        "detail": "flask.Classes.Login",
+        "documentation": {}
+    },
+    {
+        "label": "WFHRequests",
+        "kind": 6,
+        "importPath": "flask.Classes.Wfh_Request",
+        "description": "flask.Classes.Wfh_Request",
+        "peekOfCode": "class WFHRequests(db.Model):\n    __tablename__ = 'WFH_Requests'\n    request_ID = db.Column(db.Integer, primary_key=True)\n    selected_date = db.Column(db.Date, nullable=False)\n    day_of_week = db.Column(db.String(50), nullable=False)\n    Requester_ID = db.Column(db.Integer, nullable=False)\n    Requester_Supervisor = db.Column(db.Integer, nullable=False)\n    Request_Status = db.Column(db.Enum('Approved', 'Pending', 'Withdrawn', 'Rejected'), default='Pending')\n    @staticmethod\n    def get_by_id(request_id):",
+        "detail": "flask.Classes.Wfh_Request",
+        "documentation": {}
+    },
+    {
+        "label": "retrieve_employees",
+        "kind": 2,
+        "importPath": "flask.Classes.retrieve_employees",
+        "description": "flask.Classes.retrieve_employees",
+        "peekOfCode": "def retrieve_employees(Employees):\n    \"\"\"Retrieve and display all employees.\"\"\"\n    employees_list = Employees.get_all()  # Retrieve all employees from the database\n    return render_template('employees.html', employees=employees_list)  # Render the employees in the template",
+        "detail": "flask.Classes.retrieve_employees",
+        "documentation": {}
+    },
+    {
+        "label": "login_route",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def login_route():\n    return render_template(\"Login.html\")  # Call the login function from Auth.py\n@app.route(\"/check_pword\",methods=['POST'])\ndef check_pword():\n    login1= Login()\n    # Get the form data\n    user_id = request.form.get('user_ID')\n    input_password = request.form.get('password')\n    # Convert the password to a string (optional)\n    input_password = str(input_password)",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "check_pword",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def check_pword():\n    login1= Login()\n    # Get the form data\n    user_id = request.form.get('user_ID')\n    input_password = request.form.get('password')\n    # Convert the password to a string (optional)\n    input_password = str(input_password)\n    # Use the AuthService to check the password\n    if login1.check_user_password(user_id, input_password):\n        return render_template(\"employees.html\")",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "retrieve_employees",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def retrieve_employees():\n    \"\"\"Retrieve and display all employees.\"\"\"\n    employees_list = Employees.get_all()  # Retrieve all employees from the database\n    return render_template('employees.html', employees=employees_list)  # Render the employees in the template\nif __name__ == '__main__':\n    with app.app_context():\n        db.create_all()  # Create tables if they don't exist\n    app.run(host='0.0.0.0', port=5000, debug=True)",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "app = Flask(__name__)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:@localhost:3306/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key=\"1234567\"\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app)\n# Route for login\n@app.route('/login')\ndef login_route():\n    return render_template(\"Login.html\")  # Call the login function from Auth.py",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['SQLALCHEMY_DATABASE_URI']",
+        "kind": 5,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:@localhost:3306/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key=\"1234567\"\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app)\n# Route for login\n@app.route('/login')\ndef login_route():\n    return render_template(\"Login.html\")  # Call the login function from Auth.py\n@app.route(\"/check_pword\",methods=['POST'])",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['SQLALCHEMY_TRACK_MODIFICATIONS']",
+        "kind": 5,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key=\"1234567\"\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app)\n# Route for login\n@app.route('/login')\ndef login_route():\n    return render_template(\"Login.html\")  # Call the login function from Auth.py\n@app.route(\"/check_pword\",methods=['POST'])\ndef check_pword():",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "password",
+        "kind": 5,
+        "importPath": "flask.hashing_pword",
+        "description": "flask.hashing_pword",
+        "peekOfCode": "password = '123456'\nhashed_password = generate_password_hash(password)\nprint(hashed_password)\nunhashed_password=check_password_hash(hashed_password,\"123456\")\nprint(\"Unhashed pword is \",unhashed_password)",
+        "detail": "flask.hashing_pword",
+        "documentation": {}
+    },
+    {
+        "label": "hashed_password",
+        "kind": 5,
+        "importPath": "flask.hashing_pword",
+        "description": "flask.hashing_pword",
+        "peekOfCode": "hashed_password = generate_password_hash(password)\nprint(hashed_password)\nunhashed_password=check_password_hash(hashed_password,\"123456\")\nprint(\"Unhashed pword is \",unhashed_password)",
+        "detail": "flask.hashing_pword",
+        "documentation": {}
+    }
+]
