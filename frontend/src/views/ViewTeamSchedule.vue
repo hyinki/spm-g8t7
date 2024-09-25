@@ -1,4 +1,5 @@
 <template>
+<div v-if="isStaff">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">PlanPro</a>
@@ -31,10 +32,88 @@
       </div>
     </div>
   </nav>
-
   <div>
-    <h1>Welcome to the view team schedule</h1>
+    <h1>Welcome to the view team schedule (Staff)</h1>
   </div>
+
+</div>
+
+<div v-if="isManager">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">PlanPro</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/homepage">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/viewteamschedule">View Team Schedule</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/arrangement">Approve/RejectArrangement</a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div>
+    <h1>Welcome to the view team schedule (Manager)</h1>
+  </div>
+</div>
+
+<div v-if="isHR">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">PlanPro</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/homepage">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/viewoverallschedule">View Overall Schedule</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/viewteamschedule">View Team Schedule</a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div>
+    <h1>Welcome to the view team schedule (HR)</h1>
+  </div>
+</div>
+
+  
 
   <div class="container">
     <div class="d-flex justify-content-between mb-3">
@@ -107,6 +186,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: "ViewOwnSchedule",
   data() {
@@ -138,6 +219,16 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['userRole']), // Access the user's role from Vuex
+    isStaff() {
+      return this.userRole === 'Staff'; // Only true if the user's role is 'Staff'
+    },
+    isManager() {
+      return this.userRole === 'Manager'; // Only true if the user's role is 'Manager'
+    },
+    isHR() {
+      return this.userRole === 'HR'; // Only true if the user's role is 'Manager'
+    },
     calendarWeeks() {
       const firstDayOfMonth = new Date(new Date().getFullYear(), this.selectedMonth - 1, 1);
       const lastDayOfMonth = new Date(new Date().getFullYear(), this.selectedMonth, 0);
