@@ -28,11 +28,17 @@
             <tr>
                 <th>Request ID</th>
                 <th>Requester_ID</th>
-                <th>Selected Date</th>
-                <th>Day Of The Week</th>
-                <th>Time Block</th>
+                <th>Start Date</th>
+                <th>End Date</th>
                 <th>Requestor Supervisor</th>
                 <th>Request Status</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
             </tr>
         </thead>
         <tbody>
@@ -40,11 +46,17 @@
             <tr>
                 <td>{{ request.request_ID }}</td>
                 <td>{{ request.Requester_ID }}</td>
-                <td>{{ request.selected_date }}</td>
-                <td>{{ request.day_of_week }}</td>
-                <td>{{ request.time_block }}</td>
+                <td>{{ request.start_date }}</td>
+                <td>{{ request.end_date }}</td>
                 <td>{{ request.Requester_Supervisor }}</td>
                 <td>{{ request.Request_Status }}</td>
+                <td>{{ request.Monday }}</td>
+                <td>{{ request.Tuesday }}</td>
+                <td>{{ request.Wednesday }}</td>
+                <td>{{ request.Thursday }}</td>
+                <td>{{ request.Friday }}</td>
+                <td>{{ request.Saturday }}</td>
+                <td>{{ request.Sunday }}</td>
             </tr>
             {% endfor %}
         </tbody>

@@ -83,19 +83,33 @@ def wfh_request():
 @app.route("/submit_wfh_request", methods=["POST"])
 def submit_wfh_request():
     """Submit a new WFH request to the database."""
-    selected_date = request.form['selected_date']
-    day_of_week = request.form['day_of_week']
+    start_date = request.form['start_date']
+    end_date = request.form['end_date']
+    monday = request.form['monday']
+    tuesday = request.form['tuesday']
+    wednesday = request.form['wednesday']
+    thursday = request.form['thursday']
+    friday = request.form['friday']
+    saturday = request.form['saturday']
+    sunday = request.form['sunday']
     requester_id = request.form['requester_id']
     requester_supervisor = request.form['requester_supervisor']
     request_status = request.form['request_status']
 
     # Create a new WFH request instance
     new_request = WFHRequests(
-        selected_date=selected_date,
-        day_of_week=day_of_week,
         Requester_ID=requester_id,
         Requester_Supervisor=requester_supervisor,
-        Request_Status=request_status
+        Request_Status=request_status,
+        start_date = start_date,
+        end_date = end_date,
+        Monday = monday,
+        Tuesday = tuesday,
+        Wednesday = wednesday,
+        Thursday = thursday,
+        Friday = friday,
+        Saturday = saturday,
+        Sunday = sunday
     )
 
     try:
@@ -166,6 +180,8 @@ def managerview_active():
     sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Approved'")
     sql_processed = db.session.execute(sql)  
     return render_template('managerview_active.html', active=sql_processed)
+
+sql = text("Update update wfh_requests set Request_Status = 'Approved' where request_ID =" + str(request.form["request_id"]))
 
 if __name__ == '__main__':
     with app.app_context():
