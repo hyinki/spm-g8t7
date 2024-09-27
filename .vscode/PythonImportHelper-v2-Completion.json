@@ -348,7 +348,7 @@
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "app = Flask(__name__)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:8889/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app)\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated",
+        "peekOfCode": "app = Flask(__name__)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app)\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -357,7 +357,7 @@
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:8889/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app)\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class",
+        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app)\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class",
         "detail": "flask.app",
         "documentation": {}
     },
