@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Active WFH Arrangements</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Request ID</th>
+                <th>Requester_ID</th>
+                <th>Selected Date</th>
+                <th>Day Of The Week</th>
+                <th>Time Block</th>
+                <th>Requestor Supervisor</th>
+                <th>Request Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in active %}
+            <tr>
+                <td>{{ request.request_ID }}</td>
+                <td>{{ request.Requester_ID }}</td>
+                <td>{{ request.selected_date }}</td>
+                <td>{{ request.day_of_week }}</td>
+                <td>{{ request.time_block }}</td>
+                <td>{{ request.Requester_Supervisor }}</td>
+                <td>{{ request.Request_Status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

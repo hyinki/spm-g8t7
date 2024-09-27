@@ -149,9 +149,9 @@ def retrieve_staff_wfh_for_manager():
 @app.route("/managerview")
 def managerview():
     sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Pending'")
-    processeing = db.session.execute(sql) 
+    processing = db.session.execute(sql) 
     #list_of_pending_requests = session.get('manager_pending_list', [])   
-    return render_template('managerview.html', requests=processeing)
+    return render_template('managerview.html', requests=processing)
 
 
 @app.route("/viewownrequests")
@@ -160,6 +160,12 @@ def viewownrequests():
     sql = text("Select * from WFH_requests where Requester_ID = " + str(session['employee_id']))
     sqldonepog = db.session.execute(sql)
     return render_template('viewownrequests.html', ownreq = sqldonepog)
+
+@app.route("/managerview_active")
+def managerview_active():
+    sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Approved'")
+    sql_processed = db.session.execute(sql)  
+    return render_template('managerview_active.html', active=sql_processed)
 
 if __name__ == '__main__':
     with app.app_context():
