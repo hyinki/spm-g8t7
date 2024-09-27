@@ -58,12 +58,17 @@ def logout():
 @app.route("/homepage")
 @login_required
 def homepage():
+    staff_name=session['employee_id'] 
+    session['name']
+    session['dept'] 
+    session['supervisor']
+    session['email']
     return render_template("homepage.html")
 
 
 # Define a protected route
 @app.route("/test_employees")
-@login_required  # Protect this route
+@login_required 
 def retrieve_employees():
     """Retrieve and display all employees."""
     emp_name=session['name']
@@ -74,6 +79,7 @@ def retrieve_employees():
 
 
 @app.route("/wfh_request")
+@login_required
 def wfh_request():
     emp_name=session['name']
     emp_sup=session['supervisor']
@@ -81,6 +87,7 @@ def wfh_request():
     return render_template("wfh_request.html", emp_name=emp_name, emp_sup=emp_sup,emp_id=emp_id)
 
 @app.route("/submit_wfh_request", methods=["POST"])
+@login_required
 def submit_wfh_request():
     """Submit a new WFH request to the database."""
     start_date = request.form['start_date']
@@ -122,6 +129,7 @@ def submit_wfh_request():
         return redirect(url_for('failure'))  # Redirect to the failure page
 
 @app.route("/wfh_viewer")
+@login_required
 def retrieve_wfh():
     """Retrieve and display all wfh."""
     wfh_list = WFHRequests.get_all()  # Retrieve all employees from the database
@@ -129,6 +137,7 @@ def retrieve_wfh():
 
 
 @app.route("/update_wfh_request/<int:request_id>", methods=["GET", "POST"])
+@login_required
 def update_wfh_request(request_id):
     """Update a WFH request."""
     wfh_request = WFHRequests.get_by_id(request_id)
@@ -176,12 +185,12 @@ def viewownrequests():
     return render_template('viewownrequests.html', ownreq = sqldonepog)
 
 @app.route("/managerview_active")
+@login_required
 def managerview_active():
     sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Approved'")
     sql_processed = db.session.execute(sql)  
     return render_template('managerview_active.html', active=sql_processed)
 
-sql = text("Update update wfh_requests set Request_Status = 'Approved' where request_ID =" + str(request.form["request_id"]))
 
 if __name__ == '__main__':
     with app.app_context():

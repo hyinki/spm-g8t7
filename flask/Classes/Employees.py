@@ -42,6 +42,7 @@ class Employees(db.Model):
             session['role'] = user.Role
             session['dept'] = user.Dept
             session['supervisor']=user.Reporting_Manager
+            session['email']=user.Email
             #the following is code to check if the user is a manager himself/herself
             sql = text("Select Count(Staff_ID) from employee_list where Reporting_Manager =" + str(session['employee_id']))
             result = db.session.execute(sql)
