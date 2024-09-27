@@ -1,5 +1,6 @@
 from .Database import db  # Import the shared db instance
 from flask import session
+from sqlalchemy import text
 class Employees(db.Model):
     __tablename__ = 'employee_list'  # Ensure this matches your actual table name
 
@@ -41,6 +42,10 @@ class Employees(db.Model):
             session['role'] = user.Role
             session['dept'] = user.Dept
             session['supervisor']=user.Reporting_Manager
+            #the following is code to check if the user is a manager himself/herself
+            sql = text("Select Count(Staff_ID) from employee_list where Reporting_Manager =" + str(session['employee_id']))
+            result = db.session.execute(sql)
+            session['managecount'] = result.scalar()
             return user.User_Password
         else:
             return "nope"
@@ -50,3 +55,14 @@ class Employees(db.Model):
     def get_all():
         """Retrieve all employees from the database."""
         return Employees.query.all()
+    
+    def get_id(self):
+        return str(self.Staff_ID)
+    def get_role(self):
+        return str(self.Role)
+    def get_Fname(self):
+        return str(self.Staff_FName)       
+    def get_Lname(self):
+        return str(self.Staff_LName)         
+    def get_r_manager(self):
+        return str(self.Reporting_Manager)       

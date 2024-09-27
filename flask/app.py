@@ -6,6 +6,7 @@ from Classes.Employees import Employees
 from Classes.Wfh_Request import WFHRequests
 from Classes.Login import Login
 from werkzeug.security import check_password_hash
+from sqlalchemy import text
 import os
 
 app = Flask(__name__)
@@ -66,7 +67,9 @@ def homepage():
 def retrieve_employees():
     """Retrieve and display all employees."""
     emp_name=session['name']
-    employees_list = Employees.get_all()  # Retrieve all employees from the database
+    #employees_list = Employees.get_all()  # Retrieve all employees from the database
+    sql = text("SELECT * FROM employee_list where Reporting_Manager =" + str(session['supervisor']))
+    employees_list = db.session.execute(sql)
     return render_template('employees.html', employees=employees_list, emp_name=emp_name)  # Render the employees in the template
 
 
@@ -132,7 +135,31 @@ def update_wfh_request(request_id):
     return render_template('update_wfh_request.html', wfh_request=wfh_request)
 
 
+#Note, this function most likely can delete, with the homepage button reroute to manager view, was trialling some session based logic for handling data.
+#Might try to integrate a function where if session["managecount"] == 0 redirect back to homepage since no need to approve anything.
+@app.route("/manager_view_processing")
+def retrieve_staff_wfh_for_manager():
+    #sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Pending'")
+    #processed = db.session.execute(sql)
+    #turn the object into a list
+    #pending_list = processed.fetchall()
+    #session["manager_pending_list"] = pending_list
+    return redirect(url_for('managerview'))
 
+@app.route("/managerview")
+def managerview():
+    sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Pending'")
+    processeing = db.session.execute(sql) 
+    #list_of_pending_requests = session.get('manager_pending_list', [])   
+    return render_template('managerview.html', requests=processeing)
+
+
+@app.route("/viewownrequests")
+@login_required
+def viewownrequests():
+    sql = text("Select * from WFH_requests where Requester_ID = " + str(session['employee_id']))
+    sqldonepog = db.session.execute(sql)
+    return render_template('viewownrequests.html', ownreq = sqldonepog)
 
 if __name__ == '__main__':
     with app.app_context():

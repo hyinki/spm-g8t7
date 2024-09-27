@@ -9,6 +9,17 @@
     <h1>Welcome {{emp_name}}</h1>
     <button onclick="location.href = '/test_employees'">Employee list</button>
     <button onclick="location.href = '/wfh_request'">request wfh</button>
+    <button onclick="location.href = '/viewownrequests'">View my WFH Requests</button>
+    <br><br>
+    You are {{staff_name}} {{staff_last_name}}, reporting to {{reporting_manager}}{{session['supervisor']}}. Your email is {{session['email']}}
+    <br><br>
+    You manage {{session['managecount']}} people. Thanks!
+    <br><br>
+    {% if session['managecount'] > 0 %}
+    <br><br>
+    You are a manager!
+    <button onclick="location.href= '/manager_view_processing'">View Pending Staff Request</button>
+    {% endif %}
 
 </body>
 </html>
