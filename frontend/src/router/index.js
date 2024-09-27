@@ -5,6 +5,9 @@ import Homepage from '../views/Homepage.vue';
 import ViewTeamSchedule from '../views/ViewTeamSchedule.vue';
 import ViewOwnSchedule from '../views/ViewOwnSchedule.vue';
 import ApplyForArrangement from '../views/ApplyForArrangement.vue';
+import Arrangement from '../views/Arrangement.vue';
+import ViewOverallSchedule from '../views/ViewOverallSchedule.vue';
+
 
 
 const routes = [
@@ -37,6 +40,16 @@ const routes = [
     path: '/applyforarrangement',
     name: 'ApplyForArrangement',
     component: ApplyForArrangement
+  },
+  {
+    path: '/Arrangement',
+    name: 'Arrangement',
+    component: Arrangement
+  },
+  {
+    path: '/viewoverallschedule',
+    name: 'ViewOverallSchedule',
+    component: ViewOverallSchedule
   }
 ];
 
