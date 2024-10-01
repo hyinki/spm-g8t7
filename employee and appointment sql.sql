@@ -1,4 +1,5 @@
-
+drop table wfh_requests;
+drop table employee_list;
 
 
 CREATE DATABASE  if not exists spmtest1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
