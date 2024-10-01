@@ -6,6 +6,7 @@ from Classes.Employees import Employees
 from Classes.Wfh_Request import WFHRequests
 from Classes.Login import Login
 from werkzeug.security import check_password_hash
+from sqlalchemy import text
 import os
 
 app = Flask(__name__)
@@ -57,20 +58,28 @@ def logout():
 @app.route("/homepage")
 @login_required
 def homepage():
+    staff_name=session['employee_id'] 
+    session['name']
+    session['dept'] 
+    session['supervisor']
+    session['email']
     return render_template("homepage.html")
 
 
 # Define a protected route
 @app.route("/test_employees")
-@login_required  # Protect this route
+@login_required 
 def retrieve_employees():
     """Retrieve and display all employees."""
     emp_name=session['name']
-    employees_list = Employees.get_all()  # Retrieve all employees from the database
+    #employees_list = Employees.get_all()  # Retrieve all employees from the database
+    sql = text("SELECT * FROM employee_list where Reporting_Manager =" + str(session['supervisor']))
+    employees_list = db.session.execute(sql)
     return render_template('employees.html', employees=employees_list, emp_name=emp_name)  # Render the employees in the template
 
 
 @app.route("/wfh_request")
+@login_required
 def wfh_request():
     emp_name=session['name']
     emp_sup=session['supervisor']
@@ -78,21 +87,36 @@ def wfh_request():
     return render_template("wfh_request.html", emp_name=emp_name, emp_sup=emp_sup,emp_id=emp_id)
 
 @app.route("/submit_wfh_request", methods=["POST"])
+@login_required
 def submit_wfh_request():
     """Submit a new WFH request to the database."""
-    selected_date = request.form['selected_date']
-    day_of_week = request.form['day_of_week']
+    start_date = request.form['start_date']
+    end_date = request.form['end_date']
+    monday = request.form['monday']
+    tuesday = request.form['tuesday']
+    wednesday = request.form['wednesday']
+    thursday = request.form['thursday']
+    friday = request.form['friday']
+    saturday = request.form['saturday']
+    sunday = request.form['sunday']
     requester_id = request.form['requester_id']
     requester_supervisor = request.form['requester_supervisor']
     request_status = request.form['request_status']
 
     # Create a new WFH request instance
     new_request = WFHRequests(
-        selected_date=selected_date,
-        day_of_week=day_of_week,
         Requester_ID=requester_id,
         Requester_Supervisor=requester_supervisor,
-        Request_Status=request_status
+        Request_Status=request_status,
+        start_date = start_date,
+        end_date = end_date,
+        Monday = monday,
+        Tuesday = tuesday,
+        Wednesday = wednesday,
+        Thursday = thursday,
+        Friday = friday,
+        Saturday = saturday,
+        Sunday = sunday
     )
 
     try:
@@ -105,6 +129,7 @@ def submit_wfh_request():
         return redirect(url_for('failure'))  # Redirect to the failure page
 
 @app.route("/wfh_viewer")
+@login_required
 def retrieve_wfh():
     """Retrieve and display all wfh."""
     wfh_list = WFHRequests.get_all()  # Retrieve all employees from the database
@@ -112,6 +137,7 @@ def retrieve_wfh():
 
 
 @app.route("/update_wfh_request/<int:request_id>", methods=["GET", "POST"])
+@login_required
 def update_wfh_request(request_id):
     """Update a WFH request."""
     wfh_request = WFHRequests.get_by_id(request_id)
@@ -132,6 +158,38 @@ def update_wfh_request(request_id):
     return render_template('update_wfh_request.html', wfh_request=wfh_request)
 
 
+#Note, this function most likely can delete, with the homepage button reroute to manager view, was trialling some session based logic for handling data.
+#Might try to integrate a function where if session["managecount"] == 0 redirect back to homepage since no need to approve anything.
+@app.route("/manager_view_processing")
+def retrieve_staff_wfh_for_manager():
+    #sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Pending'")
+    #processed = db.session.execute(sql)
+    #turn the object into a list
+    #pending_list = processed.fetchall()
+    #session["manager_pending_list"] = pending_list
+    return redirect(url_for('managerview'))
+
+@app.route("/managerview")
+def managerview():
+    sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Pending'")
+    processing = db.session.execute(sql) 
+    #list_of_pending_requests = session.get('manager_pending_list', [])   
+    return render_template('managerview.html', requests=processing)
+
+
+@app.route("/viewownrequests")
+@login_required
+def viewownrequests():
+    sql = text("Select * from WFH_requests where Requester_ID = " + str(session['employee_id']))
+    sqldonepog = db.session.execute(sql)
+    return render_template('viewownrequests.html', ownreq = sqldonepog)
+
+@app.route("/managerview_active")
+@login_required
+def managerview_active():
+    sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Approved'")
+    sql_processed = db.session.execute(sql)  
+    return render_template('managerview_active.html', active=sql_processed)
 
 
 if __name__ == '__main__':
