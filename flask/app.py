@@ -191,6 +191,12 @@ def managerview_active():
     sql_processed = db.session.execute(sql)  
     return render_template('managerview_active.html', active=sql_processed)
 
+@app.route("/org_view")
+@login_required
+def org_view():
+    sql = text("Select * from WFH_requests where Request_Status = 'Approved'")
+    sql_processed = db.session.execute(sql)  
+    return render_template('org_view.html', org = sql_processed)
 
 if __name__ == '__main__':
     with app.app_context():

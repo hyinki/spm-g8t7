@@ -22,6 +22,12 @@
     <button onclick="location.href= '/manager_view_processing'">View Pending Staff Request</button>
     <button onclick="location.href= '/managerview_active'">View Active Staff WFH Arrangements</button>
     {% endif %}
+    <br><br>
+    {% if session['role'] == 1 or session['position'] == "MD" or session['position'] == "Director"%}
+    You have HR rights or are senior management!
+    <button onclick="location.href ='/org_view'">View organisation schedule</button>
+    you are {{session['position']}}
+    {% endif %}
 
 </body>
 </html>
