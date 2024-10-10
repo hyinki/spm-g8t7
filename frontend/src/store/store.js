@@ -9,6 +9,7 @@ export default createStore({
       dept: null,
       email: null,
       position: null,
+      userid: null,
     },
     isAuthenticated: false,
   },
@@ -32,6 +33,9 @@ export default createStore({
     setPosition(state, position) {
       state.user.position = position;
     },
+    setUserID(state, userid){
+      state.user.userid = userid
+    },
     logoutUser(state) {
       state.user = {
         role: null,
@@ -40,12 +44,13 @@ export default createStore({
         dept: null,
         email: null,
         position: null,
+        userid: null,
       };
       state.isAuthenticated = false; // Reset authenticated status
     },
   },
   actions: {
-    login({ commit }, { role, username, supervisor, dept, email, position }) {
+    login({ commit }, { role, username, supervisor, dept, email, position, userid }) {
       // Store the role and other user information retrieved from the backend upon login
       commit('setRole', role);
       commit('setUsername', username);
@@ -53,6 +58,7 @@ export default createStore({
       commit('setDept', dept);
       commit('setEmail', email);
       commit('setPosition', position);
+      commit('setUserID', userid);
      
     },
 
@@ -68,5 +74,6 @@ export default createStore({
     email: (state) => state.user.email,
     position: (state) => state.user.position,
     isAuthenticated: (state) => state.isAuthenticated,
+    userid: (state) => state.user.userid,
   },
 });

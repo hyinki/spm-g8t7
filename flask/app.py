@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.urandom(24)  # Set a random secret key for security
 db.init_app(app)  # Initialize the db with the Flask app
-CORS(app)
+CORS(app, supports_credentials=True)
 
 # Initialize Flask-Login
 login_manager = LoginManager()
@@ -53,6 +53,7 @@ def login_route():
             "supervisor": user.Reporting_Manager,
             "email": user.Email,
             "position": user.Position,
+            "userid": user.Staff_ID,
             "msg": "Login successful."
         }), 200
     else:
@@ -214,6 +215,33 @@ def org_view():
     sql = text("Select * from WFH_requests where Request_Status = 'Approved'")
     sql_processed = db.session.execute(sql)  
     return render_template('org_view.html', org = sql_processed)
+
+@app.route("/api/manager_view", methods=['GET'])
+def retrieve_manager_view():
+    #user_role = request.cookies.get("userRole")
+    #print(user_role)
+    #user_id = request.cookies.get("username")
+    #print(user_id)
+    user_id_2_the_electric_boogaloo = request.cookies.get("userid")
+    #print(user_id_2_the_electric_boogaloo)
+    sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)
+    sql = text(sql_stringie)
+    sql_processed = db.session.execute(sql)  
+    column_names = sql_processed.keys()
+    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+    print(sql_processed_2)
+    return jsonify(sql_processed_2)
+
+@app.route("/api/individual_view", methods=['GET'])
+def retrieve_individual_view():
+    user_id = request.cookies.get("userid")
+    sql_stringie = "Select * from WFH_requests where Requester_ID = "+str(user_id)
+    sql = text(sql_stringie)
+    sql_processed = db.session.execute(sql)
+    column_names = sql_processed.keys()
+    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+    print(sql_processed_2)
+    return jsonify(sql_processed_2)
 
 if __name__ == '__main__':
     with app.app_context():

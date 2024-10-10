@@ -60,6 +60,7 @@ export default {
         const dept=response.data.dept
         const email=response.data.email
         const position=response.data.position
+        const userid=response.data.userid
 
         // Store the role in Vuex state
         this.login({ role: fetchedRole });
@@ -71,6 +72,7 @@ export default {
         Cookies.set("dept", dept, { expires: 7 });
         Cookies.set("email", email, { expires: 7 });
         Cookies.set("position", position, { expires: 7 });
+        Cookies.set("userid", userid, { expires: 7 });
         
 
 
