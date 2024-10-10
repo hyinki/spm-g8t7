@@ -30,13 +30,22 @@ class Employees(db.Model):
         """Retrieve a specific employee by their Staff_ID."""
         return Employees.query.get(staff_id)
 
+    def get_role(role):
+        if(role==1):
+            return "HR"
+        if (role==2):
+            return "Employee"
+        if(role==3):
+            return "Manager"
+
     @staticmethod
     def check_pword(staff_id):
         
         user = Employees.query.get(staff_id)
-        
+        print(staff_id)
         # If the user exists, return their password hash
         if user:
+            
             session['employee_id'] = user.Staff_ID
             session['name']= user.Staff_FName
             session['role'] = user.Role
@@ -57,14 +66,4 @@ class Employees(db.Model):
     def get_all():
         """Retrieve all employees from the database."""
         return Employees.query.all()
-    
-    def get_id(self):
-        return str(self.Staff_ID)
-    def get_role(self):
-        return str(self.Role)
-    def get_Fname(self):
-        return str(self.Staff_FName)       
-    def get_Lname(self):
-        return str(self.Staff_LName)         
-    def get_r_manager(self):
-        return str(self.Reporting_Manager)       
+     

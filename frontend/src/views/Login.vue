@@ -33,28 +33,53 @@
 <script>
 import Cookies from "js-cookie"; // Import js-cookie to manage cookies
 import { mapActions } from "vuex";
+import axios from "axios"; // Import Axios for HTTP requests
 
 export default {
   data() {
     return {
       username: "",
       password: "",
+      error: null, // To store any error messages
     };
   },
   methods: {
     ...mapActions(["login"]),
-    submitForm() {
-      // Simulate a role fetched from the backend after login
-      const fetchedRole = "Manager"; // This would come from your backend API in a real scenario
+    async submitForm() {
+      try {
+        // Make the login request to the Flask backend
+        const response = await axios.post("http://localhost:5000/login", {
+          username: this.username,
+          password: this.password,
+        });
 
-      // Store the role in Vuex state
-      this.login({ role: fetchedRole });
+        // Assuming the backend returns a role in the response
+        const fetchedRole = response.data.role;
+        const name=response.data.user_name
+        const supervisor=response.data.supervisor
+        const dept=response.data.dept
+        const email=response.data.email
+        const position=response.data.position
 
-      // Set a cookie for the role, which expires in 7 days
-      Cookies.set("userRole", fetchedRole, { expires: 7 });
+        // Store the role in Vuex state
+        this.login({ role: fetchedRole });
 
-      alert(`Login successful for ${this.username}`);
-      this.$router.push("/homepage"); // Redirect after login
+        // Set a cookie for the role, which expires in 7 days
+        Cookies.set("userRole", fetchedRole, { expires: 7 });
+        Cookies.set("username", name, { expires: 7 });
+        Cookies.set("supervisor", supervisor, { expires: 7 });
+        Cookies.set("dept", dept, { expires: 7 });
+        Cookies.set("email", email, { expires: 7 });
+        Cookies.set("position", position, { expires: 7 });
+        
+
+
+        alert(`Login successful for ${this.username}`);
+        this.$router.push("/homepage"); // Redirect after login
+      } catch (error) {
+        this.error = error.response.data.msg || "Login failed."; // Capture error message
+        alert(this.error); // Display error message
+      }
     },
     forgotPassword() {
       if (this.username) {

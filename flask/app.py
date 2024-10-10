@@ -31,22 +31,39 @@ def load_user(user_id):
     return Employees.query.get(user_id)
 
 # Route for login
-@app.route('/login', methods=['GET', 'POST'])
+@app.route("/login", methods=["POST"])
 def login_route():
-    if request.method == 'POST':
-        user_id = request.form.get('user_ID')
-        input_password = request.form.get('password')
+    user_id = request.json.get('username')  # Get the user ID from the JSON body
+    input_password = request.json.get('password')  # Get the password from the JSON body
+    print(user_id)
+    print("password is "+ input_password)
+    # Create an instance of Login to check user credentials
+    login1 = Login()
+    if login1.check_user_password(user_id, input_password):
 
-        # Create an instance of Login to check user credentials
-        login1 = Login()
-        if login1.check_user_password(user_id, input_password):
-            user = User()
-            user.id = user_id  # or get the user ID from the Employees model if necessary
-            login_user(user)  # Log in the user
-            return redirect(url_for('homepage'))  # Redirect to the employees page
-        else:
-            return render_template("Login.html", error="Invalid credentials")  # Show an error if login fails
-    return render_template("Login.html")  # Display the login form
+
+        # Optionally return the user's role or other information
+        user =Employees.query.get(user_id)
+        user_role = Employees.get_role(user.Role)
+        user_name =user.Staff_FName
+        return jsonify({
+            "user_name": user_name,
+            "role": user_role,
+            "dept": user.Dept,
+            "supervisor": user.Reporting_Manager,
+            "email": user.Email,
+            "position": user.Position,
+            "msg": "Login successful."
+        }), 200
+    else:
+        return jsonify({"msg": "Invalid credentials."}), 401  # Return error if login fails
+
+# @app.route("/session", methods=['GET'])
+# @login_required
+# def get_session():
+#     name = session.get('name')  # Get the name from the session
+#     return jsonify({"name": name}), 200
+
 
 # Logout route
 @app.route("/logout")

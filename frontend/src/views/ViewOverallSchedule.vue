@@ -39,7 +39,9 @@
 </template>
 
 <script>
+
+
 export default {
   name: "viewoverallschedule",
-};
+}
 </script>

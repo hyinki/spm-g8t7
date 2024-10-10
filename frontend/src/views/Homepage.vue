@@ -107,7 +107,7 @@
     </nav>
 
     <div>
-      <h1>Welcome to the HomePage (Manager)</h1>
+      <h1>Welcome to the HomePage (Manager) {{username}}</h1>
     </div>
 
     <div>
@@ -153,7 +153,7 @@
 
             <li class="nav-item">
               <a class="nav-link" href="/viewoverallschedule"
-                >View Overall Schedulet</a
+                >View Overall Schedule</a
               >
             </li>
             <li class="nav-item">
@@ -170,7 +170,8 @@
 
 
     <div>
-      <h1>Welcome to the HomePage (HR)</h1>
+      <h1 >Welcome to the HomePage (HR)</h1>
+      <h2>{{username}}</h2>
     </div>
 
     <div>
@@ -197,8 +198,10 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "Homepage",
+
   computed: {
-    ...mapGetters(["userRole"]), // Access the user's role from Vuex
+    ...mapGetters(["userRole","username"]), // Access the user's role, username from Vuex
+    
     isStaff() {
       return this.userRole === "Staff"; // Only true if the user's role is 'Staff'
     },

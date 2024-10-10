@@ -23,7 +23,8 @@ import TheWelcome from './components/TheWelcome.vue'
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/homepage">Homepage</router-link> |
-      <router-link to="/viewteamschedule">viewteamschedule</router-link> 
+      <router-link to="/viewteamschedule">viewteamschedule </router-link> | 
+      <router-link to="/logout">log Out</router-link> 
     </nav>
   </header>
 
