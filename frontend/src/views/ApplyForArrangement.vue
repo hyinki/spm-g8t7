@@ -55,7 +55,7 @@
       </div>
     </nav>
 
-
+<div class="container">
   <div>
     <h1>Apply for arrangement</h1>
   </div>
@@ -119,6 +119,7 @@
 
     
   </div>
+</div>
 </template>
 
 <script>

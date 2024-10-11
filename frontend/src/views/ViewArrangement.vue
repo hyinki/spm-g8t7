@@ -54,12 +54,13 @@
         </div>
       </div>
     </nav>
-  
+    <div class="container">
     <div>
       <h1>View Arrangement</h1>
     </div>
   
     <!-- Arrangements Table -->
+   
     <div class="row">
       <div class="col">
         <table class="table table-bordered">
@@ -98,6 +99,7 @@
         </table>
       </div>
     </div>
+  </div>
   </template>
   
   <script>
