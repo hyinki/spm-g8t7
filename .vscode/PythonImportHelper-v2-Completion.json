@@ -80,6 +80,22 @@
         "documentation": {}
     },
     {
+        "label": "text",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "text",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
         "label": "check_password_hash",
         "importPath": "werkzeug.security",
         "description": "werkzeug.security",
@@ -184,11 +200,59 @@
         "documentation": {}
     },
     {
+        "label": "Employees",
+        "importPath": "Classes.Employees",
+        "description": "Classes.Employees",
+        "isExtraImport": true,
+        "detail": "Classes.Employees",
+        "documentation": {}
+    },
+    {
+        "label": "Employees",
+        "importPath": "Classes.Employees",
+        "description": "Classes.Employees",
+        "isExtraImport": true,
+        "detail": "Classes.Employees",
+        "documentation": {}
+    },
+    {
         "label": "WFHRequests",
         "importPath": "Classes.Wfh_Request",
         "description": "Classes.Wfh_Request",
         "isExtraImport": true,
         "detail": "Classes.Wfh_Request",
+        "documentation": {}
+    },
+    {
+        "label": "WFHRequests",
+        "importPath": "Classes.Wfh_Request",
+        "description": "Classes.Wfh_Request",
+        "isExtraImport": true,
+        "detail": "Classes.Wfh_Request",
+        "documentation": {}
+    },
+    {
+        "label": "WFHRequests",
+        "importPath": "Classes.Wfh_Request",
+        "description": "Classes.Wfh_Request",
+        "isExtraImport": true,
+        "detail": "Classes.Wfh_Request",
+        "documentation": {}
+    },
+    {
+        "label": "Login",
+        "importPath": "Classes.Login",
+        "description": "Classes.Login",
+        "isExtraImport": true,
+        "detail": "Classes.Login",
+        "documentation": {}
+    },
+    {
+        "label": "Login",
+        "importPath": "Classes.Login",
+        "description": "Classes.Login",
+        "isExtraImport": true,
+        "detail": "Classes.Login",
         "documentation": {}
     },
     {
@@ -206,6 +270,42 @@
         "importPath": "os",
         "description": "os",
         "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "cloudinary",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "cloudinary",
+        "description": "cloudinary",
+        "detail": "cloudinary",
+        "documentation": {}
+    },
+    {
+        "label": "cloudinary.uploader",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "cloudinary.uploader",
+        "description": "cloudinary.uploader",
+        "detail": "cloudinary.uploader",
+        "documentation": {}
+    },
+    {
+        "label": "mysql.connector",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "unittest;",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "unittest;",
+        "description": "unittest;",
+        "detail": "unittest;",
         "documentation": {}
     },
     {
@@ -240,7 +340,7 @@
         "kind": 6,
         "importPath": "flask.Classes.Wfh_Request",
         "description": "flask.Classes.Wfh_Request",
-        "peekOfCode": "class WFHRequests(db.Model):\n    __tablename__ = 'WFH_Requests'\n    request_ID = db.Column(db.Integer, primary_key=True)\n    selected_date = db.Column(db.Date, nullable=False)\n    day_of_week = db.Column(db.String(50), nullable=False)\n    Requester_ID = db.Column(db.Integer, nullable=False)\n    Requester_Supervisor = db.Column(db.Integer, nullable=False)\n    Request_Status = db.Column(db.Enum('Approved', 'Pending', 'Withdrawn', 'Rejected'), default='Pending')\n    @staticmethod\n    def get_by_id(request_id):",
+        "peekOfCode": "class WFHRequests(db.Model):\n    __tablename__ = 'WFH_Requests'\n    #request_ID = db.Column(db.Integer, primary_key=True)\n    #selected_date = db.Column(db.Date, nullable=False)\n    #day_of_week = db.Column(db.String(50), nullable=False)\n    #Requester_ID = db.Column(db.Integer, nullable=False)\n    #Requester_Supervisor = db.Column(db.Integer, nullable=False)\n    #Request_Status = db.Column(db.Enum('Approved', 'Pending', 'Withdrawn', 'Rejected'), default='Pending')\n    request_ID = db.Column(db.Integer, primary_key=True)\n    start_date = db.Column(db.Date, nullable=False)",
         "detail": "flask.Classes.Wfh_Request",
         "documentation": {}
     },
@@ -258,7 +358,7 @@
         "kind": 6,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "class User(UserMixin):\n    pass\n@login_manager.user_loader\ndef load_user(user_id):\n    return Employees.query.get(user_id)\n# Route for login\n@app.route('/login', methods=['GET', 'POST'])\ndef login_route():\n    if request.method == 'POST':\n        user_id = request.form.get('user_ID')",
+        "peekOfCode": "class User(UserMixin):\n    pass\n@login_manager.user_loader\ndef load_user(user_id):\n    return Employees.query.get(user_id)\n# Route for login\n@app.route(\"/login\", methods=[\"POST\"])\ndef login_route():\n    user_id = request.json.get('username')  # Get the user ID from the JSON body\n    print(user_id)",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -267,7 +367,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def load_user(user_id):\n    return Employees.query.get(user_id)\n# Route for login\n@app.route('/login', methods=['GET', 'POST'])\ndef login_route():\n    if request.method == 'POST':\n        user_id = request.form.get('user_ID')\n        input_password = request.form.get('password')\n        # Create an instance of Login to check user credentials\n        login1 = Login()",
+        "peekOfCode": "def load_user(user_id):\n    return Employees.query.get(user_id)\n# Route for login\n@app.route(\"/login\", methods=[\"POST\"])\ndef login_route():\n    user_id = request.json.get('username')  # Get the user ID from the JSON body\n    print(user_id)\n    input_password = request.json.get('password') \n    print(input_password) # Get the password from the JSON body\n    print(\"password is \"+ input_password)",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -276,7 +376,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def login_route():\n    if request.method == 'POST':\n        user_id = request.form.get('user_ID')\n        input_password = request.form.get('password')\n        # Create an instance of Login to check user credentials\n        login1 = Login()\n        if login1.check_user_password(user_id, input_password):\n            user = User()\n            user.id = user_id  # or get the user ID from the Employees model if necessary\n            login_user(user)  # Log in the user",
+        "peekOfCode": "def login_route():\n    user_id = request.json.get('username')  # Get the user ID from the JSON body\n    print(user_id)\n    input_password = request.json.get('password') \n    print(input_password) # Get the password from the JSON body\n    print(\"password is \"+ input_password)\n    # Create an instance of Login to check user credentials\n    login1 = Login()\n    if login1.check_user_password(user_id, input_password):\n        # Optionally return the user's role or other information",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -285,7 +385,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def logout():\n    logout_user()  # Log out the user\n    return redirect(url_for('login_route'))  # Redirect to login page\n@app.route(\"/homepage\")\n@login_required\ndef homepage():\n    return render_template(\"homepage.html\")\n# Define a protected route\n@app.route(\"/test_employees\")\n@login_required  # Protect this route",
+        "peekOfCode": "def logout():\n    logout_user()  # Log out the user\n    return redirect(url_for('login_route'))  # Redirect to login page\n@app.route(\"/homepage\")\n@login_required\ndef homepage():\n    staff_name=session['employee_id'] \n    session['name']\n    session['dept'] \n    session['supervisor']",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -294,7 +394,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def homepage():\n    return render_template(\"homepage.html\")\n# Define a protected route\n@app.route(\"/test_employees\")\n@login_required  # Protect this route\ndef retrieve_employees():\n    \"\"\"Retrieve and display all employees.\"\"\"\n    emp_name=session['name']\n    employees_list = Employees.get_all()  # Retrieve all employees from the database\n    return render_template('employees.html', employees=employees_list, emp_name=emp_name)  # Render the employees in the template",
+        "peekOfCode": "def homepage():\n    staff_name=session['employee_id'] \n    session['name']\n    session['dept'] \n    session['supervisor']\n    session['email']\n    return render_template(\"homepage.html\")\n# Define a protected route\n@app.route(\"/test_employees\")\n@login_required ",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -303,7 +403,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_employees():\n    \"\"\"Retrieve and display all employees.\"\"\"\n    emp_name=session['name']\n    employees_list = Employees.get_all()  # Retrieve all employees from the database\n    return render_template('employees.html', employees=employees_list, emp_name=emp_name)  # Render the employees in the template\n@app.route(\"/wfh_request\")\ndef wfh_request():\n    emp_name=session['name']\n    emp_sup=session['supervisor']\n    emp_id=session['employee_id']",
+        "peekOfCode": "def retrieve_employees():\n    \"\"\"Retrieve and display all employees.\"\"\"\n    emp_name=session['name']\n    #employees_list = Employees.get_all()  # Retrieve all employees from the database\n    sql = text(\"SELECT * FROM employee_list where Reporting_Manager =\" + str(session['supervisor']))\n    employees_list = db.session.execute(sql)\n    return render_template('employees.html', employees=employees_list, emp_name=emp_name)  # Render the employees in the template\n@app.route(\"/wfh_request\")\n@login_required\ndef wfh_request():",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -312,7 +412,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def wfh_request():\n    emp_name=session['name']\n    emp_sup=session['supervisor']\n    emp_id=session['employee_id']\n    return render_template(\"wfh_request.html\", emp_name=emp_name, emp_sup=emp_sup,emp_id=emp_id)\n@app.route(\"/submit_wfh_request\", methods=[\"POST\"])\ndef submit_wfh_request():\n    \"\"\"Submit a new WFH request to the database.\"\"\"\n    selected_date = request.form['selected_date']\n    day_of_week = request.form['day_of_week']",
+        "peekOfCode": "def wfh_request():\n    emp_name=session['name']\n    emp_sup=session['supervisor']\n    emp_id=session['employee_id']\n    return render_template(\"wfh_request.html\", emp_name=emp_name, emp_sup=emp_sup,emp_id=emp_id)\n@app.route(\"/submit_wfh_request\", methods=[\"POST\"])\ndef submit_wfh_request():\n    data = request.get_json()\n    start_date = data.get('startDate')\n    end_date = data.get('endDate')",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -321,7 +421,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def submit_wfh_request():\n    \"\"\"Submit a new WFH request to the database.\"\"\"\n    selected_date = request.form['selected_date']\n    day_of_week = request.form['day_of_week']\n    requester_id = request.form['requester_id']\n    requester_supervisor = request.form['requester_supervisor']\n    request_status = request.form['request_status']\n    # Create a new WFH request instance\n    new_request = WFHRequests(\n        selected_date=selected_date,",
+        "peekOfCode": "def submit_wfh_request():\n    data = request.get_json()\n    start_date = data.get('startDate')\n    end_date = data.get('endDate')\n    requester_id = data.get('userId')\n    requester_supervisor = data.get('supervisor')\n    request_status = \"pending\"  # or however you determine the initial status\n    cloudinary_link = data.get('cloudinary_link')\n    repeating= data.get('repeating')\n    print(\"This is a test\")",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -330,7 +430,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_wfh():\n    \"\"\"Retrieve and display all wfh.\"\"\"\n    wfh_list = WFHRequests.get_all()  # Retrieve all employees from the database\n    return  render_template('WFH.html',wfh_li=wfh_list) # Render the employees in the \n@app.route(\"/update_wfh_request/<int:request_id>\", methods=[\"GET\", \"POST\"])\ndef update_wfh_request(request_id):\n    \"\"\"Update a WFH request.\"\"\"\n    wfh_request = WFHRequests.get_by_id(request_id)\n    if request.method == \"POST\":\n        # Update the WFH request with the form data",
+        "peekOfCode": "def retrieve_wfh():\n    \"\"\"Retrieve and display all wfh.\"\"\"\n    wfh_list = WFHRequests.get_all()  # Retrieve all employees from the database\n    return  render_template('WFH.html',wfh_li=wfh_list) # Render the employees in the \n@app.route(\"/update_wfh_request/<int:request_id>\", methods=[\"GET\", \"POST\"])\n@login_required\ndef update_wfh_request(request_id):\n    \"\"\"Update a WFH request.\"\"\"\n    wfh_request = WFHRequests.get_by_id(request_id)\n    if request.method == \"POST\":",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -344,11 +444,56 @@
         "documentation": {}
     },
     {
+        "label": "retrieve_staff_wfh_for_manager",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def retrieve_staff_wfh_for_manager():\n    #sql = text(\"Select * from WFH_requests where Requester_Supervisor = \" + str(session['employee_id']) + \" AND Request_Status = 'Pending'\")\n    #processed = db.session.execute(sql)\n    #turn the object into a list\n    #pending_list = processed.fetchall()\n    #session[\"manager_pending_list\"] = pending_list\n    return redirect(url_for('managerview'))\n@app.route(\"/managerview\")\ndef managerview():\n    sql = text(\"Select * from WFH_requests where Requester_Supervisor = \" + str(session['employee_id']) + \" AND Request_Status = 'Pending'\")",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "managerview",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def managerview():\n    sql = text(\"Select * from WFH_requests where Requester_Supervisor = \" + str(session['employee_id']) + \" AND Request_Status = 'Pending'\")\n    processing = db.session.execute(sql) \n    #list_of_pending_requests = session.get('manager_pending_list', [])   \n    return render_template('managerview.html', requests=processing)\n@app.route(\"/viewownrequests\")\n@login_required\ndef viewownrequests():\n    sql = text(\"Select * from WFH_requests where Requester_ID = \" + str(session['employee_id']))\n    sqldonepog = db.session.execute(sql)",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "viewownrequests",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def viewownrequests():\n    sql = text(\"Select * from WFH_requests where Requester_ID = \" + str(session['employee_id']))\n    sqldonepog = db.session.execute(sql)\n    return render_template('viewownrequests.html', ownreq = sqldonepog)\n@app.route(\"/managerview_active\")\n@login_required\ndef managerview_active():\n    sql = text(\"Select * from WFH_requests where Requester_Supervisor = \" + str(session['employee_id']) + \" AND Request_Status = 'Approved'\")\n    sql_processed = db.session.execute(sql)  \n    return render_template('managerview_active.html', active=sql_processed)",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "managerview_active",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def managerview_active():\n    sql = text(\"Select * from WFH_requests where Requester_Supervisor = \" + str(session['employee_id']) + \" AND Request_Status = 'Approved'\")\n    sql_processed = db.session.execute(sql)  \n    return render_template('managerview_active.html', active=sql_processed)\n@app.route(\"/org_view\")\n@login_required\ndef org_view():\n    sql = text(\"Select * from WFH_requests where Request_Status = 'Approved'\")\n    sql_processed = db.session.execute(sql)  \n    return render_template('org_view.html', org = sql_processed)",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "org_view",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def org_view():\n    sql = text(\"Select * from WFH_requests where Request_Status = 'Approved'\")\n    sql_processed = db.session.execute(sql)  \n    return render_template('org_view.html', org = sql_processed)\nif __name__ == '__main__':\n    with app.app_context():\n        db.create_all()  # Create tables if they don't exist\n    app.run(host='0.0.0.0', port=5000, debug=True)",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
         "label": "app",
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "app = Flask(__name__)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app)\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated",
+        "peekOfCode": "app = Flask(__name__)\ncloudinary.config(\n    cloud_name='dofj7bkm3',\n    api_key='844945974877343',\n    api_secret='kxy0mseU1Qsz5G7UX31WElZ1hts'\n)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:8889/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -357,7 +502,7 @@
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app)\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class",
+        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:8889/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app, supports_credentials=True, origins=[\"*\"])\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -366,7 +511,7 @@
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app)\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class\nclass User(UserMixin):",
+        "peekOfCode": "app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app, supports_credentials=True, origins=[\"*\"])\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class\nclass User(UserMixin):",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -375,7 +520,7 @@
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "app.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app)\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class\nclass User(UserMixin):\n    pass",
+        "peekOfCode": "app.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app, supports_credentials=True, origins=[\"*\"])\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class\nclass User(UserMixin):\n    pass",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -393,7 +538,7 @@
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "login_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class\nclass User(UserMixin):\n    pass\n@login_manager.user_loader\ndef load_user(user_id):\n    return Employees.query.get(user_id)\n# Route for login\n@app.route('/login', methods=['GET', 'POST'])\ndef login_route():",
+        "peekOfCode": "login_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class\nclass User(UserMixin):\n    pass\n@login_manager.user_loader\ndef load_user(user_id):\n    return Employees.query.get(user_id)\n# Route for login\n@app.route(\"/login\", methods=[\"POST\"])\ndef login_route():",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -413,6 +558,24 @@
         "description": "flask.hashing_pword",
         "peekOfCode": "hashed_password = generate_password_hash(password)\nprint(hashed_password)\nunhashed_password=check_password_hash(hashed_password,\"123456\")\nprint(\"Unhashed pword is \",unhashed_password)",
         "detail": "flask.hashing_pword",
+        "documentation": {}
+    },
+    {
+        "label": "TestSQL",
+        "kind": 6,
+        "importPath": "flask.test_integration",
+        "description": "flask.test_integration",
+        "peekOfCode": "class TestSQL(unittest.TestCase):\n    pass",
+        "detail": "flask.test_integration",
+        "documentation": {}
+    },
+    {
+        "label": "TestLogin",
+        "kind": 6,
+        "importPath": "flask.test_unit",
+        "description": "flask.test_unit",
+        "peekOfCode": "class TestLogin(unittest.TestCase):\n    pass",
+        "detail": "flask.test_unit",
         "documentation": {}
     }
 ]

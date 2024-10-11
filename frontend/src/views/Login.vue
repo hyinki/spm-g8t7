@@ -34,6 +34,9 @@
 import Cookies from "js-cookie"; // Import js-cookie to manage cookies
 import { mapActions } from "vuex";
 import axios from "axios"; // Import Axios for HTTP requests
+import Toastify from "toastify-js"; // Correct path for Toastify
+import "toastify-js/src/toastify.css";  // Import Toastify CSS
+
 
 export default {
   data() {
@@ -75,11 +78,28 @@ export default {
         
 
 
-        alert(`Login successful for ${this.username}`);
+        Toastify({
+            text: `Login successful for ${this.username}`,
+            duration: 3000,  // Toast duration in milliseconds
+            close: true,     // Show close button
+            gravity: "top",  // Position of toast
+            position: "center", // Center horizontally
+            backgroundColor: "#4caf50",  // Green for success
+          }).showToast();
+
         this.$router.push("/homepage"); // Redirect after login
       } catch (error) {
-        this.error = error.response.data.msg || "Login failed."; // Capture error message
-        alert(this.error); // Display error message
+        // this.error = error.response.data.msg || "Login failed."; // Capture error message
+        // alert(this.error); // Display error message
+
+        Toastify({
+          text: `An error occurred: wrong username or password.`,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "center",
+          backgroundColor: "#f44336",  // Red for failure
+        }).showToast();
       }
     },
     forgotPassword() {
