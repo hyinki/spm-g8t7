@@ -24,11 +24,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.urandom(24)  # Set a random secret key for security
 db.init_app(app)  # Initialize the db with the Flask app
-<<<<<<< Updated upstream
-CORS(app)
-=======
+
 CORS(app, supports_credentials=True, origins=["*"])
->>>>>>> Stashed changes
+
 
 # Initialize Flask-Login
 login_manager = LoginManager()
@@ -66,18 +64,12 @@ def login_route():
         return jsonify({
             "user_name": session['name'],
             "role": user_role,
-<<<<<<< Updated upstream
-            "dept": user.Dept,
-            "supervisor": user.Reporting_Manager,
-            "email": user.Email,
-            "position": user.Position,
-=======
             "dept": session['dept'],
             "supervisor": session['supervisor'],
             "email": session['email'],
             "position": session['position'],
             "userid": session['employee_id'],
->>>>>>> Stashed changes
+
             "msg": "Login successful."
         }), 200
     else:
