@@ -170,14 +170,7 @@ def submit_wfh_request():
         Friday=days_dict.get('Friday', None),
         Saturday=days_dict.get('Saturday', None),
         Sunday=days_dict.get('Sunday', None)
-     
-        # Monday = monday,
-        # Tuesday = tuesday,
-        # Wednesday = wednesday,
-        # Thursday = thursday,
-        # Friday = friday,
-        # Saturday = saturday,
-        # Sunday = sunday
+        
         )
 
     try:
