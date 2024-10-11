@@ -64,9 +64,10 @@ export default {
         const dept=response.data.dept
         const email=response.data.email
         const position=response.data.position
-
+        const userid=response.data.userid
+        console.log(response.data.userid)
         // Store the role in Vuex state
-        this.login({ role: fetchedRole });
+        this.login({ role: fetchedRole, username: name, userid: userid, dept: dept, email: email, supervisor: supervisor, position: position });
 
         // Set a cookie for the role, which expires in 7 days
         Cookies.set("userRole", fetchedRole, { expires: 7 });
@@ -75,7 +76,7 @@ export default {
         Cookies.set("dept", dept, { expires: 7 });
         Cookies.set("email", email, { expires: 7 });
         Cookies.set("position", position, { expires: 7 });
-        
+        Cookies.set("userid", userid, { expires: 7 });
 
 
         Toastify({

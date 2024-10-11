@@ -7,7 +7,7 @@ import ViewOwnSchedule from '../views/ViewOwnSchedule.vue';
 import ApplyForArrangement from '../views/ApplyForArrangement.vue';
 import Arrangement from '../views/Arrangement.vue';
 import ViewOverallSchedule from '../views/ViewOverallSchedule.vue';
-import Logout from '../views/logout.vue';
+import Logout from '../views/Logout.vue';
 import store from '../store/store.js';
 
 const routes = [
