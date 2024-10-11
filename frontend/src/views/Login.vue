@@ -54,6 +54,7 @@ export default {
         });
 
         // Assuming the backend returns a role in the response
+        console.log(response.data);
         const fetchedRole = response.data.role;
         const name=response.data.user_name
         const supervisor=response.data.supervisor

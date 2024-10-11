@@ -8,14 +8,27 @@ from Classes.Login import Login
 from werkzeug.security import check_password_hash
 from sqlalchemy import text
 import os
-
+import cloudinary
+import cloudinary.uploader
+import mysql.connector
 app = Flask(__name__)
+
+cloudinary.config(
+    cloud_name='dofj7bkm3',
+    api_key='844945974877343',
+    api_secret='kxy0mseU1Qsz5G7UX31WElZ1hts'
+)
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.urandom(24)  # Set a random secret key for security
 db.init_app(app)  # Initialize the db with the Flask app
+<<<<<<< Updated upstream
 CORS(app)
+=======
+CORS(app, supports_credentials=True, origins=["*"])
+>>>>>>> Stashed changes
 
 # Initialize Flask-Login
 login_manager = LoginManager()
@@ -34,8 +47,10 @@ def load_user(user_id):
 @app.route("/login", methods=["POST"])
 def login_route():
     user_id = request.json.get('username')  # Get the user ID from the JSON body
-    input_password = request.json.get('password')  # Get the password from the JSON body
     print(user_id)
+    input_password = request.json.get('password') 
+    print(input_password) # Get the password from the JSON body
+    
     print("password is "+ input_password)
     # Create an instance of Login to check user credentials
     login1 = Login()
@@ -44,15 +59,25 @@ def login_route():
 
         # Optionally return the user's role or other information
         user =Employees.query.get(user_id)
+        userid=session['employee_id']
+        print(userid)
         user_role = Employees.get_role(user.Role)
-        user_name =user.Staff_FName
+        
         return jsonify({
-            "user_name": user_name,
+            "user_name": session['name'],
             "role": user_role,
+<<<<<<< Updated upstream
             "dept": user.Dept,
             "supervisor": user.Reporting_Manager,
             "email": user.Email,
             "position": user.Position,
+=======
+            "dept": session['dept'],
+            "supervisor": session['supervisor'],
+            "email": session['email'],
+            "position": session['position'],
+            "userid": session['employee_id'],
+>>>>>>> Stashed changes
             "msg": "Login successful."
         }), 200
     else:
@@ -104,21 +129,38 @@ def wfh_request():
     return render_template("wfh_request.html", emp_name=emp_name, emp_sup=emp_sup,emp_id=emp_id)
 
 @app.route("/submit_wfh_request", methods=["POST"])
-@login_required
+
 def submit_wfh_request():
-    """Submit a new WFH request to the database."""
-    start_date = request.form['start_date']
-    end_date = request.form['end_date']
-    monday = request.form['monday']
-    tuesday = request.form['tuesday']
-    wednesday = request.form['wednesday']
-    thursday = request.form['thursday']
-    friday = request.form['friday']
-    saturday = request.form['saturday']
-    sunday = request.form['sunday']
-    requester_id = request.form['requester_id']
-    requester_supervisor = request.form['requester_supervisor']
-    request_status = request.form['request_status']
+
+    data = request.get_json()
+
+    start_date = data.get('startDate')
+    end_date = data.get('endDate')
+    requester_id = data.get('userId')
+    requester_supervisor = data.get('supervisor')
+    request_status = "pending"  # or however you determine the initial status
+    cloudinary_link = data.get('cloudinary_link')
+    repeating= data.get('repeating')
+    print("This is a test")
+    print(type(repeating))
+    # Get selected days and timeslots
+    selected_days = data.get('selectedDays', [])
+    # print(selected_days)
+    days_dict = {day['day']: day['timeslot'] for day in selected_days}
+
+    # """Submit a new WFH request to the database."""
+    # start_date = request.form['start_date']
+    # end_date = request.form['end_date']
+    # monday = request.form['monday']
+    # tuesday = request.form['tuesday']
+    # wednesday = request.form['wednesday']
+    # thursday = request.form['thursday']
+    # friday = request.form['friday']
+    # saturday = request.form['saturday']
+    # sunday = request.form['sunday']
+    # requester_id = request.form['requester_id']
+    # requester_supervisor = request.form['requester_supervisor']
+    # request_status = request.form['request_status']
 
     # Create a new WFH request instance
     new_request = WFHRequests(
@@ -127,23 +169,33 @@ def submit_wfh_request():
         Request_Status=request_status,
         start_date = start_date,
         end_date = end_date,
-        Monday = monday,
-        Tuesday = tuesday,
-        Wednesday = wednesday,
-        Thursday = thursday,
-        Friday = friday,
-        Saturday = saturday,
-        Sunday = sunday
-    )
+        Cloudinary_link=cloudinary_link,
+        Repeating=repeating,
+        Monday=days_dict.get('Monday', None),
+        Tuesday=days_dict.get('Tuesday', None),
+        Wednesday=days_dict.get('Wednesday', None),
+        Thursday=days_dict.get('Thursday', None),
+        Friday=days_dict.get('Friday', None),
+        Saturday=days_dict.get('Saturday', None),
+        Sunday=days_dict.get('Sunday', None)
+     
+        # Monday = monday,
+        # Tuesday = tuesday,
+        # Wednesday = wednesday,
+        # Thursday = thursday,
+        # Friday = friday,
+        # Saturday = saturday,
+        # Sunday = sunday
+        )
 
     try:
         # Add the new request to the session and commit it to the database
         db.session.add(new_request)
         db.session.commit()
-        return redirect(url_for('success'))  # Redirect to the success page
+        return jsonify({'message': 'Request submitted successfully'}), 201
     except Exception as e:
         print(f"Error: {e}")  # Log the error
-        return redirect(url_for('failure'))  # Redirect to the failure page
+        return jsonify({'message': 'Failed to submit request'}), 500  # Redirect to the failure page
 
 @app.route("/wfh_viewer")
 @login_required

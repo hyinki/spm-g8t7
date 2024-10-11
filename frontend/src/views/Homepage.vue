@@ -39,7 +39,7 @@
     </nav>
 
     <div>
-      <h1>Welcome to the HomePage (Staff)</h1>
+    <h1> Welcome to the HomePage, {{username}}, {{paper}} ,{{dept}} (Staff) </h1>
     </div>
 
     <div>
@@ -107,7 +107,7 @@
     </nav>
 
     <div>
-      <h1>Welcome to the HomePage (Manager) {{username}}</h1>
+      <h1>Welcome to the HomePage, {{username}} (Manager)</h1>
     </div>
 
     <div>
@@ -170,8 +170,8 @@
 
 
     <div>
-      <h1 >Welcome to the HomePage (HR)</h1>
-      <h2>{{username}}</h2>
+      <h1 >Welcome to the HomePage, {{ username }} (HR)</h1>
+    
     </div>
 
     <div>
@@ -195,15 +195,23 @@
 
 <script>
 import { mapGetters } from "vuex";
+import Cookies from "js-cookie"; // Import js-cookie to manage cookies
+
+
 
 export default {
   name: "Homepage",
-
+  created() {
+    // Get the cookie value when the component is created
+    this.userID = Cookies.get('userid') || 'Cookie not found';
+  },
   computed: {
-    ...mapGetters(["userRole","username"]), // Access the user's role, username from Vuex
+    ...mapGetters(["userRole","username","userid","dept"]), // Access the user's role, username from Vuex
     
     isStaff() {
+    
       return this.userRole === "Staff"; // Only true if the user's role is 'Staff'
+      
     },
     isManager() {
       return this.userRole === "Manager"; // Only true if the user's role is 'Manager'
