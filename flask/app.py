@@ -296,6 +296,35 @@ def org_view():
     sql_processed = db.session.execute(sql)  
     return render_template('org_view.html', org = sql_processed)
 
+@app.route("/api/manager_view", methods=['GET'])
+def retrieve_manager_view():
+    #user_role = request.cookies.get("userRole")
+    #print(user_role)
+    #user_id = request.cookies.get("username")
+    #print(user_id)
+    user_id_2_the_electric_boogaloo = request.cookies.get("userid")
+    selected_month = request.args.get('month')
+    print(selected_month)
+    #print(user_id_2_the_electric_boogaloo)
+    sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+    sql = text(sql_stringie)
+    sql_processed = db.session.execute(sql)  
+    column_names = sql_processed.keys()
+    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+    print(sql_processed_2)
+    return jsonify(sql_processed_2)
+
+@app.route("/api/individual_view", methods=['GET'])
+def retrieve_individual_view():
+    user_id = request.cookies.get("userid")
+    sql_stringie = "Select * from WFH_requests where Requester_ID = "+str(user_id)
+    sql = text(sql_stringie)
+    sql_processed = db.session.execute(sql)
+    column_names = sql_processed.keys()
+    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+    print(sql_processed_2)
+    return jsonify(sql_processed_2)
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Create tables if they don't exist

@@ -111,7 +111,39 @@ import HeaderManager from '../components/HeaderManager.vue';
               <div v-else>{{ event.name }} - WFH</div>
             </td>
           </tr>
+          <tr v-for="requests in teamschedule" :key="requests.request_ID">
+            <td>{{requests.request_ID}}</td>
+            <td>{{requests.Requester_ID}}</td>
+            <td>{{requests.start_date}}</td>
+            <td>{{requests.end_date}}</td>
+          </tr>
         </tbody>
+      </table>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>Requester ID</th>
+            <th>Requester Supervisor</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+            <th>Request Status</th>
+          </tr>
+          <tr v-for="requests in teamschedule" :key="requests.request_ID">
+            <td>{{requests.request_ID}}</td>
+            <td>{{requests.Requester_ID}}</td>
+            <td>{{requests.Rquester_Supervisor}}</td>
+            <td>{{requests.start_date}}</td>
+            <td>{{requests.end_date}}</td>
+          </tr>
+        </thead>
       </table>
     </div>
   </div>
@@ -119,6 +151,7 @@ import HeaderManager from '../components/HeaderManager.vue';
 
 <script>
 import { mapGetters } from "vuex";
+import axios from 'axios';
 
 export default {
   name: "ViewOwnSchedule",
@@ -148,8 +181,10 @@ export default {
         { name: "Elliot Tay", date: "2024-10-03", type: "wfh" },
         // Add more events here
       ],
+      teamschedule: [],
     };
   },
+
   computed: {
     ...mapGetters(["userRole"]), // Access the user's role from Vuex
     isStaff() {
@@ -201,7 +236,24 @@ export default {
       return daysArray;
     },
   },
+
+
   methods: {
+    fetchteamschedule(){
+      console.log('Selected month before fetching:', this.selectedMonth)
+      var params = { month: this.selectedMonth }
+      console.log(params)
+      axios.get("http://localhost:5000/api/manager_view", { params:params, withCredentials:true})
+      .then(response => {
+      this.teamschedule = response.data
+      console.log(this.teamschedule)
+      console.log(typeof teamschedule)
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    })
+    },
+
     toggleView(view) {
       this.viewType = view;
     },
@@ -218,5 +270,26 @@ export default {
       });
     },
   },
+
+  created(){
+    this.fetchteamschedule();
+  },
+
+  watch:{
+    selectedMonth(){
+      this.fetchteamschedule();
+    }
+  }
 };
+
+/*console.log("Checking")
+axios.get("http://localhost:5000/api/manager_view", { withCredentials:true})
+  .then(response => {
+    var pogchamp = response.data
+    console.log(pogchamp)
+    console.log(typeof pogchamp)
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  }) */
 </script>
