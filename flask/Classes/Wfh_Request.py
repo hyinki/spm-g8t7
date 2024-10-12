@@ -23,7 +23,8 @@ class WFHRequests(db.Model):
     Saturday = db.Column(db.Enum('AM', 'PM', 'Whole Day', 'NULL'), nullable=True, default='NULL')
     Sunday = db.Column(db.Enum('AM', 'PM', 'Whole Day', 'NULL'), nullable=True, default='NULL')
     Request_Status = db.Column(db.Enum('Approved', 'Pending', 'Withdrawn', 'Rejected'), default='Pending')
-
+    Cloudinary_link = db.Column(db.String(1028), nullable=True)
+    Repeating = db.Column(db.Boolean, default=False)
 
     @staticmethod
     def get_by_id(request_id):

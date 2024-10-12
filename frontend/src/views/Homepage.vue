@@ -1,72 +1,133 @@
+<script setup>
+import HeaderStaff from '../components/HeaderStaff.vue';
+import HeaderHR from '../components/HeaderHR.vue';
+import HeaderManager from '../components/HeaderManager.vue';
+</script>
+
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">PlanPro</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/homepage">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/viewteamschedule">Team Schedule</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/viewownschedule">Own Schedule</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/applyforarrangement">Apply For Arrangement</a>
-          </li>
-        </ul>
-      </div>
+  <!-- Staff Section -->
+  <div v-if="isStaff">
+    <HeaderStaff/>
+    
+
+    <div>
+    <h1> Welcome to the HomePage, {{username}}, {{id}},{{ userID }} , {{dept}} (Staff) </h1>
     </div>
-  </nav>
 
-  <div>
-    <h1>Welcome to the HomePage</h1>
+    <div>
+      <router-link to="/viewteamschedule">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          View Team Schedule
+        </button>
+      </router-link>
+    </div>
+
+    <div>
+      <router-link to="/viewownschedule">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          View Own Schedule
+        </button>
+      </router-link>
+    </div>
+
+    <div>
+      <router-link to="/applyforarrangement">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          Apply For Arrangement
+        </button>
+      </router-link>
+    </div>
   </div>
 
-  <div>
-    <router-link to="/viewteamschedule">
-  <button type="button" class="btn btn-primary btn-lg m-5">
-    View Team Schedule
-  </button>
-</router-link>
+  <!-- Manager Section -->
+  <div v-if="isManager">
+    <HeaderManager/>
+
+    <div>
+      <h1>Welcome to the HomePage, {{username}} (Manager)</h1>
+    </div>
+
+    <div>
+      <router-link to="/viewteamschedule">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          View Team Schedule
+        </button>
+      </router-link>
+    </div>
+
+    <div>
+      <router-link to="/arrangement">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          Approve/Reject Arrangement
+        </button>
+      </router-link>
+    </div>
   </div>
 
-  <div>
-    <router-link to="/viewownschedule">
-  <button type="button" class="btn btn-primary btn-lg m-5">
-    View Own Schedule
-  </button>
-</router-link>
+  <!-- HR Section -->
+  <div v-if="isHR">
+    <HeaderHR/>
+
+
+    <div>
+      <h1 >Welcome to the HomePage, {{ username }} (HR)</h1>
+    
+    </div>
+
+    <div>
+      
+      <router-link to="/viewteamschedule">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          View Team Schedule
+        </button>
+      </router-link>
+    </div>
+
+    <div>
+      <router-link to="/viewoverallschedule">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          View Overall Schedule
+        </button>
+      </router-link>
+    </div>
   </div>
-
-  <div>
-    <router-link to="/applyforarrangement">
-  <button type="button" class="btn btn-primary btn-lg m-5">
-    Apply For Arrangement
-  </button>
-</router-link>
-  </div>
-
-
-
-
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import Cookies from "js-cookie"; // Import js-cookie to manage cookies
+
+
+
+
 export default {
-  name: "Homepage",
+ 
+  created() {
+    // Get the cookie value when the component is created
+    this.userID = Cookies.get('userid') || 'Cookie not found';
+  },
+  computed: {
+    ...mapGetters(["userRole","username","id","dept","email","supervisor"]), // Access the user's role, username from Vuex
+   
+
+    isStaff() {
+    
+      return this.userRole === "Staff"; // Only true if the user's role is 'Staff'
+      
+    },
+    isManager() {
+      return this.userRole === "Manager"; // Only true if the user's role is 'Manager'
+    },
+    isHR() {
+      return this.userRole === "HR"; // Only true if the user's role is 'HR'
+    },
+  },
 };
 </script>
+
+<style scoped>
+.container {
+  max-width: 400px;
+  margin-top: 50px;
+}
+</style>

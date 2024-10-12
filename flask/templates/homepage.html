@@ -6,7 +6,7 @@
     <title>Form</title>
 </head>
 <body>
-    <h1>Welcome {{emp_name}}</h1>
+    <h1>Welcome {{emp_name}} , </h1>
     <button onclick="location.href = '/test_employees'">Employee list</button>
     <button onclick="location.href = '/wfh_request'">request wfh</button>
     <button onclick="location.href = '/viewownrequests'">View my WFH Requests</button>
@@ -21,6 +21,12 @@
     You are a manager!
     <button onclick="location.href= '/manager_view_processing'">View Pending Staff Request</button>
     <button onclick="location.href= '/managerview_active'">View Active Staff WFH Arrangements</button>
+    {% endif %}
+    <br><br>
+    {% if session['role'] == 1 or session['position'] == "MD" or session['position'] == "Director"%}
+    You have HR rights or are senior management!
+    <button onclick="location.href ='/org_view'">View organisation schedule</button>
+    you are {{session['position']}}
     {% endif %}
 
 </body>

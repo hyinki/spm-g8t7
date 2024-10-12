@@ -15,6 +15,7 @@ class Employees(db.Model):
     User_Password = db.Column(db.String(1024),nullable=True)
     Role = db.Column(db.Integer, nullable=False)
     
+
     def __repr__(self):
         return f'<employee_list {self.Staff_FName} {self.Staff_LName}>'
     @property
@@ -30,19 +31,29 @@ class Employees(db.Model):
         """Retrieve a specific employee by their Staff_ID."""
         return Employees.query.get(staff_id)
 
+    def get_role(role):
+        if(role==1):
+            return "HR"
+        if (role==2):
+            return "Staff"
+        if(role==3):
+            return "Manager"
+
     @staticmethod
     def check_pword(staff_id):
         
         user = Employees.query.get(staff_id)
-        
+        print(staff_id)
         # If the user exists, return their password hash
         if user:
+            
             session['employee_id'] = user.Staff_ID
             session['name']= user.Staff_FName
             session['role'] = user.Role
             session['dept'] = user.Dept
             session['supervisor']=user.Reporting_Manager
             session['email']=user.Email
+            session['position']=user.Position
             #the following is code to check if the user is a manager himself/herself
             sql = text("Select Count(Staff_ID) from employee_list where Reporting_Manager =" + str(session['employee_id']))
             result = db.session.execute(sql)
@@ -56,14 +67,4 @@ class Employees(db.Model):
     def get_all():
         """Retrieve all employees from the database."""
         return Employees.query.all()
-    
-    def get_id(self):
-        return str(self.Staff_ID)
-    def get_role(self):
-        return str(self.Role)
-    def get_Fname(self):
-        return str(self.Staff_FName)       
-    def get_Lname(self):
-        return str(self.Staff_LName)         
-    def get_r_manager(self):
-        return str(self.Reporting_Manager)       
+     
