@@ -62,6 +62,8 @@ import HeaderStaff from '../components/HeaderStaff.vue';
 <script>
 import { mapGetters } from "vuex";
 import axios from "axios"; // Import axios for API requests
+import Toastify from 'toastify-js';  // Import Toastify for notifications
+import "toastify-js/src/toastify.css";  // Import Toastify CSS
 
 export default {
   name: "ViewArrangement",
@@ -98,11 +100,37 @@ export default {
           // Remove the deleted request from the table
           this.arrangements.splice(index, 1);
           console.log("Request deleted successfully!");
+          Toastify({
+            text: `Cancel arrangement successful`,
+            duration: 3000,  // Toast duration in milliseconds
+            close: true,     // Show close button
+            gravity: "top",  // Position of toast
+            position: "center", // Center horizontally
+            backgroundColor: "#4caf50",  // Green for success
+          }).showToast();
+
         } else {
           console.error("Error deleting request:", response.data.message);
+          
+          Toastify({
+          text: `An error occurred.`,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "center",
+          backgroundColor: "#f44336",  // Red for failure
+        }).showToast();
         }
       } catch (error) {
         console.error("Error canceling request:", error);
+        Toastify({
+          text: `An error occurred.`,
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "center",
+          backgroundColor: "#f44336",  // Red for failure
+        }).showToast();
       }
     },
   },
