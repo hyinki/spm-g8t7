@@ -15,6 +15,7 @@ class Employees(db.Model):
     User_Password = db.Column(db.String(1024),nullable=True)
     Role = db.Column(db.Integer, nullable=False)
     
+
     def __repr__(self):
         return f'<employee_list {self.Staff_FName} {self.Staff_LName}>'
     @property
@@ -34,7 +35,7 @@ class Employees(db.Model):
         if(role==1):
             return "HR"
         if (role==2):
-            return "Employee"
+            return "Staff"
         if(role==3):
             return "Manager"
 

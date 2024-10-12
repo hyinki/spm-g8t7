@@ -9,7 +9,7 @@ export default createStore({
       dept: null,
       email: null,
       position: null,
-      userid: null,
+      id: null,
     },
     isAuthenticated: false,
   },
@@ -33,8 +33,8 @@ export default createStore({
     setPosition(state, position) {
       state.user.position = position;
     },
-    setUserID(state, userid){
-      state.user.userid = userid
+    setId(state, user_id) {
+      state.user.id = user_id;
     },
     logoutUser(state) {
       state.user = {
@@ -44,8 +44,9 @@ export default createStore({
         dept: null,
         email: null,
         position: null,
-        userid: null,
+        user_id: null,
       };
+      
       state.isAuthenticated = false; // Reset authenticated status
     },
   },
@@ -57,9 +58,10 @@ export default createStore({
       commit('setSupervisor', supervisor);
       commit('setDept', dept);
       commit('setEmail', email);
+      console.log('Setting user with position:', position);
       commit('setPosition', position);
-      commit('setUserID', userid);
-     
+      console.log('Setting user with ID:', userid);
+     commit('setId', userid);
     },
 
     logout({ commit }) {
@@ -74,6 +76,5 @@ export default createStore({
     email: (state) => state.user.email,
     position: (state) => state.user.position,
     isAuthenticated: (state) => state.isAuthenticated,
-    userid: (state) => state.user.userid,
-  },
-});
+    id:(state) => state.user.id,
+}});

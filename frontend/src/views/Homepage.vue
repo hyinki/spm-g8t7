@@ -1,45 +1,17 @@
+<script setup>
+import HeaderStaff from '../components/HeaderStaff.vue';
+import HeaderHR from '../components/HeaderHR.vue';
+import HeaderManager from '../components/HeaderManager.vue';
+</script>
+
 <template>
   <!-- Staff Section -->
   <div v-if="isStaff">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">PlanPro</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/homepage"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/viewteamschedule">Team Schedule</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/viewownschedule">Own Schedule</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/applyforarrangement"
-                >Apply For Arrangement</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <HeaderStaff/>
+    
 
     <div>
-      <h1>Welcome to the HomePage (Staff)</h1>
+    <h1> Welcome to the HomePage, {{username}}, {{id}},{{ userID }} , {{dept}} (Staff) </h1>
     </div>
 
     <div>
@@ -69,45 +41,10 @@
 
   <!-- Manager Section -->
   <div v-if="isManager">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">PlanPro</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/homepage"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/viewteamschedule"
-                >View Team Schedule</a
-              >
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="/arrangement"
-                >Approve/RejectArrangement</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <HeaderManager/>
 
     <div>
-      <h1>Welcome to the HomePage (Manager) {{username}}</h1>
+      <h1>Welcome to the HomePage, {{username}} (Manager)</h1>
     </div>
 
     <div>
@@ -129,49 +66,12 @@
 
   <!-- HR Section -->
   <div v-if="isHR">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">PlanPro</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/homepage"
-                >Home</a
-              >
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="/viewoverallschedule"
-                >View Overall Schedule</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/viewteamschedule"
-                >View Team Schedule</a
-              >
-            </li>
-
-           
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <HeaderHR/>
 
 
     <div>
-      <h1 >Welcome to the HomePage (HR)</h1>
-      <h2>{{username}}</h2>
+      <h1 >Welcome to the HomePage, {{ username }} (HR)</h1>
+    
     </div>
 
     <div>
@@ -195,15 +95,25 @@
 
 <script>
 import { mapGetters } from "vuex";
+import Cookies from "js-cookie"; // Import js-cookie to manage cookies
+
+
+
 
 export default {
-  name: "Homepage",
-
+ 
+  created() {
+    // Get the cookie value when the component is created
+    this.userID = Cookies.get('userid') || 'Cookie not found';
+  },
   computed: {
-    ...mapGetters(["userRole","username"]), // Access the user's role, username from Vuex
-    
+    ...mapGetters(["userRole","username","id","dept","email","supervisor"]), // Access the user's role, username from Vuex
+   
+
     isStaff() {
+    
       return this.userRole === "Staff"; // Only true if the user's role is 'Staff'
+      
     },
     isManager() {
       return this.userRole === "Manager"; // Only true if the user's role is 'Manager'
