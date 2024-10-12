@@ -104,31 +104,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
       </div>
     </div>
 
-    <!-- Arrangements Table -->
-    <div class="row">
-      <div class="col">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Timeslot</th>
-              <th>Approved</th>
-              <th>Cancel</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(arrangement, index) in arrangements" :key="index">
-              <td>{{ formatDate(arrangement.date) }}</td>
-              <td>{{ arrangement.timeslot }}</td>
-              <td>{{ arrangement.approved ? 'Yes' : 'No' }}</td>
-              <td>
-                <button class="btn btn-danger" @click="cancelArrangement(index)">Cancel</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    
   </div>
   </div>
   
@@ -140,6 +116,9 @@ import HeaderStaff from '../components/HeaderStaff.vue';
   import { mapState,mapGetters } from "vuex";
   import axios from 'axios';
   import Cookies from "js-cookie";
+  import Toastify from 'toastify-js'
+
+import "toastify-js/src/toastify.css";  // Import Toastify CSS
 
   export default {
     name: "ApplyForArrangement",
@@ -239,15 +218,28 @@ import HeaderStaff from '../components/HeaderStaff.vue';
             };
 
             const response = await axios.post('http://localhost:5000/submit_wfh_request', newArrangement);
-            console.log('Arrangement submitted:', response.data);
+            Toastify({
+            text: `Request submitted successfully!`,
+            duration: 3000,  // Toast duration in milliseconds
+            close: true,     // Show close button
+            gravity: "top",  // Position of toast
+            position: "center", // Center horizontally
+            backgroundColor: "#4caf50",  // Green for success
+          }).showToast();
            
             this.arrangements.push(newArrangement);
-            alert('Arrangement submitted successfully!');
         
             this.resetForm();
         } catch (error) {
             console.error('Error submitting arrangement:', error);
-            alert('Failed to submit arrangement. Please try again.');
+            Toastify({
+          text: "Request submission failed.",
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "center",
+          backgroundColor: "#ff9800",  // Orange for warning
+        }).showToast();
         }
     }
 },

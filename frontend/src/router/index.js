@@ -8,6 +8,7 @@ import ApplyForArrangement from '../views/ApplyForArrangement.vue';
 import Arrangement from '../views/Arrangement.vue';
 import ViewOverallSchedule from '../views/ViewOverallSchedule.vue';
 import Logout from '../views/Logout.vue';
+import ViewArrangement from '../views/ViewArrangement.vue';
 import store from '../store/store.js';
 
 const routes = [
@@ -17,6 +18,8 @@ const routes = [
   { path: '/viewteamschedule', name: 'ViewTeamSchedule', component: ViewTeamSchedule, meta: { requiresAuth: true }},
   { path: '/viewownschedule', name: 'ViewOwnSchedule', component: ViewOwnSchedule, meta: { requiresAuth: true }},
   { path: '/applyforarrangement', name: 'ApplyForArrangement', component: ApplyForArrangement },
+  { path: '/viewarrangement', name: 'ViewArrangement', component: ViewArrangement },
+
   { path: '/Arrangement', name: 'Arrangement', component: Arrangement },
   { path: '/viewoverallschedule', name: 'ViewOverallSchedule', component: ViewOverallSchedule },
   { path: '/logout', name: 'Logout', component: Logout },

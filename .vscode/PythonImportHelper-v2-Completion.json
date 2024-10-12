@@ -457,7 +457,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def managerview():\n    sql = text(\"Select * from WFH_requests where Requester_Supervisor = \" + str(session['employee_id']) + \" AND Request_Status = 'Pending'\")\n    processing = db.session.execute(sql) \n    #list_of_pending_requests = session.get('manager_pending_list', [])   \n    return render_template('managerview.html', requests=processing)\n@app.route(\"/viewownrequests\")\n@login_required\ndef viewownrequests():\n    sql = text(\"Select * from WFH_requests where Requester_ID = \" + str(session['employee_id']))\n    sqldonepog = db.session.execute(sql)",
+        "peekOfCode": "def managerview():\n    sql = text(\"Select * from WFH_requests where Requester_Supervisor = \" + str(session['employee_id']) + \" AND Request_Status = 'Pending'\")\n    processing = db.session.execute(sql) \n    #list_of_pending_requests = session.get('manager_pending_list', [])   \n    return render_template('managerview.html', requests=processing)\n# @app.route(\"/viewownrequests\")\n# @login_required\n# def viewownrequests():\n#     sql = text(\"Select * from WFH_requests where Requester_ID = \" + str(session['employee_id']))\n#     sqldonepog = db.session.execute(sql)",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -466,7 +466,16 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def viewownrequests():\n    sql = text(\"Select * from WFH_requests where Requester_ID = \" + str(session['employee_id']))\n    sqldonepog = db.session.execute(sql)\n    return render_template('viewownrequests.html', ownreq = sqldonepog)\n@app.route(\"/managerview_active\")\n@login_required\ndef managerview_active():\n    sql = text(\"Select * from WFH_requests where Requester_Supervisor = \" + str(session['employee_id']) + \" AND Request_Status = 'Approved'\")\n    sql_processed = db.session.execute(sql)  \n    return render_template('managerview_active.html', active=sql_processed)",
+        "peekOfCode": "def viewownrequests():\n    # Retrieve employee_id from cookies\n    employee_id = request.cookies.get('userid')\n    print(employee_id)\n    # Check if 'Staff_ID' exists in the cookies\n    if not employee_id:\n        return jsonify({\"status\": \"failure\", \"message\": \"User not logged in\"}), 401\n    # Fetch the requests from the database\n    sql = text(\"SELECT * FROM WFH_requests WHERE Requester_ID = :requester_id\")\n    sqldonepog = db.session.execute(sql, {'requester_id': employee_id}).mappings().all()",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "delete_request",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def delete_request(request_id):\n    # Retrieve employee_id from cookies\n    employee_id = request.cookies.get('userid')\n    if not employee_id:\n        return jsonify({\"status\": \"failure\", \"message\": \"User not logged in\"}), 401\n    # Check if the request belongs to the logged-in user\n    sql_check = text(\"SELECT * FROM WFH_requests WHERE Requester_ID = :requester_id AND request_ID = :request_id\")\n    result = db.session.execute(sql_check, {'requester_id': employee_id, 'request_id': request_id}).fetchone()\n    if not result:\n        return jsonify({\"status\": \"failure\", \"message\": \"Request not found or you do not have permission to delete this request.\"}), 404",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -493,7 +502,7 @@
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "app = Flask(__name__)\ncloudinary.config(\n    cloud_name='dofj7bkm3',\n    api_key='844945974877343',\n    api_secret='kxy0mseU1Qsz5G7UX31WElZ1hts'\n)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:8889/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app",
+        "peekOfCode": "app = Flask(__name__)\ncloudinary.config(\n    cloud_name='dofj7bkm3',\n    api_key='844945974877343',\n    api_secret='kxy0mseU1Qsz5G7UX31WElZ1hts'\n)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -502,7 +511,7 @@
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:8889/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app, supports_credentials=True, origins=[\"*\"])\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class",
+        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app, supports_credentials=True, origins=[\"*\"])\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class",
         "detail": "flask.app",
         "documentation": {}
     },

@@ -20,7 +20,7 @@ cloudinary.config(
 )
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:8889/spmtest1'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.urandom(24)  # Set a random secret key for security
 db.init_app(app)  # Initialize the db with the Flask app
@@ -60,6 +60,7 @@ def login_route():
         userid=session['employee_id']
         print(userid)
         user_role = Employees.get_role(user.Role)
+        print(user_role)
         
         return jsonify({
             "user_name": session['name'],
@@ -231,12 +232,55 @@ def managerview():
     return render_template('managerview.html', requests=processing)
 
 
-@app.route("/viewownrequests")
-@login_required
+# @app.route("/viewownrequests")
+# @login_required
+# def viewownrequests():
+#     sql = text("Select * from WFH_requests where Requester_ID = " + str(session['employee_id']))
+#     sqldonepog = db.session.execute(sql)
+#     return render_template('viewownrequests.html', ownreq = sqldonepog)
+
+@app.route("/viewownrequests", methods=['GET'])
 def viewownrequests():
-    sql = text("Select * from WFH_requests where Requester_ID = " + str(session['employee_id']))
-    sqldonepog = db.session.execute(sql)
-    return render_template('viewownrequests.html', ownreq = sqldonepog)
+    # Retrieve employee_id from cookies
+    employee_id = request.cookies.get('userid')
+    print(employee_id)
+
+    # Check if 'Staff_ID' exists in the cookies
+    if not employee_id:
+        return jsonify({"status": "failure", "message": "User not logged in"}), 401
+    
+    # Fetch the requests from the database
+    sql = text("SELECT * FROM WFH_requests WHERE Requester_ID = :requester_id")
+    sqldonepog = db.session.execute(sql, {'requester_id': employee_id}).mappings().all()
+
+    # Convert the SQL result to a list of dictionaries
+    requests = [dict(row) for row in sqldonepog]
+
+    # Return the data as JSON
+    return jsonify(requests), 200
+
+
+@app.route("/deleterequest/<int:request_id>", methods=['DELETE'])
+def delete_request(request_id):
+    # Retrieve employee_id from cookies
+    employee_id = request.cookies.get('userid')
+    
+    if not employee_id:
+        return jsonify({"status": "failure", "message": "User not logged in"}), 401
+    
+    # Check if the request belongs to the logged-in user
+    sql_check = text("SELECT * FROM WFH_requests WHERE Requester_ID = :requester_id AND request_ID = :request_id")
+    result = db.session.execute(sql_check, {'requester_id': employee_id, 'request_id': request_id}).fetchone()
+
+    if not result:
+        return jsonify({"status": "failure", "message": "Request not found or you do not have permission to delete this request."}), 404
+    
+    # Delete the request
+    sql_delete = text("DELETE FROM WFH_requests WHERE request_ID = :request_id")
+    db.session.execute(sql_delete, {'request_id': request_id})
+    db.session.commit()  # Commit the deletion
+
+    return jsonify({"status": "success", "message": "Request deleted successfully"}), 200
 
 @app.route("/managerview_active")
 @login_required
