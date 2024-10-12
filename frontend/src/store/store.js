@@ -44,7 +44,7 @@ export default createStore({
         dept: null,
         email: null,
         position: null,
-        user_id: null,
+        id: null,
       };
       
       state.isAuthenticated = false; // Reset authenticated status
