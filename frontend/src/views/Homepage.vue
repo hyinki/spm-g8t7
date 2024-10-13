@@ -62,6 +62,23 @@ import HeaderManager from '../components/HeaderManager.vue';
         </button>
       </router-link>
     </div>
+
+    <div>
+      <router-link to="/viewownschedule">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          View Own Schedule
+        </button>
+      </router-link>
+    </div>
+
+    <div>
+      <router-link to="/applyforarrangement">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          Apply For Arrangement
+        </button>
+      </router-link>
+    </div>
+
   </div>
 
   <!-- HR Section -->
@@ -90,6 +107,23 @@ import HeaderManager from '../components/HeaderManager.vue';
         </button>
       </router-link>
     </div>
+
+    <div>
+      <router-link to="/viewownschedule">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          View Own Schedule
+        </button>
+      </router-link>
+    </div>
+
+    <div>
+      <router-link to="/applyforarrangement">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          Apply For Arrangement
+        </button>
+      </router-link>
+    </div>
+    
   </div>
 </template>
 

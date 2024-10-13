@@ -7,11 +7,12 @@ from Classes.Wfh_Request import WFHRequests
 from Classes.Login import Login
 from werkzeug.security import check_password_hash
 from sqlalchemy import text
+import mysql.connector
 import os
 import cloudinary
 import cloudinary.uploader
-import mysql.connector
 app = Flask(__name__)
+
 
 cloudinary.config(
     cloud_name='dofj7bkm3',
@@ -19,12 +20,10 @@ cloudinary.config(
     api_secret='kxy0mseU1Qsz5G7UX31WElZ1hts'
 )
 
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.urandom(24)  # Set a random secret key for security
 db.init_app(app)  # Initialize the db with the Flask app
-
 CORS(app, supports_credentials=True, origins=["*"])
 
 
@@ -58,7 +57,6 @@ def login_route():
         # Optionally return the user's role or other information
         user =Employees.query.get(user_id)
         userid=session['employee_id']
-        print(userid)
         user_role = Employees.get_role(user.Role)
         print(user_role)
         
@@ -83,22 +81,26 @@ def login_route():
 #     return jsonify({"name": name}), 200
 
 
+#delete ltr
 # Logout route
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()  # Log out the user
-    return redirect(url_for('login_route'))  # Redirect to login page
+# @app.route("/logout")
+# @login_required
+# def logout():
+#     print("its called")
+#     logout_user()  # Log out the user
+#     session.clear()
+#     return redirect(url_for('login_route'))  # Redirect to login page
 
-@app.route("/homepage")
-@login_required
-def homepage():
-    staff_name=session['employee_id'] 
-    session['name']
-    session['dept'] 
-    session['supervisor']
-    session['email']
-    return render_template("homepage.html")
+# @app.route("/homepage")
+# @login_required
+# def homepage():
+#     staff_name=session['employee_id'] 
+#     print(staff_name)
+#     session['name']
+#     session['dept'] 
+#     session['supervisor']
+#     session['email']
+#     return render_template("homepage.html")
 
 
 # Define a protected route
@@ -134,26 +136,12 @@ def submit_wfh_request():
     request_status = "pending"  # or however you determine the initial status
     cloudinary_link = data.get('cloudinary_link')
     repeating= data.get('repeating')
-    print("This is a test")
-    print(type(repeating))
+
     # Get selected days and timeslots
     selected_days = data.get('selectedDays', [])
     # print(selected_days)
     days_dict = {day['day']: day['timeslot'] for day in selected_days}
 
-    # """Submit a new WFH request to the database."""
-    # start_date = request.form['start_date']
-    # end_date = request.form['end_date']
-    # monday = request.form['monday']
-    # tuesday = request.form['tuesday']
-    # wednesday = request.form['wednesday']
-    # thursday = request.form['thursday']
-    # friday = request.form['friday']
-    # saturday = request.form['saturday']
-    # sunday = request.form['sunday']
-    # requester_id = request.form['requester_id']
-    # requester_supervisor = request.form['requester_supervisor']
-    # request_status = request.form['request_status']
 
     # Create a new WFH request instance
     new_request = WFHRequests(
@@ -232,18 +220,16 @@ def managerview():
     return render_template('managerview.html', requests=processing)
 
 
-# @app.route("/viewownrequests")
-# @login_required
-# def viewownrequests():
-#     sql = text("Select * from WFH_requests where Requester_ID = " + str(session['employee_id']))
-#     sqldonepog = db.session.execute(sql)
-#     return render_template('viewownrequests.html', ownreq = sqldonepog)
+
 
 @app.route("/viewownrequests", methods=['GET'])
 def viewownrequests():
     # Retrieve employee_id from cookies
     employee_id = request.cookies.get('userid')
-    print(employee_id)
+    print(employee_id + " is the employee id")
+    print()
+    print(session.get('test'))
+    
 
     # Check if 'Staff_ID' exists in the cookies
     if not employee_id:
@@ -260,12 +246,20 @@ def viewownrequests():
     return jsonify(requests), 200
 
 
-@app.route("/deleterequest/<int:request_id>", methods=['DELETE'])
-def delete_request(request_id):
+@app.route("/withdrawrequest/<int:request_id>/<int:userid>", methods=['patch'])
+
+def withdraw_request(request_id, userid):
     # Retrieve employee_id from cookies
-    employee_id = request.cookies.get('userid')
+    print("Received request to withdraw:", request_id, "for user ID:", userid)
     
+    # Assume employee_id comes from the URL for this logic
+    employee_id = userid
+
+    print("Employee ID from URL:", employee_id)
+
+
     if not employee_id:
+        print("User ID is not provided.")
         return jsonify({"status": "failure", "message": "User not logged in"}), 401
     
     # Check if the request belongs to the logged-in user
@@ -273,14 +267,15 @@ def delete_request(request_id):
     result = db.session.execute(sql_check, {'requester_id': employee_id, 'request_id': request_id}).fetchone()
 
     if not result:
-        return jsonify({"status": "failure", "message": "Request not found or you do not have permission to delete this request."}), 404
+        print("Request not found or user does not have permission.")
+        return jsonify({"status": "failure", "message": "Request not found or you do not have permission to withdraw this request."}), 404
     
-    # Delete the request
-    sql_delete = text("DELETE FROM WFH_requests WHERE request_ID = :request_id")
-    db.session.execute(sql_delete, {'request_id': request_id})
-    db.session.commit()  # Commit the deletion
+    # Update the request status to 'Withdrawn'
+    sql_update = text("UPDATE WFH_requests SET Request_Status = :status WHERE request_ID = :request_id")
+    db.session.execute(sql_update, {'status': 'Withdrawn', 'request_id': request_id})
+    db.session.commit()  # Commit the update
 
-    return jsonify({"status": "success", "message": "Request deleted successfully"}), 200
+    return jsonify({"status": "success", "message": "Request status updated to 'Withdrawn' successfully"}), 200
 
 @app.route("/managerview_active")
 @login_required
@@ -304,7 +299,7 @@ def retrieve_manager_view():
     #print(user_id)
     user_id_2_the_electric_boogaloo = request.cookies.get("userid")
     selected_month = request.args.get('month')
-    print(selected_month)
+    # print(selected_month)
     #print(user_id_2_the_electric_boogaloo)
     sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
     sql = text(sql_stringie)
@@ -324,6 +319,8 @@ def retrieve_individual_view():
     sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
     print(sql_processed_2)
     return jsonify(sql_processed_2)
+
+
 
 if __name__ == '__main__':
     with app.app_context():
