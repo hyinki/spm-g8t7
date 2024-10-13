@@ -1,42 +1,15 @@
+<script setup>
+import HeaderStaff from '../components/HeaderStaff.vue';
+import HeaderHR from '../components/HeaderHR.vue';
+import HeaderManager from '../components/HeaderManager.vue';
+
+</script>
+
 <template>
   <!-- Staff Section -->
   <div v-if="isStaff">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">PlanPro</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/homepage"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/viewteamschedule">Team Schedule</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/viewownschedule">Own Schedule</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/applyforarrangement"
-                >Apply For Arrangement</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <HeaderStaff/>
+    
     <div>
       <h1>Welcome to the view team schedule (Staff)</h1>
     </div>
@@ -44,42 +17,7 @@
   
   <!-- Manager Section -->
   <div v-if="isManager">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">PlanPro</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/homepage"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/viewteamschedule"
-                >View Team Schedule</a
-              >
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="/arrangement"
-                >Approve/RejectArrangement</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <HeaderManager/>
     <div>
       <h1>Welcome to the view team schedule (Manager)</h1>
     </div>
@@ -87,42 +25,7 @@
 
   <!-- HR Section -->
   <div v-if="isHR">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">PlanPro</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/homepage"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/viewoverallschedule"
-                >View Overall Schedule</a
-              >
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="/viewteamschedule"
-                >View Team Schedule</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <HeaderHR/>
 
     <div>
       <h1>Welcome to the view team schedule (HR)</h1>
@@ -211,6 +114,12 @@
               <div v-else>{{ event.name }} - WFH</div>
             </td>
           </tr>
+          <tr v-for="requests in teamschedule" :key="requests.request_ID">
+            <td>{{requests.request_ID}}</td>
+            <td>{{requests.Requester_ID}}</td>
+            <td>{{requests.start_date}}</td>
+            <td>{{requests.end_date}}</td>
+          </tr>
         </tbody>
       </table>
       <table class="table table-striped">
@@ -267,6 +176,7 @@ export default {
       calendar_data:[{1:{"AM": 4, "PM": 3, "wholeday": 5}}],
     };
   },
+
   computed: {
     ...mapGetters(["userRole"]), // Access the user's role from Vuex
     isStaff() {
@@ -348,6 +258,8 @@ export default {
       return daysArray;
     },
   },
+
+
   methods: {
     fetchteamschedule(){
       console.log('Selected month before fetching:', this.selectedMonth)
@@ -410,7 +322,7 @@ export default {
   }
 };
 
-console.log("Checking")
+/*console.log("Checking")
 axios.get("http://localhost:5000/api/manager_view", { withCredentials:true})
   .then(response => {
     var pogchamp = response.data
@@ -419,5 +331,5 @@ axios.get("http://localhost:5000/api/manager_view", { withCredentials:true})
   })
   .catch(error => {
     console.error('Error fetching data:', error);
-  })
+  }) */
 </script>
