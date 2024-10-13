@@ -164,6 +164,9 @@
             <td v-for="day in week" :key="day.date">
               <div :class="['calendar-day', { today: isToday(day.date) }]">
                 <span>{{ day.dayNumber }}</span>
+                <div v-if="day.dayNumber >= 1">AM: {{ day.AM }}</div>
+                <div v-if="day.dayNumber >= 1">PM: {{ day.PM }}</div>
+                <div v-if="day.dayNumber >= 1">Full Day: {{ day.wholeday }}</div>
                 <div v-if="day.events.length" class="events">
                   <div
                     v-for="event in day.events"
@@ -210,13 +213,27 @@
           </tr>
         </tbody>
       </table>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Timeblock</th>
+            <th>Staff Name</th>
+          </tr>
+          <tr v-for="requests in teamschedule" :key="requests.request_ID">
+            <td>{{requests.Date}}</td>
+            <td>{{requests.Timeblock}}</td>
+            <td>{{requests.staff_name}}</td>
+          </tr>
+        </thead>
+      </table>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import axios from 'axios';
+import axios, { HttpStatusCode } from 'axios';
 
 export default {
   name: "ViewOwnSchedule",
@@ -246,6 +263,8 @@ export default {
         { name: "Elliot Tay", date: "2024-10-03", type: "wfh" },
         // Add more events here
       ],
+      teamschedule: [],
+      calendar_data:[{1:{"AM": 4, "PM": 3, "wholeday": 5}}],
     };
   },
   computed: {
@@ -275,19 +294,49 @@ export default {
       const daysArray = [];
       let week = [];
 
+      // Create a mapping from day numbers to AM/PM/full-day data
+      const amPmData = {};
+      this.calendar_data.forEach(item => {
+        const dayKey = Object.keys(item)[0]; // Get the key (e.g., "1", "2")
+        amPmData[dayKey] = item[dayKey]; // Map to the corresponding data
+      });
+
+
+      
       for (let i = startDate; i <= lastDayOfMonth.getDate(); i++) {
         const dayDate = new Date(
           new Date().getFullYear(),
           this.selectedMonth - 1,
           i
         );
+
+      
+        const dayKey = i.toString(); // Convert day number to string for key access
+
         const dayEvents = this.dummyEvents.filter(
           (event) => event.date === dayDate.toISOString().split("T")[0]
         );
+
+        // Fetch AM/PM/full-day data
+        // const amPmCounts = amPmData[dayKey] || { am: 0, pm: 0, fullday: 0 };
+
+        // Only set AM/PM counts if the day number is valid (greater than 0)
+        const amPmCounts = (i > 0 && i <= lastDayOfMonth.getDate())
+        ? (amPmData[dayKey] || { AM: 0, PM: 0, wholeday: 0 })
+        : { AM: 0, PM: 0, wholeday: 0 };
+
+
         week.push({
           date: dayDate,
           dayNumber: i > 0 ? i : "",
           events: dayEvents,
+
+          //To handle Am Pm counts
+          AM: amPmCounts.AM,
+          PM: amPmCounts.PM,
+          wholeday: amPmCounts.wholeday,
+
+
         });
         if (week.length === 7) {
           daysArray.push(week);
@@ -300,6 +349,37 @@ export default {
     },
   },
   methods: {
+    fetchteamschedule(){
+      console.log('Selected month before fetching:', this.selectedMonth)
+      var params = { month: this.selectedMonth }
+      console.log(params)
+      axios.get("http://localhost:5000/api/manager_view", { params:params, withCredentials:true})
+      .then(response => {
+      this.teamschedule = response.data
+      console.log(this.teamschedule)
+      console.log(typeof teamschedule)
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    })
+    },
+
+    fetch_calendar_data(){
+      var params = {month: this.selectedMonth}
+      axios.get("http://localhost:5000/api/manager_view_calendar", {params:params, withCredentials:true})
+      .then(response =>{
+        // this.calendar_data = response.data
+        this.calendar_data = Object.entries(response.data).map(([key, value]) => ({
+        [key]: value
+        }));
+        console.log(this.calendar_data)
+        console.log(typeof this.calendar_data)
+      })
+      .catch(error=>{
+        console.error('Error fetching data:', error)
+      })
+    },
+
     toggleView(view) {
       this.viewType = view;
     },
@@ -316,6 +396,18 @@ export default {
       });
     },
   },
+
+  created(){
+    this.fetchteamschedule();
+    this.fetch_calendar_data();
+  },
+
+  watch:{
+    selectedMonth(){
+      this.fetchteamschedule();
+      this.fetch_calendar_data();
+    }
+  }
 };
 
 console.log("Checking")

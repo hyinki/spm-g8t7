@@ -7,6 +7,7 @@ from Classes.Wfh_Request import WFHRequests
 from Classes.Login import Login
 from werkzeug.security import check_password_hash
 from sqlalchemy import text
+from Classes.Calender_DT_Processing import calendar_count, sql_to_indiv_row
 import os
 
 app = Flask(__name__)
@@ -224,13 +225,36 @@ def retrieve_manager_view():
     #print(user_id)
     user_id_2_the_electric_boogaloo = request.cookies.get("userid")
     #print(user_id_2_the_electric_boogaloo)
-    sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)
+    #sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+    sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and w.Requester_Supervisor ="+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
     column_names = sql_processed.keys()
     sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+    sql_processed_3 = sql_to_indiv_row(sql_processed_2)
     print(sql_processed_2)
-    return jsonify(sql_processed_2)
+    print(sql_processed_3)
+    return jsonify(sql_processed_3)
+
+@app.route("/api/manager_view_calendar", methods=['GET'])
+def retrieve_manager_calendar_data():
+    user_id_2_the_electric_boogaloo = request.cookies.get("userid")
+    selected_month = request.args.get('month')
+    print(selected_month)
+    #print(user_id_2_the_electric_boogaloo)
+    sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+    sql = text(sql_stringie)
+    sql_processed = db.session.execute(sql)  
+    column_names = sql_processed.keys()
+    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+    #print(sql_processed_2)
+    sql_2 = text("Select Count(Staff_ID) from employee_list where Reporting_Manager =" + str(user_id_2_the_electric_boogaloo))
+    result = db.session.execute(sql_2)
+    total_managed_people = result.scalar()
+    returned_stuff = calendar_count(sql_processed_2, total_managed_people, selected_month)
+    print(type(returned_stuff))
+    return jsonify(returned_stuff)
+
 
 @app.route("/api/individual_view", methods=['GET'])
 def retrieve_individual_view():
