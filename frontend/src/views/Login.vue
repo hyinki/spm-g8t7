@@ -57,7 +57,7 @@ export default {
         });
 
         // Assuming the backend returns a role in the response
-        console.log(response.data);
+        // console.log(response.data);
         const fetchedRole = response.data.role;
         const name=response.data.user_name
         const supervisor=response.data.supervisor
@@ -65,7 +65,7 @@ export default {
         const email=response.data.email
         const position=response.data.position
         const userid=response.data.userid
-        console.log(response.data.userid)
+        // console.log(response.data.userid)
         // Store the role in Vuex state
         this.login({ role: fetchedRole, username: name, userid: userid, dept: dept, email: email, supervisor: supervisor, position: position });
 
