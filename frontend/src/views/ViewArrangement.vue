@@ -1,3 +1,8 @@
+<script setup>
+import HeaderStaff from '../components/HeaderStaff.vue';
+
+</script>
+
 <template>
   <HeaderStaff />
   <div class="container">
