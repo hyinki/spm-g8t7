@@ -93,7 +93,7 @@ export default {
         const response = await axios.get("http://localhost:5000/viewownrequests", {
           withCredentials: true, // Include cookies in the request
         });
-        console.log(response.data);
+        // console.log(response.data);
         this.arrangements = response.data;
       } catch (error) {
         console.error("Error fetching arrangements:", error);
@@ -107,7 +107,7 @@ export default {
         });
 
         if (response.data.status === "success") {
-          console.log("Request deleted successfully!");
+          // console.log("Request deleted successfully!");
           Toastify({
             text: `Cancel arrangement successful`,
             duration: 3000,  // Toast duration in milliseconds
