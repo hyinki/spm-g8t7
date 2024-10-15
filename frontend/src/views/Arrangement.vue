@@ -101,7 +101,7 @@ export default {
           duration: 3000, // Duration in milliseconds
           gravity: "top", // `top` or `bottom`
           position: 'center', // `left`, `center` or `right`
-          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)", // Customize color
+          backgroundColor: "#4caf50", // Customize color
           className: "info",
           stopOnFocus: true, // Prevents dismissing of toast on hover
         }).showToast();
@@ -123,7 +123,7 @@ export default {
           duration: 3000, // Duration in milliseconds
           gravity: "top", // `top` or `bottom`
           position: 'center', // `left`, `center` or `right`
-          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)", // Customize color
+          backgroundColor: "#4caf50", // Customize color
           className: "info",
           stopOnFocus: true, // Prevents dismissing of toast on hover
         }).showToast();

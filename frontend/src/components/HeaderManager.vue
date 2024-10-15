@@ -2,7 +2,9 @@
    
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/homepage">PlanPro</a>
+        <a class="navbar-brand" href="/homepage">
+          <img :src="calendarIcon" alt="Calendar Icon" style="width: 20px; margin-right: 5px" />
+          PlanPro</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -54,6 +56,8 @@
   import { mapActions } from "vuex";
   import Cookies from "js-cookie";
   import accountIcon from "@/assets/account.png"; // Import the account icon
+  import calendarIcon from "@/assets/calendar.png";
+
   
   export default {
     name: "HeaderManager",
@@ -62,6 +66,7 @@
       return {
         loggingOut: false, // To show loading message when logging out
         accountIcon, // Set the imported icon to data
+        calendarIcon
       };
     },
   

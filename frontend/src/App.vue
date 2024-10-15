@@ -1,7 +1,7 @@
 <script setup>
 
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+
+import Footer from './components/Footer.vue';
 </script>
 
 
@@ -20,6 +20,7 @@ import TheWelcome from './components/TheWelcome.vue'
     <!-- Display the current page here -->
     <router-view />
   </main>
+  <Footer></Footer>
 </template>
 
 <style scoped>
