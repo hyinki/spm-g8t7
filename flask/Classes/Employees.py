@@ -43,7 +43,7 @@ class Employees(db.Model):
     def check_pword(staff_id):
         
         user = Employees.query.get(staff_id)
-        print(staff_id)
+        # print(staff_id)
         # If the user exists, return their password hash
         if user:
             

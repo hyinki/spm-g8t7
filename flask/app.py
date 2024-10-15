@@ -172,12 +172,6 @@ def submit_wfh_request():
         print(f"Error: {e}")  # Log the error
         return jsonify({'message': 'Failed to submit request'}), 500  # Redirect to the failure page
 
-@app.route("/wfh_viewer")
-@login_required
-def retrieve_wfh():
-    """Retrieve and display all wfh."""
-    wfh_list = WFHRequests.get_all()  # Retrieve all employees from the database
-    return  render_template('WFH.html',wfh_li=wfh_list) # Render the employees in the 
 
 
 @app.route("/update_wfh_request/<int:request_id>", methods=["GET", "POST"])
@@ -206,11 +200,6 @@ def update_wfh_request(request_id):
 #Might try to integrate a function where if session["managecount"] == 0 redirect back to homepage since no need to approve anything.
 @app.route("/manager_view_processing")
 def retrieve_staff_wfh_for_manager():
-    #sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Pending'")
-    #processed = db.session.execute(sql)
-    #turn the object into a list
-    #pending_list = processed.fetchall()
-    #session["manager_pending_list"] = pending_list
     return redirect(url_for('managerview'))
 
 @app.route("/managerview")
@@ -278,19 +267,74 @@ def withdraw_request(request_id, userid):
 
     return jsonify({"status": "success", "message": "Request status updated to 'Withdrawn' successfully"}), 200
 
-@app.route("/managerview_active")
-@login_required
-def managerview_active():
-    sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Approved'")
-    sql_processed = db.session.execute(sql)  
-    return render_template('managerview_active.html', active=sql_processed)
 
-@app.route("/org_view")
-@login_required
-def org_view():
-    sql = text("Select * from WFH_requests where Request_Status = 'Approved'")
+@app.route("/approve_request", methods=['GET'])
+def approve_request():
+    try:
+        cookie_req_id=request.args.get("request")
+        print(cookie_req_id)
+        sql_string = "UPDATE wfh_requests SET Request_Status = 'Approved' WHERE Request_ID = :request_id"
+        sql = text(sql_string)
+
+            # Execute the SQL statement using parameterized query
+        sql_processed = db.session.execute(sql, {"request_id": cookie_req_id})
+
+            # Commit the changes to the database
+        db.session.commit()
+
+        # Return success response
+        return jsonify({"status": "success", "message": "Request approved"}), 200
+
+    except Exception as e:
+        # Rollback in case of error
+        db.session.rollback()
+        print(f"Error updating request status: {e}")  # Debugging statement
+        return jsonify({"status": "error", "message": str(e)}), 500
+    
+
+@app.route("/reject_request", methods=['GET'])
+def reject_request():
+    try:
+        cookie_req_id=request.args.get("request")
+        print(cookie_req_id)
+        sql_string = "UPDATE wfh_requests SET Request_Status = 'Rejected' WHERE Request_ID = :request_id"
+        sql = text(sql_string)
+
+            # Execute the SQL statement using parameterized query
+        sql_processed = db.session.execute(sql, {"request_id": cookie_req_id})
+
+            # Commit the changes to the database
+        db.session.commit()
+
+        # Return success response
+        return jsonify({"status": "success", "message": "Request rejected"}), 200
+
+    except Exception as e:
+        # Rollback in case of error
+        db.session.rollback()
+        print(f"Error updating request status: {e}")  # Debugging statement
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
+@app.route("/manager_to_approve", methods=['GET'])
+def retrieve_manager_approve():
+
+    user_id_2_the_electric_boogaloo = request.cookies.get("userid")
+    # print(selected_month)
+
+    sql_stringie =  "SELECT w.*, CONCAT(e.Staff_FName, ' ', e.Staff_LName) AS staff_name FROM wfh_requests w LEFT JOIN employee_list e ON w.Requester_ID = e.Staff_ID WHERE w.Requester_Supervisor ="+ str(user_id_2_the_electric_boogaloo)+" AND w.Request_Status = 'Pending'"
+    sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
-    return render_template('org_view.html', org = sql_processed)
+    column_names = sql_processed.keys()
+    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+   
+    print(sql_processed_2)
+
+    return jsonify(sql_processed_2)
+
+
+
+
 
 @app.route("/api/manager_view", methods=['GET'])
 def retrieve_manager_view():

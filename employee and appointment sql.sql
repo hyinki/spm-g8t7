@@ -64,6 +64,8 @@ Friday Enum('AM', 'PM', 'Whole Day', 'NULL') DEFAULT 'NULL',
 Saturday Enum('AM', 'PM', 'Whole Day', 'NULL') DEFAULT 'NULL',
 Sunday Enum('AM', 'PM', 'Whole Day', 'NULL') DEFAULT 'NULL',
 Request_Status ENUM('Approved', 'Pending',"Withdrawn","Rejected",'Cancelled') DEFAULT 'Pending'
+cloudinary_link varchar(1028),
+repeating Boolean DEFAULT FALSE;
 );
 
 # Mock data for testing
