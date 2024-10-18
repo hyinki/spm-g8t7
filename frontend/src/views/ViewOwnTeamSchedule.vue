@@ -8,7 +8,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
  
 
   <div>
-    <h1>Welcome to the poggiest of pogs WHOOOOOOOOOo {{ username }}</h1>
+    <h1>Welcome {{ username }}</h1>
   </div>
 
   <div class="container">
