@@ -128,8 +128,9 @@ def tally_people_in_office(staff_fullname_dict, approved_wfh_requests, month):
     for indiv_request in approved_wfh_requests:
         start_date = indiv_request["start_date"]
         end_date = indiv_request["end_date"]
+        end_date_plus_one = end_date + timedelta(days=1)
         staff_name = indiv_request["staff_name"]
-        while start_date != end_date:
+        while start_date !=  end_date_plus_one:
             if start_date.month < int(month):
                 start_date += timedelta(days = 1)
                 continue
@@ -161,6 +162,8 @@ def tally_people_in_office(staff_fullname_dict, approved_wfh_requests, month):
     #print("This is to check if all dates have been properly created by python: ", date_checking)
 
     return returned_dict
+
+
 
 
 

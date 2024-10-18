@@ -75,34 +75,6 @@ def login_route():
     else:
         return jsonify({"msg": "Invalid credentials."}), 401  # Return error if login fails
 
-# @app.route("/session", methods=['GET'])
-# @login_required
-# def get_session():
-#     name = session.get('name')  # Get the name from the session
-#     return jsonify({"name": name}), 200
-
-
-#delete ltr
-# Logout route
-# @app.route("/logout")
-# @login_required
-# def logout():
-#     print("its called")
-#     logout_user()  # Log out the user
-#     session.clear()
-#     return redirect(url_for('login_route'))  # Redirect to login page
-
-# @app.route("/homepage")
-# @login_required
-# def homepage():
-#     staff_name=session['employee_id'] 
-#     print(staff_name)
-#     session['name']
-#     session['dept'] 
-#     session['supervisor']
-#     session['email']
-#     return render_template("homepage.html")
-
 
 # Define a protected route
 @app.route("/test_employees")
@@ -198,16 +170,16 @@ def update_wfh_request(request_id):
 
 #Note, this function most likely can delete, with the homepage button reroute to manager view, was trialling some session based logic for handling data.
 #Might try to integrate a function where if session["managecount"] == 0 redirect back to homepage since no need to approve anything.
-@app.route("/manager_view_processing")
-def retrieve_staff_wfh_for_manager():
-    return redirect(url_for('managerview'))
+# @app.route("/manager_view_processing")
+# def retrieve_staff_wfh_for_manager():
+#     return redirect(url_for('managerview'))
 
-@app.route("/managerview")
-def managerview():
-    sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Pending'")
-    processing = db.session.execute(sql) 
-    #list_of_pending_requests = session.get('manager_pending_list', [])   
-    return render_template('managerview.html', requests=processing)
+# @app.route("/managerview")
+# def managerview():
+#     sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Pending'")
+#     processing = db.session.execute(sql) 
+#     #list_of_pending_requests = session.get('manager_pending_list', [])   
+#     return render_template('managerview.html', requests=processing)
 
 
 
@@ -338,10 +310,7 @@ def retrieve_manager_approve():
 
 @app.route("/api/manager_view", methods=['GET'])
 def retrieve_manager_view():
-    #user_role = request.cookies.get("userRole")
-    #print(user_role)
-    #user_id = request.cookies.get("username")
-    #print(user_id)
+  
     user_id_2_the_electric_boogaloo = request.cookies.get("userid")
     selected_month = request.args.get('month')
     # print(selected_month)
@@ -393,7 +362,7 @@ def retrieve_individual_view():
 def retrieve_list_in_office():
     user_id = request.cookies.get("userid")
     selected_month = request.args.get('month')
-    #sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id)+" and month(start_date) <= "+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
+
     sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and w.Requester_Supervisor ="+str(user_id)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)
@@ -405,23 +374,17 @@ def retrieve_list_in_office():
     column_names_2 = sql_processed_bravo.keys()
     sql_processed_3 = [dict(zip(column_names_2, row)) for row in sql_processed_bravo]
     returned_json = tally_people_in_office(sql_processed_3, sql_processed_2, selected_month)
-    #Comment the following to check the function
-    #returned_json = {}
+
     return jsonify(returned_json)
     
 
 @app.route("/api/view_own_team_schedule", methods=['GET'])
 def retrieve_own_team_view():
-    #user_role = request.cookies.get("userRole")
-    #print(user_role)
-    #user_id = request.cookies.get("username")
-    #print(user_id)
+
     user_supervisor = request.cookies.get("supervisor")
     print("The user's supervisor is: ",user_supervisor)
     selected_month = request.args.get('month')
-    # print(selected_month)
-    #print(user_id_2_the_electric_boogaloo)
-    #sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+
     sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor ="+str(user_supervisor)+" or w.Requester_ID ="+str(user_supervisor)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
@@ -455,7 +418,7 @@ def retrieve_staff_team_calendar_data():
 def retrieve_own_team_in_office_list():
     user_supervisor = request.cookies.get("supervisor")
     selected_month = request.args.get('month')
-    #sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id)+" and month(start_date) <= "+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
+
     sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor ="+str(user_supervisor)+" or w.Requester_ID ="+str(user_supervisor)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)
@@ -470,6 +433,53 @@ def retrieve_own_team_in_office_list():
     #Comment the following to check the function
     #returned_json = {}
     return jsonify(returned_json)
+
+
+#hr view
+@app.route("/api/view_all_team_in_office_list", methods=['GET'])
+def retrieve_all_team_in_office_list():
+    selected_dept = request.args.get("dept")
+    selected_month = request.args.get('month')
+    print("the dept is ",selected_dept)
+    sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and e.Dept = '"+str(selected_dept)+"'"
+
+    sql = text(sql_stringie)
+    sql_processed = db.session.execute(sql)
+    column_names = sql_processed.keys()
+    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+    print("sql is ", sql_processed_2)
+    sql_stringie_2 = "select concat(Staff_Fname, ' ', Staff_LName) as staff_name from employee_list where Dept = '"+str(selected_dept)+"'"
+    sql_2 = text(sql_stringie_2)
+    print(sql_stringie_2)
+    sql_processed_bravo = db.session.execute(sql_2)
+    column_names_2 = sql_processed_bravo.keys()
+    sql_processed_3 = [dict(zip(column_names_2, row)) for row in sql_processed_bravo]
+    returned_json = tally_people_in_office(sql_processed_3, sql_processed_2, selected_month)
+    #Comment the following to check the function
+    #returned_json = {}
+    print("it works")
+   
+    return jsonify(returned_json)
+
+
+@app.route("/api/hr_view", methods=['GET'])
+def retrieve_hr_view():
+    selected_dept=request.args.get('dept')
+    selected_month = request.args.get('month')
+    # print(selected_month)
+    #print(user_id_2_the_electric_boogaloo)
+    #sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+    sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month) +" and e.Dept = '"+str(selected_dept)+"'"
+    sql = text(sql_stringie)
+    sql_processed = db.session.execute(sql)  
+    column_names = sql_processed.keys()
+    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+    sql_processed_3 = sql_to_indiv_row(sql_processed_2, selected_month)
+    print(sql_processed_2)
+    print(sql_processed_3)
+    return jsonify(sql_processed_3)
+
+
 
 if __name__ == '__main__':
     with app.app_context():
