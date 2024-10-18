@@ -5,7 +5,6 @@ import HeaderStaff from '../components/HeaderStaff.vue';
 <template>
   <HeaderStaff/>
  
-
   <div>
     <h1>Welcome to the view own schedule</h1>
   </div>
@@ -34,13 +33,13 @@ import HeaderStaff from '../components/HeaderStaff.vue';
         </thead>
         <tbody>
           <tr v-for="week in calendarWeeks" :key="week">
-            <td v-for="day in week" :key="day.date">
+            <td v-for="day in week" :key="day.dayNumber">
               <div :class="['calendar-day', { 'today': isToday(day.date) }]">
                 <span>{{ day.dayNumber }}</span>
-                <div v-if="day.events.length" class="events">
-                  <div v-for="event in day.events" :key="event.name" :class="['event', event.type === 'office' ? 'text-warning' : 'text-success']">
-                    {{ event.name }} {{ event.type === 'office' ? 'in Office' : 'WFH' }}
-                  </div>
+                <div v-if="day.event">
+                  <span :class="day.event === 'WFH' ? 'text-success' : 'text-warning'">
+                    {{ day.event }}
+                  </span>
                 </div>
               </div>
             </td>
@@ -55,24 +54,13 @@ import HeaderStaff from '../components/HeaderStaff.vue';
         <thead>
           <tr>
             <th>Date</th>
-            <th>Time</th>
-            <th>Activity</th>
-            <th>Office/WFH</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="event in dummyEvents" :key="event.name">
-            <td>{{ formatDate(event.date) }}</td>
-            <td>1pm - 2pm</td> <!-- You can customize the time format -->
-            <td>Meeting</td>
-            <td>
-              <div v-if="event.type === 'office'">
-                {{ event.name }} - Office
-              </div>
-              <div v-else>
-                {{ event.name }} - WFH
-              </div>
-            </td>
+          <tr v-for="wfhDay in filteredWFHDays" :key="wfhDay.date">
+            <td>{{ formatDate(wfhDay.date) }}</td>
+            <td>{{ wfhDay.event }}</td>
           </tr>
         </tbody>
       </table>
@@ -104,61 +92,129 @@ export default {
         { name: 'Nov', value: 11 },
         { name: 'Dec', value: 12 },
       ],
-      dummyEvents: [
-      { name: 'Sarah Koh', date: '2024-09-10', type: 'office' },
-        { name: 'Mary Tan', date: '2024-10-03', type: 'office' },
-        { name: 'Sean Goh', date: '2024-10-03', type: 'office' },
-        { name: 'Elliot Tay', date: '2024-10-03', type: 'wfh' },
-        // Add more events here
-      ],
+      wfhRequests: [], // Store WFH requests fetched from API
     };
+  },
+  created() {
+    this.fetchWFHRequests(); // Fetch WFH requests when the component is created
   },
   computed: {
     calendarWeeks() {
-      const firstDayOfMonth = new Date(new Date().getFullYear(), this.selectedMonth - 1, 1);
-      const lastDayOfMonth = new Date(new Date().getFullYear(), this.selectedMonth, 0);
-      const startDate = firstDayOfMonth.getDay() === 0 ? -6 : 1 - firstDayOfMonth.getDay();
-      const daysArray = [];
+      const year = new Date().getFullYear();
+      const firstDayOfMonth = new Date(year, this.selectedMonth - 1, 1);
+      const lastDayOfMonth = new Date(year, this.selectedMonth, 0);
+      const daysInMonth = lastDayOfMonth.getDate();
+
+      // Adjust for Monday being the first day of the week
+      const startDay = (firstDayOfMonth.getDay() + 6) % 7;
+
+      let daysArray = [];
       let week = [];
 
-      for (let i = startDate; i <= lastDayOfMonth.getDate(); i++) {
-        const dayDate = new Date(new Date().getFullYear(), this.selectedMonth - 1, i);
-        const dayEvents = this.dummyEvents.filter(event => event.date === dayDate.toISOString().split('T')[0]);
-        week.push({ date: dayDate, dayNumber: i > 0 ? i : '', events: dayEvents });
+      // Fill empty cells at the start of the first week
+      for (let i = 0; i < startDay; i++) {
+        week.push({ dayNumber: '', event: null });
+      }
+
+      // Loop over all days of the month
+      for (let day = 1; day <= daysInMonth; day++) {
+        const currentDate = new Date(year, this.selectedMonth - 1, day);
+        const formattedDate = currentDate.toISOString().split('T')[0];
+
+        // Check if the current day has an approved WFH request
+        const request = this.wfhRequests.find(req => {
+        // Parse the start_date and end_date as UTC to avoid any shifts
+        const startDate = new Date(Date.UTC(
+          new Date(req.start_date).getFullYear(),
+          new Date(req.start_date).getMonth(),
+          new Date(req.start_date).getDate()
+        ));
+
+        const endDate = new Date(Date.UTC(
+          new Date(req.end_date).getFullYear(),
+          new Date(req.end_date).getMonth(),
+          new Date(req.end_date).getDate()
+        ));
+
+        const currentDateUTC = new Date(Date.UTC(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate()
+        ));
+
+        return currentDateUTC >= startDate && currentDateUTC <= endDate;
+      });
+
+        const event = request ? 'WFH' : 'Work from Office'; // If a request exists, mark as WFH
+
+        week.push({ date: currentDate, dayNumber: day, event });
         if (week.length === 7) {
           daysArray.push(week);
           week = [];
         }
       }
-      if (week.length) daysArray.push(week);
+
+      // Fill the remaining days of the week after the last day of the month
+      if (week.length > 0) {
+        while (week.length < 7) {
+          week.push({ dayNumber: '', event: null });
+        }
+        daysArray.push(week);
+      }
 
       return daysArray;
-    }
+    },
+    filteredWFHDays() {
+  // Flatten calendarWeeks to get all days
+  const allDays = this.calendarWeeks.flatMap(week => week);
+
+  // Filter out only days where the event is WFH
+  return allDays.filter(day => day.event === 'WFH');
+}
   },
   methods: {
     toggleView(view) {
       this.viewType = view;
     },
     isToday(date) {
-      const today = new Date();
-      return today.toDateString() === date.toDateString();
-    },
+  if (!date) return false; // Check if the date is valid before proceeding
+  const today = new Date();
+  return today.toDateString() === date.toDateString();
+},
     formatDate(dateStr) {
       const date = new Date(dateStr);
       return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    },
+    // Fetch the WFH requests from the backend
+    fetchWFHRequests() {
+      axios.get("http://localhost:5000/api/individual_view", { withCredentials: true })
+        .then(response => {
+          // console.log(response.data);
+          this.wfhRequests = response.data.filter(req => req.Request_Status === 'Approved'); // Store only approved requests
+          console.log(this.wfhRequests)
+        })
+        .catch(error => {
+          console.error('Error fetching WFH requests:', error);
+        });
     }
   }
 };
-
-console.log("Checking")
-axios.get("http://localhost:5000/api/individual_view", { withCredentials:true})
-  .then(response => {
-    var pogchamp = response.data
-    console.log(pogchamp)
-    console.log(typeof pogchamp)
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  })
 </script>
-  
+
+<style scoped>
+  .form-check-input {
+    margin-right: 10px;
+  }
+  .form-select {
+    max-width: 200px;
+  }
+  .calendar-day {
+    padding: 10px;
+  }
+  .text-success {
+    color: green;
+  }
+  .text-warning {
+    color: orange;
+  }
+</style>
