@@ -282,7 +282,7 @@ export default {
       axios.get("http://localhost:5000/api/manager_view", { params:params, withCredentials:true})
       .then(response => {
       this.teamschedule = response.data
-      console.log(this.teamschedule)
+      console.log( this.teamschedule)
       console.log(typeof teamschedule)
     })
     .catch(error => {
