@@ -1,35 +1,14 @@
 <script setup>
+import Cookies from 'js-cookie';
 import HeaderStaff from '../components/HeaderStaff.vue';
-import HeaderHR from '../components/HeaderHR.vue';
-import HeaderManager from '../components/HeaderManager.vue';
-
 </script>
 
 <template>
-  <!-- Staff Section -->
-  <div v-if="isStaff">
-    <HeaderStaff/>
-    
-    <div>
-      <h1>Welcome to the view team schedule (Staff)</h1>
-    </div>
-  </div>
-  
-  <!-- Manager Section -->
-  <div v-if="isManager">
-    <HeaderManager/>
-    <div>
-      <h1>Welcome to the view team schedule (Manager)</h1>
-    </div>
-  </div>
+  <HeaderStaff/>
+ 
 
-  <!-- HR Section -->
-  <div v-if="isHR">
-    <HeaderHR/>
-
-    <div>
-      <h1>Welcome to the view team schedule (HR)</h1>
-    </div>
+  <div>
+    <h1>Welcome to the poggiest of pogs WHOOOOOOOOOo {{ username }}</h1>
   </div>
 
   <div class="container">
@@ -37,20 +16,12 @@ import HeaderManager from '../components/HeaderManager.vue';
       <div>
         <label for="monthSelect">Month</label>
         <select id="monthSelect" class="form-select" v-model="selectedMonth">
-          <option
-            v-for="month in months"
-            :key="month.value"
-            :value="month.value"
-          >
-            {{ month.name }}
-          </option>
+          <option v-for="month in months" :key="month.value" :value="month.value">{{ month.name }}</option>
         </select>
       </div>
       <div>
         <button class="btn" @click="toggleView('list')">List View</button>
-        <button class="btn btn-outline-primary" @click="toggleView('calendar')">
-          Calendar View
-        </button>
+        <button class="btn btn-outline-primary" @click="toggleView('calendar')">Calendar View</button>
       </div>
     </div>
 
@@ -65,22 +36,14 @@ import HeaderManager from '../components/HeaderManager.vue';
         <tbody>
           <tr v-for="week in calendarWeeks" :key="week">
             <td v-for="day in week" :key="day.date">
-              <div :class="['calendar-day', { today: isToday(day.date) }]">
+              <div :class="['calendar-day', { 'today': isToday(day.date) }]">
                 <span>{{ day.dayNumber }}</span>
                 <div v-if="day.dayNumber >= 1">AM: {{ day.AM }}</div>
                 <div v-if="day.dayNumber >= 1">PM: {{ day.PM }}</div>
                 <div v-if="day.dayNumber >= 1">Full Day: {{ day.wholeday }}</div>
                 <div v-if="day.events.length" class="events">
-                  <div
-                    v-for="event in day.events"
-                    :key="event.name"
-                    :class="[
-                      'event',
-                      event.type === 'office' ? 'text-warning' : 'text-success',
-                    ]"
-                  >
-                    {{ event.name }}
-                    {{ event.type === "office" ? "in Office" : "WFH" }}
+                  <div v-for="event in day.events" :key="event.name" :class="['event', event.type === 'office' ? 'text-warning' : 'text-success']">
+                    {{ event.name }} {{ event.type === 'office' ? 'in Office' : 'WFH' }}
                   </div>
                 </div>
               </div>
@@ -104,14 +67,15 @@ import HeaderManager from '../components/HeaderManager.vue';
         <tbody>
           <tr v-for="event in dummyEvents" :key="event.name">
             <td>{{ formatDate(event.date) }}</td>
-            <td>1pm - 2pm</td>
-            <!-- You can customize the time format -->
+            <td>1pm - 2pm</td> <!-- You can customize the time format -->
             <td>Meeting</td>
             <td>
               <div v-if="event.type === 'office'">
                 {{ event.name }} - Office
               </div>
-              <div v-else>{{ event.name }} - WFH</div>
+              <div v-else>
+                {{ event.name }} - WFH
+              </div>
             </td>
           </tr>
         </tbody>
@@ -123,7 +87,7 @@ import HeaderManager from '../components/HeaderManager.vue';
             <th>Timeblock</th>
             <th>Staff Name</th>
           </tr>
-          <tr v-for="requests in teamschedule" :key="requests.request_ID">
+          <tr v-for="requests in ownteamschedule" :key="requests.request_ID">
             <td>{{requests.Date}}</td>
             <td>{{requests.Timeblock}}</td>
             <td>{{requests.staff_name}}</td>
@@ -131,7 +95,7 @@ import HeaderManager from '../components/HeaderManager.vue';
         </thead>
       </table>
       <br><h4>In office list</h4>
-      <div v-for="(dictionary, date_time) in inoffice">
+      <div v-for="(dictionary, date_time) in ownteaminoffice">
       <h5>{{ date_time }}</h5>
       <table class="table table-striped">
       <tr>
@@ -154,54 +118,44 @@ import HeaderManager from '../components/HeaderManager.vue';
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import axios, { HttpStatusCode } from 'axios';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 export default {
-  name: "ViewOwnSchedule",
+  name: "ViewOwnTeamSchedule",
   data() {
     return {
+      username: "",
       selectedMonth: new Date().getMonth() + 1,
-      viewType: "calendar",
-      daysOfWeek: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+      viewType: 'calendar',
+      daysOfWeek: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
       months: [
-        { name: "Jan", value: 1 },
-        { name: "Feb", value: 2 },
-        { name: "Mar", value: 3 },
-        { name: "Apr", value: 4 },
-        { name: "May", value: 5 },
-        { name: "Jun", value: 6 },
-        { name: "Jul", value: 7 },
-        { name: "Aug", value: 8 },
-        { name: "Sep", value: 9 },
-        { name: "Oct", value: 10 },
-        { name: "Nov", value: 11 },
-        { name: "Dec", value: 12 },
+        { name: 'Jan', value: 1 },
+        { name: 'Feb', value: 2 },
+        { name: 'Mar', value: 3 },
+        { name: 'Apr', value: 4 },
+        { name: 'May', value: 5 },
+        { name: 'Jun', value: 6 },
+        { name: 'Jul', value: 7 },
+        { name: 'Aug', value: 8 },
+        { name: 'Sep', value: 9 },
+        { name: 'Oct', value: 10 },
+        { name: 'Nov', value: 11 },
+        { name: 'Dec', value: 12 },
       ],
       dummyEvents: [
-        { name: "Sarah Koh", date: "2024-09-10", type: "office" },
-        { name: "Mary Tan", date: "2024-10-03", type: "office" },
-        { name: "Sean Goh", date: "2024-10-03", type: "office" },
-        { name: "Elliot Tay", date: "2024-10-03", type: "wfh" },
+      { name: 'Sarah Koh', date: '2024-09-10', type: 'office' },
+        { name: 'Mary Tan', date: '2024-10-03', type: 'office' },
+        { name: 'Sean Goh', date: '2024-10-03', type: 'office' },
+        { name: 'Elliot Tay', date: '2024-10-03', type: 'wfh' },
         // Add more events here
       ],
-      teamschedule: [],
-      calendar_data:[{1:{"AM": 4, "PM": 3, "wholeday": 5}}],
-      inoffice: {"11/04/24":{"AM":["Michael", "Charles"], "PM":["Michael"], "Whole Day":["Michael", "Charles"]}, "12/04/24":{"AM":["Michael", "Charles"], "PM":["Michael", "Charles"], "Whole Day":["Michael", "Charles"]}},
+      ownteamschedule: [],
+      own_team_calendar_data:[{1:{"AM": 4, "PM": 3, "wholeday": 5}}],
+      ownteaminoffice: {"11/04/24":{"AM":["Michael", "Charles"], "PM":["Michael"], "Whole Day":["Michael", "Charles"]}, "12/04/24":{"AM":["Michael", "Charles"], "PM":["Michael", "Charles"], "Whole Day":["Michael", "Charles"]}},
     };
   },
-
   computed: {
-    ...mapGetters(["userRole"]), // Access the user's role from Vuex
-    isStaff() {
-      return this.userRole === "Staff"; // Only true if the user's role is 'Staff'
-    },
-    isManager() {
-      return this.userRole === "Manager"; // Only true if the user's role is 'Manager'
-    },
-    isHR() {
-      return this.userRole === "HR"; // Only true if the user's role is 'Manager'
-    },
     calendarWeeks() {
       const firstDayOfMonth = new Date(
         new Date().getFullYear(),
@@ -220,7 +174,7 @@ export default {
 
       // Create a mapping from day numbers to AM/PM/full-day data
       const amPmData = {};
-      this.calendar_data.forEach(item => {
+      this.own_team_calendar_data.forEach(item => {
         const dayKey = Object.keys(item)[0]; // Get the key (e.g., "1", "2")
         amPmData[dayKey] = item[dayKey]; // Map to the corresponding data
       });
@@ -273,52 +227,7 @@ export default {
     },
   },
 
-
   methods: {
-    fetchteamschedule(){
-      console.log('Selected month before fetching:', this.selectedMonth)
-      var params = { month: this.selectedMonth }
-      console.log(params)
-      axios.get("http://localhost:5000/api/manager_view", { params:params, withCredentials:true})
-      .then(response => {
-      this.teamschedule = response.data
-      console.log(this.teamschedule)
-      console.log(typeof teamschedule)
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-    })
-    },
-
-    fetch_calendar_data(){
-      var params = {month: this.selectedMonth}
-      axios.get("http://localhost:5000/api/manager_view_calendar", {params:params, withCredentials:true})
-      .then(response =>{
-        // this.calendar_data = response.data
-        this.calendar_data = Object.entries(response.data).map(([key, value]) => ({
-        [key]: value
-        }));
-        console.log(this.calendar_data)
-        console.log(typeof this.calendar_data)
-      })
-      .catch(error=>{
-        console.error('Error fetching data:', error)
-      })
-    },
-
-    fetch_team_schedule_list(){
-      var params = {month: this.selectedMonth}
-      axios.get("http://localhost:5000/api/manager_list_in_office", {params:params, withCredentials:true})
-      .then(response =>{
-        this.inoffice = response.data
-        console.log(this.inoffice)
-        console.log(typeof this.inoffice)
-      })
-      .catch(error=>{
-        console.error('Error fetching data:', error)
-      })
-    },
-
     toggleView(view) {
       this.viewType = view;
     },
@@ -328,37 +237,75 @@ export default {
     },
     formatDate(dateStr) {
       const date = new Date(dateStr);
-      return date.toLocaleDateString("en-US", {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-      });
+      return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     },
+
+    fetchownteamschedule(){
+      console.log('Selected month before fetching:', this.selectedMonth)
+      var params = { month: this.selectedMonth }
+      console.log(params)
+      axios.get("http://localhost:5000/api/view_own_team_schedule", { params:params, withCredentials:true})
+      .then(response => {
+      this.ownteamschedule = response.data
+      console.log(this.ownteamschedule)
+      console.log(typeof ownteamschedule)
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    })
+    },
+
+    usernameassign(){
+      this.username = Cookies.get('username')
+    },
+
+    fetchstaffteamdata(){
+      var params = {month: this.selectedMonth}
+      axios.get("http://localhost:5000/api/staff_team_view_calendar", {params:params, withCredentials:true})
+      .then(response =>{
+        // this.calendar_data = response.data
+        this.own_team_calendar_data = Object.entries(response.data).map(([key, value]) => ({
+        [key]: value
+        }));
+        console.log(this.own_team_calendar_data)
+        console.log(typeof this.own_team_calendar_data)
+      })
+      .catch(error=>{
+        console.error('Error fetching data:', error)
+      })
+    },
+
+    fetchteaminofficelist(){
+      var params = {month: this.selectedMonth}
+      axios.get("http://localhost:5000/api/view_own_team_in_office_list", {params:params, withCredentials:true})
+      .then(response =>{
+        this.ownteaminoffice = response.data
+        console.log(this.ownteaminoffice)
+        console.log(typeof this.ownteaminoffice)
+      })
+      .catch(error=>{
+        console.error('Error fetching data:', error)
+      })
+    }
+
   },
 
   created(){
-    this.fetchteamschedule();
-    this.fetch_calendar_data();
-    this.fetch_team_schedule_list();
+    this.fetchownteamschedule();
+    this.usernameassign();
+    this.fetchstaffteamdata();
+    this.fetchteaminofficelist();
   },
 
   watch:{
     selectedMonth(){
-      this.fetchteamschedule();
-      this.fetch_calendar_data();
-      this.fetch_team_schedule_list();
+      this.fetchownteamschedule();
+      this.fetchstaffteamdata();
+      this.fetchteaminofficelist();
     }
   }
+
 };
 
-/*console.log("Checking")
-axios.get("http://localhost:5000/api/manager_view", { withCredentials:true})
-  .then(response => {
-    var pogchamp = response.data
-    console.log(pogchamp)
-    console.log(typeof pogchamp)
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  }) */
 </script>
+  

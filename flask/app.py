@@ -7,7 +7,7 @@ from Classes.Wfh_Request import WFHRequests
 from Classes.Login import Login
 from werkzeug.security import check_password_hash
 from sqlalchemy import text
-from Classes.Calender_DT_Processing import calendar_count, sql_to_indiv_row
+from Classes.Calender_DT_Processing import calendar_count, sql_to_indiv_row, tally_people_in_office
 import mysql.connector
 import os
 import cloudinary
@@ -352,7 +352,7 @@ def retrieve_manager_view():
     sql_processed = db.session.execute(sql)  
     column_names = sql_processed.keys()
     sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
-    sql_processed_3 = sql_to_indiv_row(sql_processed_2)
+    sql_processed_3 = sql_to_indiv_row(sql_processed_2, selected_month)
     print(sql_processed_2)
     print(sql_processed_3)
     return jsonify(sql_processed_3)
@@ -363,7 +363,7 @@ def retrieve_manager_calendar_data():
     selected_month = request.args.get('month')
     print(selected_month)
     #print(user_id_2_the_electric_boogaloo)
-    sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+    sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
     column_names = sql_processed.keys()
@@ -389,6 +389,87 @@ def retrieve_individual_view():
     return jsonify(sql_processed_2)
 
 
+@app.route("/api/manager_list_in_office", methods=['GET'])
+def retrieve_list_in_office():
+    user_id = request.cookies.get("userid")
+    selected_month = request.args.get('month')
+    #sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id)+" and month(start_date) <= "+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
+    sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and w.Requester_Supervisor ="+str(user_id)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+    sql = text(sql_stringie)
+    sql_processed = db.session.execute(sql)
+    column_names = sql_processed.keys()
+    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+    sql_stringie_2 = "select concat(Staff_Fname, ' ', Staff_LName) as staff_name from employee_list where Reporting_Manager = "+str(user_id)
+    sql_2 = text(sql_stringie_2)
+    sql_processed_bravo = db.session.execute(sql_2)
+    column_names_2 = sql_processed_bravo.keys()
+    sql_processed_3 = [dict(zip(column_names_2, row)) for row in sql_processed_bravo]
+    returned_json = tally_people_in_office(sql_processed_3, sql_processed_2, selected_month)
+    #Comment the following to check the function
+    #returned_json = {}
+    return jsonify(returned_json)
+    
+
+@app.route("/api/view_own_team_schedule", methods=['GET'])
+def retrieve_own_team_view():
+    #user_role = request.cookies.get("userRole")
+    #print(user_role)
+    #user_id = request.cookies.get("username")
+    #print(user_id)
+    user_supervisor = request.cookies.get("supervisor")
+    print("The user's supervisor is: ",user_supervisor)
+    selected_month = request.args.get('month')
+    # print(selected_month)
+    #print(user_id_2_the_electric_boogaloo)
+    #sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+    sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor ="+str(user_supervisor)+" or w.Requester_ID ="+str(user_supervisor)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+    sql = text(sql_stringie)
+    sql_processed = db.session.execute(sql)  
+    column_names = sql_processed.keys()
+    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+    sql_processed_3 = sql_to_indiv_row(sql_processed_2, selected_month)
+    print(sql_processed_2)
+    print(sql_processed_3)
+    return jsonify(sql_processed_3)
+
+@app.route("/api/staff_team_view_calendar", methods=['GET'])
+def retrieve_staff_team_calendar_data():
+    user_supervisor = request.cookies.get("supervisor")
+    selected_month = request.args.get('month')
+    print(selected_month)
+    #print(user_id_2_the_electric_boogaloo)
+    sql_stringie = "Select * from WFH_requests where (Requester_Supervisor = "+str(user_supervisor)+" or Requester_ID = "+str(user_supervisor)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
+    sql = text(sql_stringie)
+    sql_processed = db.session.execute(sql)  
+    column_names = sql_processed.keys()
+    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+    #print(sql_processed_2)
+    sql_2 = text("Select Count(Staff_ID) from employee_list where (Reporting_Manager =" + str(user_supervisor)+" or Staff_ID = " + str(user_supervisor)+")")
+    result = db.session.execute(sql_2)
+    total_managed_people = result.scalar()
+    returned_stuff = calendar_count(sql_processed_2, total_managed_people, selected_month)
+    print(type(returned_stuff))
+    return jsonify(returned_stuff)
+
+@app.route("/api/view_own_team_in_office_list", methods=['GET'])
+def retrieve_own_team_in_office_list():
+    user_supervisor = request.cookies.get("supervisor")
+    selected_month = request.args.get('month')
+    #sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id)+" and month(start_date) <= "+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
+    sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor ="+str(user_supervisor)+" or w.Requester_ID ="+str(user_supervisor)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+    sql = text(sql_stringie)
+    sql_processed = db.session.execute(sql)
+    column_names = sql_processed.keys()
+    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
+    sql_stringie_2 = "select concat(Staff_Fname, ' ', Staff_LName) as staff_name from employee_list where (Reporting_Manager = "+str(user_supervisor)+ " or Staff_ID = "+str(user_supervisor)+")"
+    sql_2 = text(sql_stringie_2)
+    sql_processed_bravo = db.session.execute(sql_2)
+    column_names_2 = sql_processed_bravo.keys()
+    sql_processed_3 = [dict(zip(column_names_2, row)) for row in sql_processed_bravo]
+    returned_json = tally_people_in_office(sql_processed_3, sql_processed_2, selected_month)
+    #Comment the following to check the function
+    #returned_json = {}
+    return jsonify(returned_json)
 
 if __name__ == '__main__':
     with app.app_context():
