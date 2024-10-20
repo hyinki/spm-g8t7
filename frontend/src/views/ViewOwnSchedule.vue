@@ -37,7 +37,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
               <div :class="['calendar-day', { 'today': isToday(day.date) }]">
                 <span>{{ day.dayNumber }}</span>
                 <div v-if="day.event">
-                  <span :class="day.event === 'WFH' ? 'text-success' : 'text-warning'">
+                  <span :class="day.event.includes('WFH') ? 'text-success' : 'text-warning'">
                     {{ day.event }}
                   </span>
                 </div>
@@ -60,7 +60,9 @@ import HeaderStaff from '../components/HeaderStaff.vue';
         <tbody>
           <tr v-for="wfhDay in filteredWFHDays" :key="wfhDay.date">
             <td>{{ formatDate(wfhDay.date) }}</td>
-            <td>{{ wfhDay.event }}</td>
+            <td :class="wfhDay.event.includes('WFH') ? 'text-success' : 'text-warning'">
+              {{ wfhDay.event }}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -99,79 +101,104 @@ export default {
     this.fetchWFHRequests(); // Fetch WFH requests when the component is created
   },
   computed: {
-    calendarWeeks() {
-      const year = new Date().getFullYear();
-      const firstDayOfMonth = new Date(year, this.selectedMonth - 1, 1);
-      const lastDayOfMonth = new Date(year, this.selectedMonth, 0);
-      const daysInMonth = lastDayOfMonth.getDate();
-
-      // Adjust for Monday being the first day of the week
-      const startDay = (firstDayOfMonth.getDay() + 6) % 7;
-
-      let daysArray = [];
-      let week = [];
-
-      // Fill empty cells at the start of the first week
-      for (let i = 0; i < startDay; i++) {
-        week.push({ dayNumber: '', event: null });
-      }
-
-      // Loop over all days of the month
-      for (let day = 1; day <= daysInMonth; day++) {
-        const currentDate = new Date(year, this.selectedMonth - 1, day);
-        const formattedDate = currentDate.toISOString().split('T')[0];
-
-        // Check if the current day has an approved WFH request
-        const request = this.wfhRequests.find(req => {
-        // Parse the start_date and end_date as UTC to avoid any shifts
-        const startDate = new Date(Date.UTC(
-          new Date(req.start_date).getFullYear(),
-          new Date(req.start_date).getMonth(),
-          new Date(req.start_date).getDate()
-        ));
-
-        const endDate = new Date(Date.UTC(
-          new Date(req.end_date).getFullYear(),
-          new Date(req.end_date).getMonth(),
-          new Date(req.end_date).getDate()
-        ));
-
-        const currentDateUTC = new Date(Date.UTC(
-          currentDate.getFullYear(),
-          currentDate.getMonth(),
-          currentDate.getDate()
-        ));
-
-        return currentDateUTC >= startDate && currentDateUTC <= endDate;
-      });
-
-        const event = request ? 'WFH' : 'Work from Office'; // If a request exists, mark as WFH
-
-        week.push({ date: currentDate, dayNumber: day, event });
-        if (week.length === 7) {
-          daysArray.push(week);
-          week = [];
-        }
-      }
-
-      // Fill the remaining days of the week after the last day of the month
-      if (week.length > 0) {
-        while (week.length < 7) {
-          week.push({ dayNumber: '', event: null });
-        }
-        daysArray.push(week);
-      }
-
-      return daysArray;
-    },
     filteredWFHDays() {
-  // Flatten calendarWeeks to get all days
-  const allDays = this.calendarWeeks.flatMap(week => week);
+    return this.wfhRequests
+      .filter(req => req.Request_Status === 'Approved') // Only approved requests
+      .map(req => {
+        const wfhDays = [];
 
-  // Filter out only days where the event is WFH
-  return allDays.filter(day => day.event === 'WFH');
-}
+        // Get WFH status for each day of the week
+        ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].forEach(day => {
+          if (req[day] && req[day] !== 'NULL') {
+            wfhDays.push({
+              date: this.formatDate(new Date(req.start_date)), // Format the date
+              event: `WFH (${req[day]})`
+            });
+          }
+        });
+
+        return wfhDays;
+      })
+      .flat(); // Flatten the array to avoid nested arrays
   },
+    calendarWeeks() {
+  const year = new Date().getFullYear();
+  const firstDayOfMonth = new Date(year, this.selectedMonth - 1, 1);
+  const lastDayOfMonth = new Date(year, this.selectedMonth, 0);
+  const daysInMonth = lastDayOfMonth.getDate();
+
+  // Adjust for Monday being the first day of the week
+  const startDay = (firstDayOfMonth.getDay() + 6) % 7;
+
+  let daysArray = [];
+  let week = [];
+
+  // Fill empty cells at the start of the first week
+  for (let i = 0; i < startDay; i++) {
+    week.push({ dayNumber: '', event: null });
+  }
+
+  // Loop over all days of the month
+  for (let day = 1; day <= daysInMonth; day++) {
+    const currentDate = new Date(year, this.selectedMonth - 1, day);
+    const formattedDate = currentDate.toISOString().split('T')[0];
+
+    // Check if the current day has an approved WFH request
+    const request = this.wfhRequests.find(req => {
+      const startDate = new Date(Date.UTC(
+        new Date(req.start_date).getFullYear(),
+        new Date(req.start_date).getMonth(),
+        new Date(req.start_date).getDate()
+      ));
+
+      const endDate = new Date(Date.UTC(
+        new Date(req.end_date).getFullYear(),
+        new Date(req.end_date).getMonth(),
+        new Date(req.end_date).getDate()
+      ));
+
+      const currentDateUTC = new Date(Date.UTC(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate()
+      ));
+
+      return currentDateUTC >= startDate && currentDateUTC <= endDate;
+    });
+
+    // Determine the event label based on the request
+    let event = 'Work from Office'; // Default event
+    if (request) {
+      const dayOfWeek = currentDate.toLocaleDateString('en-US', { weekday: 'long' });
+      const wfhStatus = request[dayOfWeek]; // Get the WFH status for this day of the week
+
+      if (wfhStatus === 'Whole Day') {
+        event = 'WFH (Whole Day)';
+      } else if (wfhStatus === 'AM') {
+        event = 'WFH (AM)';
+      } else if (wfhStatus === 'PM') {
+        event = 'WFH (PM)';
+      }
+    }
+
+    week.push({ date: currentDate, dayNumber: day, event });
+    if (week.length === 7) {
+      daysArray.push(week);
+      week = [];
+    }
+  }
+
+  // Fill the remaining days of the week after the last day of the month
+  if (week.length > 0) {
+    while (week.length < 7) {
+      week.push({ dayNumber: '', event: null });
+    }
+    daysArray.push(week);
+  }
+
+  return daysArray;
+}
+},
   methods: {
     toggleView(view) {
       this.viewType = view;

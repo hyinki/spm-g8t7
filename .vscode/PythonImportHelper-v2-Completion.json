@@ -16,6 +16,14 @@
         "documentation": {}
     },
     {
+        "label": "date",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "calendar",
         "kind": 6,
         "isExtraImport": true,
@@ -313,6 +321,14 @@
         "documentation": {}
     },
     {
+        "label": "tally_people_in_office",
+        "importPath": "Classes.Calender_DT_Processing",
+        "description": "Classes.Calender_DT_Processing",
+        "isExtraImport": true,
+        "detail": "Classes.Calender_DT_Processing",
+        "documentation": {}
+    },
+    {
         "label": "mysql.connector",
         "kind": 6,
         "isExtraImport": true,
@@ -404,7 +420,25 @@
         "kind": 2,
         "importPath": "flask.Classes.Calender_DT_Processing",
         "description": "flask.Classes.Calender_DT_Processing",
-        "peekOfCode": "def sql_to_indiv_row(request_dictionary):\n    returned_array = []\n    for requests in request_dictionary:\n        start_date = requests['start_date']\n        end_date = requests['end_date']\n        print(\"This is the start date and end date\", start_date, end_date)\n        while start_date != end_date:\n            appended_dictionary = {}\n            current_day_name = start_date.strftime(\"%A\")\n            day_status = requests[current_day_name]",
+        "peekOfCode": "def sql_to_indiv_row(request_dictionary, month):\n    returned_array = []\n    for requests in request_dictionary:\n        start_date = requests['start_date']\n        end_date = requests['end_date']\n        end_date_plus_one = end_date + timedelta(days=1)\n        print(\"This is the start date and end date\", start_date, end_date)\n        while start_date != end_date_plus_one:\n            #Added this line of code to take into account recurring arrangements over the course of multiple months. Since the page only displays for 1 month\n            #This will push the start_date until it the start of the selected month",
+        "detail": "flask.Classes.Calender_DT_Processing",
+        "documentation": {}
+    },
+    {
+        "label": "tally_people_in_office",
+        "kind": 2,
+        "importPath": "flask.Classes.Calender_DT_Processing",
+        "description": "flask.Classes.Calender_DT_Processing",
+        "peekOfCode": "def tally_people_in_office(staff_fullname_dict, approved_wfh_requests, month):\n    array_of_staff_name = []\n    current_time = datetime.now()\n    current_year = current_time.year\n    dict_of_dicts = {}\n    date_checking = []\n    total_days_in_current_month = calendar.monthrange(2024, int(month))[1]\n    #print(\"This print statement is to check that the function is receiving the appropriate dictionaries\",staff_fullname_dict, approved_wfh_requests, month)\n    #convert the array of dicts into a an array of staff names reporting to a certain manager\n    for staff in staff_fullname_dict:",
+        "detail": "flask.Classes.Calender_DT_Processing",
+        "documentation": {}
+    },
+    {
+        "label": "delete_person",
+        "kind": 2,
+        "importPath": "flask.Classes.Calender_DT_Processing",
+        "description": "flask.Classes.Calender_DT_Processing",
+        "peekOfCode": "def delete_person(default_dictionary, date, timeblock, name_to_delete):\n    if date in default_dictionary:\n        if timeblock == \"Whole Day\":\n            for tb in [\"AM\", \"PM\"]:\n                if tb in default_dictionary[date]:\n                    default_dictionary[date][tb] = [name for name in default_dictionary[date][tb] if name != name_to_delete]\n        if timeblock in default_dictionary[date]:\n            # Remove name from the specified time block\n            default_dictionary[date][timeblock] = [name for name in default_dictionary[date][timeblock] if name != name_to_delete]\n            # Always remove from \"Whole Day\"",
         "detail": "flask.Classes.Calender_DT_Processing",
         "documentation": {}
     },
@@ -432,6 +466,15 @@
         "importPath": "flask.Classes.Calender_DT_Processing",
         "description": "flask.Classes.Calender_DT_Processing",
         "peekOfCode": "#Trial_dict = [{'request_ID': 1, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Pending'}, {'request_ID': 2, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Approved'}, {'request_ID': 4, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Pending'}]\ndef calendar_count(request_dict, total_people, month):\n    processed_dict_for_jsonify = {}\n    processed_dict_for_jsonify_2 = {}\n    #print(total_people)\n    #print(month)\n    total_days_in_current_month = calendar.monthrange(2024, int(month))[1]\n    #print(\"Month :\",month,\" has \",total_days_in_current_month,\" days\")\n    total_days_for_ranging = total_days_in_current_month + 1\n    # i in range starts with 0 and ends at the number before the end, so add 1 for the range to get a dict with the days.",
+        "detail": "flask.Classes.Calender_DT_Processing",
+        "documentation": {}
+    },
+    {
+        "label": "#data",
+        "kind": 5,
+        "importPath": "flask.Classes.Calender_DT_Processing",
+        "description": "flask.Classes.Calender_DT_Processing",
+        "peekOfCode": "#data = {\n#    \"11/04/24\": {\"AM\": [\"Michael\", \"Charles\"], \"PM\": [\"John\", \"Mark\", \"Michael\"], \"Whole Day\": [\"John\", \"Mark\", \"Michael\"]},\n#    \"12/04/24\": {\"AM\": [\"Michael\", \"Alice\"], \"PM\": [\"Mark\", \"Michael\"], \"Whole Day\": [\"John\", \"Mark\", \"Michael\"]}\n#}\n#def delete_person(default_dictionary, date, timeblock, name_to_delete):\n#    if date in default_dictionary and timeblock in default_dictionary[date]:\n#        data[date][timeblock] = [name for name in data[date][timeblock] if name != name_to_delete]\n#        default_dictionary[date][\"Whole Day\"] = [name for name in default_dictionary[date][\"Whole Day\"] if name != name_to_delete]\ndef delete_person(default_dictionary, date, timeblock, name_to_delete):\n    if date in default_dictionary:",
         "detail": "flask.Classes.Calender_DT_Processing",
         "documentation": {}
     },
@@ -544,24 +587,6 @@
         "documentation": {}
     },
     {
-        "label": "retrieve_staff_wfh_for_manager",
-        "kind": 2,
-        "importPath": "flask.app",
-        "description": "flask.app",
-        "peekOfCode": "def retrieve_staff_wfh_for_manager():\n    return redirect(url_for('managerview'))\n@app.route(\"/managerview\")\ndef managerview():\n    sql = text(\"Select * from WFH_requests where Requester_Supervisor = \" + str(session['employee_id']) + \" AND Request_Status = 'Pending'\")\n    processing = db.session.execute(sql) \n    #list_of_pending_requests = session.get('manager_pending_list', [])   \n    return render_template('managerview.html', requests=processing)\n@app.route(\"/viewownrequests\", methods=['GET'])\ndef viewownrequests():",
-        "detail": "flask.app",
-        "documentation": {}
-    },
-    {
-        "label": "managerview",
-        "kind": 2,
-        "importPath": "flask.app",
-        "description": "flask.app",
-        "peekOfCode": "def managerview():\n    sql = text(\"Select * from WFH_requests where Requester_Supervisor = \" + str(session['employee_id']) + \" AND Request_Status = 'Pending'\")\n    processing = db.session.execute(sql) \n    #list_of_pending_requests = session.get('manager_pending_list', [])   \n    return render_template('managerview.html', requests=processing)\n@app.route(\"/viewownrequests\", methods=['GET'])\ndef viewownrequests():\n    # Retrieve employee_id from cookies\n    employee_id = request.cookies.get('userid')\n    print(employee_id + \" is the employee id\")",
-        "detail": "flask.app",
-        "documentation": {}
-    },
-    {
         "label": "viewownrequests",
         "kind": 2,
         "importPath": "flask.app",
@@ -611,7 +636,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_manager_view():\n    #user_role = request.cookies.get(\"userRole\")\n    #print(user_role)\n    #user_id = request.cookies.get(\"username\")\n    #print(user_id)\n    user_id_2_the_electric_boogaloo = request.cookies.get(\"userid\")\n    selected_month = request.args.get('month')\n    # print(selected_month)\n    #print(user_id_2_the_electric_boogaloo)\n    #sql_stringie = \"Select * from WFH_requests where Requester_Supervisor = \"+str(user_id_2_the_electric_boogaloo)+\" and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)",
+        "peekOfCode": "def retrieve_manager_view():\n    user_id_2_the_electric_boogaloo = request.cookies.get(\"userid\")\n    selected_month = request.args.get('month')\n    # print(selected_month)\n    #print(user_id_2_the_electric_boogaloo)\n    #sql_stringie = \"Select * from WFH_requests where Requester_Supervisor = \"+str(user_id_2_the_electric_boogaloo)+\" and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and w.Requester_Supervisor =\"+str(user_id_2_the_electric_boogaloo)+\" and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -620,7 +645,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_manager_calendar_data():\n    user_id_2_the_electric_boogaloo = request.cookies.get(\"userid\")\n    selected_month = request.args.get('month')\n    print(selected_month)\n    #print(user_id_2_the_electric_boogaloo)\n    sql_stringie = \"Select * from WFH_requests where Requester_Supervisor = \"+str(user_id_2_the_electric_boogaloo)+\" and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]",
+        "peekOfCode": "def retrieve_manager_calendar_data():\n    user_id_2_the_electric_boogaloo = request.cookies.get(\"userid\")\n    selected_month = request.args.get('month')\n    print(selected_month)\n    #print(user_id_2_the_electric_boogaloo)\n    sql_stringie = \"Select * from WFH_requests where Requester_Supervisor = \"+str(user_id_2_the_electric_boogaloo)+\" and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)+\" and Request_Status = 'Approved';\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -629,7 +654,61 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_individual_view():\n    user_id = request.cookies.get(\"userid\")\n    sql_stringie = \"Select * from WFH_requests where Requester_ID = \"+str(user_id)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    print(sql_processed_2)\n    return jsonify(sql_processed_2)\nif __name__ == '__main__':",
+        "peekOfCode": "def retrieve_individual_view():\n    user_id = request.cookies.get(\"userid\")\n    sql_stringie = \"Select * from WFH_requests where Requester_ID = \"+str(user_id)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    print(sql_processed_2)\n    return jsonify(sql_processed_2)\n@app.route(\"/api/manager_list_in_office\", methods=['GET'])",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "retrieve_list_in_office",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def retrieve_list_in_office():\n    user_id = request.cookies.get(\"userid\")\n    selected_month = request.args.get('month')\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and w.Requester_Supervisor =\"+str(user_id)+\" and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    sql_stringie_2 = \"select concat(Staff_Fname, ' ', Staff_LName) as staff_name from employee_list where Reporting_Manager = \"+str(user_id)\n    sql_2 = text(sql_stringie_2)",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "retrieve_own_team_view",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def retrieve_own_team_view():\n    user_supervisor = request.cookies.get(\"supervisor\")\n    print(\"The user's supervisor is: \",user_supervisor)\n    selected_month = request.args.get('month')\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor =\"+str(user_supervisor)+\" or w.Requester_ID =\"+str(user_supervisor)+\") and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    sql_processed_3 = sql_to_indiv_row(sql_processed_2, selected_month)",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "retrieve_staff_team_calendar_data",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def retrieve_staff_team_calendar_data():\n    user_supervisor = request.cookies.get(\"supervisor\")\n    selected_month = request.args.get('month')\n    print(selected_month)\n    #print(user_id_2_the_electric_boogaloo)\n    sql_stringie = \"Select * from WFH_requests where (Requester_Supervisor = \"+str(user_supervisor)+\" or Requester_ID = \"+str(user_supervisor)+\") and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)+\" and Request_Status = 'Approved';\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "retrieve_own_team_in_office_list",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def retrieve_own_team_in_office_list():\n    user_supervisor = request.cookies.get(\"supervisor\")\n    selected_month = request.args.get('month')\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor =\"+str(user_supervisor)+\" or w.Requester_ID =\"+str(user_supervisor)+\") and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    sql_stringie_2 = \"select concat(Staff_Fname, ' ', Staff_LName) as staff_name from employee_list where (Reporting_Manager = \"+str(user_supervisor)+ \" or Staff_ID = \"+str(user_supervisor)+\")\"\n    sql_2 = text(sql_stringie_2)",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "retrieve_all_team_in_office_list",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def retrieve_all_team_in_office_list():\n    selected_dept = request.args.get(\"dept\")\n    selected_month = request.args.get('month')\n    print(\"the dept is \",selected_dept)\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)+\" and e.Dept = '\"+str(selected_dept)+\"'\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    print(\"sql is \", sql_processed_2)",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "retrieve_hr_view",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def retrieve_hr_view():\n    selected_dept=request.args.get('dept')\n    selected_month = request.args.get('month')\n    # print(selected_month)\n    #print(user_id_2_the_electric_boogaloo)\n    #sql_stringie = \"Select * from WFH_requests where Requester_Supervisor = \"+str(user_id_2_the_electric_boogaloo)+\" and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month) +\" and e.Dept = '\"+str(selected_dept)+\"'\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()",
         "detail": "flask.app",
         "documentation": {}
     },

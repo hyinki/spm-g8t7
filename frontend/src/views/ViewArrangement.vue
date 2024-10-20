@@ -45,12 +45,12 @@ import HeaderStaff from '../components/HeaderStaff.vue';
               <td>{{ displayValue(arrangement.Sunday) }}</td>
               <td>
                 <button 
-                  class="btn btn-danger btn-sm" 
-                  @click="cancelRequest(arrangement.request_ID)" 
-                  :disabled="arrangement.Request_Status === 'Withdrawn'"
-                >
-                  Cancel
-                </button>
+                class="btn btn-danger btn-sm" 
+                @click="cancelRequest(arrangement.request_ID, arrangement.start_date, arrangement.end_date)" 
+                :disabled="arrangement.Request_Status === 'Withdrawn'"
+              >
+                Cancel
+              </button>
               </td> <!-- Add a cancel button for each row -->
             </tr>
           </tbody>
@@ -100,40 +100,31 @@ export default {
       }
     },
 
-    async cancelRequest(requestId) {
-      try {
-        const response = await axios.patch(`http://localhost:5000/withdrawrequest/${requestId}/${this.id}`, {
-          withCredentials: true, // Include cookies in the request
-        });
+    async cancelRequest(requestId, startDate, endDate) {
+  const confirmation = window.confirm(`Are you sure you want to cancel the arrangement from ${this.formatDate(startDate)} to ${this.formatDate(endDate)}?`);
 
-        if (response.data.status === "success") {
-          // console.log("Request deleted successfully!");
-          Toastify({
-            text: `Cancel arrangement successful`,
-            duration: 3000,  // Toast duration in milliseconds
-            close: true,
-            gravity: "top",
-            position: "center",
-            backgroundColor: "#4caf50", // Green for success
-          }).showToast();
+  if (confirmation) {
+    try {
+      const response = await axios.patch(`http://localhost:5000/withdrawrequest/${requestId}/${this.id}`, {
+        withCredentials: true, // Include cookies in the request
+      });
 
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000); // 1 second delay
+      if (response.data.status === "success") {
+        Toastify({
+          text: `Cancel arrangement successful`,
+          duration: 3000,  // Toast duration in milliseconds
+          close: true,
+          gravity: "top",
+          position: "center",
+          backgroundColor: "#4caf50", // Green for success
+        }).showToast();
 
-        } else {
-          console.error("Error deleting request:", response.data.message);
-          Toastify({
-            text: `An error occurred.`,
-            duration: 3000,
-            close: true,
-            gravity: "top",
-            position: "center",
-            backgroundColor: "#f44336",  // Red for failure
-          }).showToast();
-        }
-      } catch (error) {
-        console.error("Error canceling request:", error);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000); // 1 second delay
+
+      } else {
+        console.error("Error deleting request:", response.data.message);
         Toastify({
           text: `An error occurred.`,
           duration: 3000,
@@ -143,8 +134,22 @@ export default {
           backgroundColor: "#f44336",  // Red for failure
         }).showToast();
       }
-    },
-  },
+    } catch (error) {
+      console.error("Error canceling request:", error);
+      Toastify({
+        text: `An error occurred.`,
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "#f44336",  // Red for failure
+      }).showToast();
+    }
+  } else {
+    // If the user cancels the action, you can log or handle it here
+    console.log('Action canceled by the user');
+  }
+}},
   mounted() {
     this.fetchArrangements(); // Fetch data when the component is mounted
   },
