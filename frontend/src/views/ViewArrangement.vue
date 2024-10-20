@@ -107,10 +107,7 @@ export default {
       }
     },
 
-    async cancelRequest(requestId, startDate, endDate) {
-  const confirmation = window.confirm(`Are you sure you want to cancel the arrangement from ${this.formatDate(startDate)} to ${this.formatDate(endDate)}?`);
-
-  if (confirmation) {
+    async cancelRequest(requestId) {
     try {
       const response = await axios.patch(`http://localhost:5000/withdrawrequest/${requestId}/${this.id}`, {
         withCredentials: true, // Include cookies in the request
@@ -152,11 +149,8 @@ export default {
         backgroundColor: "#f44336",  // Red for failure
       }).showToast();
     }
-  } else {
-    // If the user cancels the action, you can log or handle it here
-    console.log('Action canceled by the user');
-  }
-}},
+  } 
+},
   mounted() {
     this.fetchArrangements(); // Fetch data when the component is mounted
   },
