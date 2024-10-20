@@ -46,7 +46,8 @@ import HeaderStaff from '../components/HeaderStaff.vue';
               <td>
                 <button 
                   class="btn btn-danger btn-sm" 
-                  @click="cancelRequest(arrangement.request_ID)" 
+
+                  @click="confirmCancel(arrangement.request_ID)" 
                   :disabled="arrangement.Request_Status === 'Withdrawn'"
                 >
                   Cancel
@@ -97,6 +98,12 @@ export default {
         this.arrangements = response.data;
       } catch (error) {
         console.error("Error fetching arrangements:", error);
+      }
+    },
+
+    confirmCancel(requestId) {
+      if (confirm("Are you sure you want to cancel this arrangement?")) {
+        this.cancelRequest(requestId);
       }
     },
 

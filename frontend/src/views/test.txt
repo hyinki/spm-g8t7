@@ -1,0 +1,14 @@
+    fetchwfhschedule(){
+      console.log('Selected month before fetching:', this.selectedMonth)
+      var params = { month: this.selectedMonth, dept: this.selectedDept }
+      console.log(params)
+      axios.get("http://localhost:5000/api/hr_view_calendar", { params:params, withCredentials:true})
+      .then(response => {
+      this.wfh= response.data
+      console.log("wfh is this ",this.wfh)
+    
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    })
+    },

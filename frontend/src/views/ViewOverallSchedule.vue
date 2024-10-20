@@ -25,6 +25,45 @@ import HeaderHR from '../components/HeaderHR.vue';
         <button class="btn btn-outline-primary" @click="toggleView('calendar')">Calendar View</button>
       </div>
     </div>
+<!-- calendar view -->
+<div v-if="viewType === 'calendar'" class="calendar">
+  <h3>WFH calendar view</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th v-for="day in daysOfWeek" :key="day">{{ day }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="week in calendarWeeks" :key="week">
+            <td v-for="day in week" :key="day.date">
+              <div :class="['calendar-day', { today: isToday(day.date) }]">
+                <span>{{ day.dayNumber }}</span>
+                <div v-if="day.dayNumber >= 1">AM: {{ day.AM }}</div>
+                <div v-if="day.dayNumber >= 1">PM: {{ day.PM }}</div>
+                <div v-if="day.dayNumber >= 1">Full Day: {{ day.wholeday }}</div>
+                <div v-if="day.events.length" class="events">
+                  <div
+                    v-for="event in day.events"
+                    :key="event.name"
+                    :class="[
+                      'event',
+                      event.type === 'office' ? 'text-warning' : 'text-success',
+                    ]"
+                  >
+                    {{ event.name }}
+                    {{ event.type === "office" ? "in Office" : "WFH" }}
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- list view -->
+     <div v-else>
     <br><h4>WFH list</h4>
       <table class="table table-striped">
         <thead>
@@ -61,6 +100,7 @@ import HeaderHR from '../components/HeaderHR.vue';
     </tbody>
       </table>
       </div>
+    </div>
 </template>
 
 <script>
@@ -71,6 +111,7 @@ export default {
   name: "viewoverallschedule",
   data() {
     return {
+      dummyEvents:[],
       selectedMonth: new Date().getMonth() + 1,
       selectedDept:"HR",
       viewType: "calendar",
@@ -101,6 +142,7 @@ export default {
       
       ],
       wfh:{},
+      wfh_calendar:[],
       allschedule: [],
       calendar_data:[{1:{"AM": 4, "PM": 3, "wholeday": 5}}],
       inoffice: {"11/04/24":{"AM":["Michael", "Charles"], "PM":["Michael"], "Whole Day":["Michael", "Charles"]}, "12/04/24":{"AM":["Michael", "Charles"], "PM":["Michael", "Charles"], "Whole Day":["Michael", "Charles"]}},
@@ -187,7 +229,26 @@ export default {
       return dateString.split(" 00:00:00")[0];
         // Returns something like 'Mon Oct 21 2024'
     },
-
+    fetchcalendarview(){
+      console.log('Selected month before fetching:', this.selectedMonth)
+      var params = { month: this.selectedMonth, dept: this.selectedDept }
+      console.log(params)
+      axios.get("http://localhost:5000/api/hr_view_calendar", { params:params, withCredentials:true})
+      .then(response => {
+      this.wfh_calendar= response.data
+      
+      this.calendar_data = Object.entries(response.data).map(([key, value]) => ({
+        [key]: value
+        }));
+        
+      console.log("wfh calendar is this ",this.wfh_calendar)
+      console.log("calendar data is ", this.calendar_data)
+    
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    })
+    },
 
     fetchwfhschedule(){
       console.log('Selected month before fetching:', this.selectedMonth)
@@ -243,17 +304,19 @@ export default {
   created(){
     this.fetchallschedule();
     this.fetchwfhschedule();
-
+    this.fetchcalendarview();
   },
 
   watch:{
     selectedDept(){
       this.fetchallschedule();
       this.fetchwfhschedule();
+      this.fetchcalendarview()
     },
     selectedMonth(){
       this.fetchallschedule();
       this.fetchwfhschedule();
+      this.fetchcalendarview();
 
     }
   }
