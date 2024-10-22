@@ -38,6 +38,8 @@ class Employees(db.Model):
             return "Staff"
         if(role==3):
             return "Manager"
+        else:
+            return "Invalid"
 
     @staticmethod
     def check_pword(staff_id):

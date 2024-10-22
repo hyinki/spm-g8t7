@@ -9,7 +9,6 @@ class Login:
         
         if pword:  # Ensure the password exists for the user
             # Check if the input password matches the stored hash
- 
             return check_password_hash(pword, input_password)
         else:
             return False

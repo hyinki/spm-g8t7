@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for, session
+from flask import Flask, request, jsonify,  session
 from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from Classes.Database import db  
@@ -21,7 +21,7 @@ cloudinary.config(
     api_secret='kxy0mseU1Qsz5G7UX31WElZ1hts'
 )
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://brandyn:root@34.80.185.149/spmtest1'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.urandom(24)  # Set a random secret key for security
 db.init_app(app)  # Initialize the db with the Flask app
@@ -76,25 +76,9 @@ def login_route():
         return jsonify({"msg": "Invalid credentials."}), 401  # Return error if login fails
 
 
-# Define a protected route
-@app.route("/test_employees")
-@login_required 
-def retrieve_employees():
-    """Retrieve and display all employees."""
-    emp_name=session['name']
-    #employees_list = Employees.get_all()  # Retrieve all employees from the database
-    sql = text("SELECT * FROM employee_list where Reporting_Manager =" + str(session['supervisor']))
-    employees_list = db.session.execute(sql)
-    return render_template('employees.html', employees=employees_list, emp_name=emp_name)  # Render the employees in the template
 
 
-@app.route("/wfh_request")
-@login_required
-def wfh_request():
-    emp_name=session['name']
-    emp_sup=session['supervisor']
-    emp_id=session['employee_id']
-    return render_template("wfh_request.html", emp_name=emp_name, emp_sup=emp_sup,emp_id=emp_id)
+
 
 @app.route("/submit_wfh_request", methods=["POST"])
 
@@ -146,41 +130,6 @@ def submit_wfh_request():
 
 
 
-@app.route("/update_wfh_request/<int:request_id>", methods=["GET", "POST"])
-@login_required
-def update_wfh_request(request_id):
-    """Update a WFH request."""
-    wfh_request = WFHRequests.get_by_id(request_id)
-    if request.method == "POST":
-        # Update the WFH request with the form data
-        selected_date = request.form['selected_date']
-        day_of_week = request.form['day_of_week']
-        requester_id = request.form['requester_id']
-        requester_supervisor = request.form['requester_supervisor']
-        request_status = request.form['request_status']
-
-        success = WFHRequests.update_request(request_id, selected_date, day_of_week, requester_id, requester_supervisor, request_status)
-        if success:
-            return redirect(url_for('wfh_request'))  # Redirect to the WFH requests page
-        else:
-            return redirect(url_for('failure'))  # Redirect to the failure page if update fails
-
-    return render_template('update_wfh_request.html', wfh_request=wfh_request)
-
-
-#Note, this function most likely can delete, with the homepage button reroute to manager view, was trialling some session based logic for handling data.
-#Might try to integrate a function where if session["managecount"] == 0 redirect back to homepage since no need to approve anything.
-# @app.route("/manager_view_processing")
-# def retrieve_staff_wfh_for_manager():
-#     return redirect(url_for('managerview'))
-
-# @app.route("/managerview")
-# def managerview():
-#     sql = text("Select * from WFH_requests where Requester_Supervisor = " + str(session['employee_id']) + " AND Request_Status = 'Pending'")
-#     processing = db.session.execute(sql) 
-#     #list_of_pending_requests = session.get('manager_pending_list', [])   
-#     return render_template('managerview.html', requests=processing)
-
 
 
 
@@ -198,7 +147,7 @@ def viewownrequests():
         return jsonify({"status": "failure", "message": "User not logged in"}), 401
     
     # Fetch the requests from the database
-    sql = text("SELECT * FROM WFH_requests WHERE Requester_ID = :requester_id")
+    sql = text("SELECT * FROM wfh_requests WHERE Requester_ID = :requester_id")
     sqldonepog = db.session.execute(sql, {'requester_id': employee_id}).mappings().all()
 
     # Convert the SQL result to a list of dictionaries
@@ -225,7 +174,7 @@ def withdraw_request(request_id, userid):
         return jsonify({"status": "failure", "message": "User not logged in"}), 401
     
     # Check if the request belongs to the logged-in user
-    sql_check = text("SELECT * FROM WFH_requests WHERE Requester_ID = :requester_id AND request_ID = :request_id")
+    sql_check = text("SELECT * FROM wfh_requests WHERE Requester_ID = :requester_id AND request_ID = :request_id")
     result = db.session.execute(sql_check, {'requester_id': employee_id, 'request_id': request_id}).fetchone()
 
     if not result:
@@ -233,7 +182,7 @@ def withdraw_request(request_id, userid):
         return jsonify({"status": "failure", "message": "Request not found or you do not have permission to withdraw this request."}), 404
     
     # Update the request status to 'Withdrawn'
-    sql_update = text("UPDATE WFH_requests SET Request_Status = :status WHERE request_ID = :request_id")
+    sql_update = text("UPDATE wfh_requests SET Request_Status = :status WHERE request_ID = :request_id")
     db.session.execute(sql_update, {'status': 'Withdrawn', 'request_id': request_id})
     db.session.commit()  # Commit the update
 
@@ -313,9 +262,7 @@ def retrieve_manager_view():
   
     user_id_2_the_electric_boogaloo = request.cookies.get("userid")
     selected_month = request.args.get('month')
-    # print(selected_month)
-    #print(user_id_2_the_electric_boogaloo)
-    #sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+
     sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and w.Requester_Supervisor ="+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
@@ -332,7 +279,7 @@ def retrieve_manager_calendar_data():
     selected_month = request.args.get('month')
     print(selected_month)
     #print(user_id_2_the_electric_boogaloo)
-    sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
+    sql_stringie = "Select * from wfh_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
     column_names = sql_processed.keys()
@@ -349,7 +296,7 @@ def retrieve_manager_calendar_data():
 @app.route("/api/individual_view", methods=['GET'])
 def retrieve_individual_view():
     user_id = request.cookies.get("userid")
-    sql_stringie = "Select * from WFH_requests where Requester_ID = "+str(user_id)
+    sql_stringie = "Select * from wfh_requests where Requester_ID = "+str(user_id)
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)
     column_names = sql_processed.keys()
@@ -401,7 +348,7 @@ def retrieve_staff_team_calendar_data():
     selected_month = request.args.get('month')
     print(selected_month)
     #print(user_id_2_the_electric_boogaloo)
-    sql_stringie = "Select * from WFH_requests where (Requester_Supervisor = "+str(user_supervisor)+" or Requester_ID = "+str(user_supervisor)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
+    sql_stringie = "Select * from wfh_requests where (Requester_Supervisor = "+str(user_supervisor)+" or Requester_ID = "+str(user_supervisor)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
     column_names = sql_processed.keys()
@@ -455,8 +402,7 @@ def retrieve_all_team_in_office_list():
     column_names_2 = sql_processed_bravo.keys()
     sql_processed_3 = [dict(zip(column_names_2, row)) for row in sql_processed_bravo]
     returned_json = tally_people_in_office(sql_processed_3, sql_processed_2, selected_month)
-    #Comment the following to check the function
-    #returned_json = {}
+
     print("it works")
    
     return jsonify(returned_json)
@@ -466,17 +412,14 @@ def retrieve_all_team_in_office_list():
 def retrieve_hr_view():
     selected_dept=request.args.get('dept')
     selected_month = request.args.get('month')
-    # print(selected_month)
-    #print(user_id_2_the_electric_boogaloo)
-    #sql_stringie = "Select * from WFH_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+    
     sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month) +" and e.Dept = '"+str(selected_dept)+"'"
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
     column_names = sql_processed.keys()
     sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
     sql_processed_3 = sql_to_indiv_row(sql_processed_2, selected_month)
-    # print(sql_processed_2)
-    # print(sql_processed_3)
+
     return jsonify(sql_processed_3)
 
 
