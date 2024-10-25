@@ -21,7 +21,7 @@ cloudinary.config(
     api_secret='kxy0mseU1Qsz5G7UX31WElZ1hts'
 )
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://brandyn:root@34.80.185.149/spmtest1'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.urandom(24)  # Set a random secret key for security
 db.init_app(app)  # Initialize the db with the Flask app
@@ -278,18 +278,19 @@ def retrieve_manager_calendar_data():
     user_id_2_the_electric_boogaloo = request.cookies.get("userid")
     selected_month = request.args.get('month')
     print(selected_month)
-    #print(user_id_2_the_electric_boogaloo)
+
     sql_stringie = "Select * from wfh_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
+    print("This is sql processed 1 ",sql_processed)
     column_names = sql_processed.keys()
     sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
-    #print(sql_processed_2)
+    print("this is the sql processed 2 ",sql_processed_2, " ==finished \n\n")
     sql_2 = text("Select Count(Staff_ID) from employee_list where Reporting_Manager =" + str(user_id_2_the_electric_boogaloo))
     result = db.session.execute(sql_2)
     total_managed_people = result.scalar()
     returned_stuff = calendar_count(sql_processed_2, total_managed_people, selected_month)
-    print(type(returned_stuff))
+    # print("this is the return things, ",returned_stuff,"\n\n\n")
     return jsonify(returned_stuff)
 
 
@@ -301,7 +302,7 @@ def retrieve_individual_view():
     sql_processed = db.session.execute(sql)
     column_names = sql_processed.keys()
     sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
-    print(sql_processed_2)
+   
     return jsonify(sql_processed_2)
 
 
@@ -320,8 +321,10 @@ def retrieve_list_in_office():
     sql_processed_bravo = db.session.execute(sql_2)
     column_names_2 = sql_processed_bravo.keys()
     sql_processed_3 = [dict(zip(column_names_2, row)) for row in sql_processed_bravo]
+    print("this is sql 3 for tally ",sql_processed_3 ,"\n\n\n")
+    print("this is sql 2 for tally ",sql_processed_2 ,"")
     returned_json = tally_people_in_office(sql_processed_3, sql_processed_2, selected_month)
-
+    print("this is the returned json ",returned_json)
     return jsonify(returned_json)
     
 
@@ -338,8 +341,7 @@ def retrieve_own_team_view():
     column_names = sql_processed.keys()
     sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
     sql_processed_3 = sql_to_indiv_row(sql_processed_2, selected_month)
-    # print(sql_processed_2)
-    # print(sql_processed_3)
+
     return jsonify(sql_processed_3)
 
 @app.route("/api/staff_team_view_calendar", methods=['GET'])

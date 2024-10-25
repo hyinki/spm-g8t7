@@ -4,9 +4,10 @@ import calendar
 
 #trial_total_people = 10
 #month = 7
-#Trial_dict = [{'request_ID': 1, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Pending'}, {'request_ID': 2, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Approved'}, {'request_ID': 4, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Pending'}]
+#Trial_dict = [{'request_ID': 28, 'start_date': datetime.date(2024, 10, 29), 'end_date': datetime.date(2024, 10, 31), 'Requester_ID': 140002, 'Requester_Supervisor': 140894, 'Monday': 'NULL', 'Tuesday': 'PM', 'Wednesday': 'AM', 'Thursday': 'AM', 'Friday': 'NULL', 'Saturday': 'NULL', 'Sunday': 'NULL', 'Request_Status': 'Approved', 'cloudinary_link': None, 'repeating': 0}, {'request_ID': 29, 'start_date': datetime.date(2024, 10, 25), 'end_date': datetime.date(2024, 10, 25), 'Requester_ID': 140004, 'Requester_Supervisor': 140894, 'Monday': 'NULL', 'Tuesday': 'NULL', 'Wednesday': 'NULL', 'Thursday': 'NULL', 'Friday': 'PM', 'Saturday': 'NULL', 'Sunday': 'NULL', 'Request_Status': 'Approved', 'cloudinary_link': None, 'repeating': 0}]
 
 def calendar_count(request_dict, total_people, month):
+    print(request_dict)
     processed_dict_for_jsonify = {}
     processed_dict_for_jsonify_2 = {}
     #print(total_people)
@@ -148,7 +149,7 @@ def tally_people_in_office(staff_fullname_dict, approved_wfh_requests, month):
             #        print("THEY ARE THE SAME")
         # print("Check if the start date and end date vars are properly assigned :",start_date, end_date)
 
-    print("This is the dictionary after delete: ", dict_of_dicts)
+    # print("This is the dictionary after delete: ", dict_of_dicts)
     #Convert back the date keys to strings with isoformat() for jsonify to work.
     returned_dict = {}
     for key in dict_of_dicts:

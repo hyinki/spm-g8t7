@@ -179,10 +179,7 @@ export default {
         { name: "Dec", value: 12 },
       ],
       dummyEvents: [
-        { name: "Sarah Koh", date: "2024-09-10", type: "office" },
-        { name: "Mary Tan", date: "2024-10-03", type: "office" },
-        { name: "Sean Goh", date: "2024-10-03", type: "office" },
-        { name: "Elliot Tay", date: "2024-10-03", type: "wfh" },
+
         // Add more events here
       ],
       teamschedule: [],

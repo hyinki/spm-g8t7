@@ -37,7 +37,7 @@ def request_context():
         yield
 
 @patch('Classes.Employees.Employees.query')  # Ensure this matches your import path
-def test_get_by_id_success(mock_query, app_context):
+def test_get_by_id_success(mock_query):
     # Create a mock employee instance
     mock_employee = Employees(
         Staff_ID=1,
