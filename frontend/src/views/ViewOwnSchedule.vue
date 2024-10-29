@@ -79,7 +79,7 @@ export default {
     return {
       selectedMonth: new Date().getMonth() + 1,
       viewType: 'calendar',
-      daysOfWeek: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
+      daysOfWeek: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
       months: [
         { name: 'Jan', value: 1 },
         { name: 'Feb', value: 2 },
