@@ -30,7 +30,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://brandyn:root@34.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.urandom(24)  # Set a random secret key for security
 db.init_app(app)  # Initialize the db with the Flask app
-CORS(app, supports_credentials=True, origins=["https://spm-g8t7-vue.onrender.com"])
+CORS(app, supports_credentials=True, origins=["https://spm-g8t7-vue.onrender.com"], allow_headers=["Content-Type", "Authorization"],
+    expose_headers=["Content-Range", "X-Content-Range"])
 
 
 # Initialize Flask-Login
