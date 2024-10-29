@@ -51,7 +51,7 @@ export default {
     async submitForm() {
       try {
         // Make the login request to the Flask backend
-        const response = await axios.post("http://localhost:5000/login", {
+        const response = await axios.post("https://spm-g8t7-flask.onrender.com/login", {
           username: this.username,
           password: this.password,
         });
@@ -70,13 +70,13 @@ export default {
         this.login({ role: fetchedRole, username: name, userid: userid, dept: dept, email: email, supervisor: supervisor, position: position });
 
         // Set a cookie for the role, which expires in 7 days
-        Cookies.set("userRole", fetchedRole, { expires: 7 });
-        Cookies.set("username", name, { expires: 7 });
-        Cookies.set("supervisor", supervisor, { expires: 7 });
-        Cookies.set("dept", dept, { expires: 7 });
-        Cookies.set("email", email, { expires: 7 });
-        Cookies.set("position", position, { expires: 7 });
-        Cookies.set("userid", userid, { expires: 7 });
+        Cookies.set("userRole", fetchedRole, { expires: 7, secure: true, sameSite: 'None' });
+        Cookies.set("username", name, { expires: 7, secure: true, sameSite: 'None' });
+        Cookies.set("supervisor", supervisor, { expires: 7, secure: true, sameSite: 'None' });
+        Cookies.set("dept", dept, { expires: 7, secure: true, sameSite: 'None' });
+        Cookies.set("email", email, { expires: 7, secure: true, sameSite: 'None' });
+        Cookies.set("position", position, { expires: 7, secure: true, sameSite: 'None' });
+        Cookies.set("userid", userid, { expires: 7, secure: true, sameSite: 'None' });
 
 
         Toastify({

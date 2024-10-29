@@ -216,7 +216,7 @@ export default {
             cloudinary_link: imageUrl // Use imageUrl which will be null if no image was uploaded
           };
 
-          await axios.post('http://localhost:5000/submit_wfh_request', newArrangement);
+          await axios.post('https://spm-g8t7-flask.onrender.com/submit_wfh_request', newArrangement);
           Toastify({
             text: `Request submitted successfully!`,
             duration: 3000,  // Toast duration in milliseconds

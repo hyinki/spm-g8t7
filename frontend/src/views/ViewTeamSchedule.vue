@@ -278,7 +278,7 @@ export default {
       console.log('Selected month before fetching:', this.selectedMonth)
       var params = { month: this.selectedMonth }
       console.log(params)
-      axios.get("http://localhost:5000/api/manager_view", { params:params, withCredentials:true})
+      axios.get("https://spm-g8t7-flask.onrender.com/api/manager_view", { params:params, withCredentials:true})
       .then(response => {
       this.teamschedule = response.data
       console.log( this.teamschedule)
@@ -291,7 +291,7 @@ export default {
 
     fetch_calendar_data(){
       var params = {month: this.selectedMonth}
-      axios.get("http://localhost:5000/api/manager_view_calendar", {params:params, withCredentials:true})
+      axios.get("https://spm-g8t7-flask.onrender.com/api/manager_view_calendar", {params:params, withCredentials:true})
       .then(response =>{
         // this.calendar_data = response.data
         this.calendar_data = Object.entries(response.data).map(([key, value]) => ({
@@ -307,7 +307,7 @@ export default {
 
     fetch_team_schedule_list(){
       var params = {month: this.selectedMonth}
-      axios.get("http://localhost:5000/api/manager_list_in_office", {params:params, withCredentials:true})
+      axios.get("https://spm-g8t7-flask.onrender.com/api/manager_list_in_office", {params:params, withCredentials:true})
       .then(response =>{
         this.inoffice = response.data
         console.log(this.inoffice)
