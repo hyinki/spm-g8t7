@@ -44,7 +44,8 @@ export default {
       username: "",
       password: "",
       error: null, // To store any error messages
-    };
+    },
+
   },
   methods: {
     ...mapActions(["login"]),

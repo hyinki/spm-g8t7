@@ -15,6 +15,11 @@ import cloudinary.uploader
 app = Flask(__name__)
 
 
+app.config.update(
+    SESSION_COOKIE_SECURE=True,      # Required for HTTPS
+    SESSION_COOKIE_SAMESITE='Lax',   # Recommended for security
+)
+
 cloudinary.config(
     cloud_name='dofj7bkm3',
     api_key='844945974877343',
@@ -136,6 +141,13 @@ def submit_wfh_request():
 @app.route("/viewownrequests", methods=['GET'])
 def viewownrequests():
     # Retrieve employee_id from cookies
+    response.set_cookie(
+        'userid',
+        'your_user_id_value',
+        samesite='None',  # Required for cross-origin cookies
+        secure=True       # Required for HTTPS
+    )
+
     employee_id = request.cookies.get('userid')
     print(employee_id + " is the employee id")
     print()
@@ -423,6 +435,9 @@ def retrieve_hr_view():
     sql_processed_3 = sql_to_indiv_row(sql_processed_2, selected_month)
 
     return jsonify(sql_processed_3)
+
+
+
 
 
 #hr calendar
