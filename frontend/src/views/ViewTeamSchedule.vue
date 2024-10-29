@@ -291,7 +291,12 @@ export default {
 
     fetch_calendar_data(){
       var params = {month: this.selectedMonth}
-      axios.get("https://spm-g8t7-flask.onrender.com/api/manager_view_calendar", {params:params, withCredentials:true})
+      axios.get("https://spm-g8t7-flask.onrender.com/api/manager_view_calendar",{ headers: {
+        month: this.selectedMonth,}
+    }
+    //{params:params, withCredentials:true}
+  )
+      
       .then(response =>{
         // this.calendar_data = response.data
         this.calendar_data = Object.entries(response.data).map(([key, value]) => ({
