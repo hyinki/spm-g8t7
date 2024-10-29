@@ -44,7 +44,7 @@ export default {
       username: "",
       password: "",
       error: null, // To store any error messages
-    },
+    }
 
   },
   methods: {
@@ -71,13 +71,13 @@ export default {
         this.login({ role: fetchedRole, username: name, userid: userid, dept: dept, email: email, supervisor: supervisor, position: position });
 
         // Set a cookie for the role, which expires in 7 days
-        Cookies.set("userRole", fetchedRole, { expires: 7, secure: true});
-        Cookies.set("username", name, { expires: 7, secure: true});
-        Cookies.set("supervisor", supervisor, { expires: 7, secure: true});
-        Cookies.set("dept", dept, { expires: 7, secure: true});
-        Cookies.set("email", email, { expires: 7, secure: true});
-        Cookies.set("position", position, { expires: 7, secure: true});
-        Cookies.set("userid", userid, { expires: 7, secure: true});
+        Cookies.set("userRole", fetchedRole, { expires: 7, secure: true, sameSite: 'None' });
+        Cookies.set("username", name, { expires: 7, secure: true, sameSite: 'None' });
+        Cookies.set("supervisor", supervisor, { expires: 7, secure: true, sameSite: 'None' });
+        Cookies.set("dept", dept, { expires: 7, secure: true, sameSite: 'None' });
+        Cookies.set("email", email, { expires: 7, secure: true, sameSite: 'None' });
+        Cookies.set("position", position, { expires: 7, secure: true, sameSite: 'None' });
+        Cookies.set("userid", userid, { expires: 7, secure: true, sameSite: 'None' });
 
 
         Toastify({
