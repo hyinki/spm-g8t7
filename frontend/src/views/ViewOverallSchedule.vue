@@ -115,7 +115,7 @@ export default {
       selectedMonth: new Date().getMonth() + 1,
       selectedDept:"HR",
       viewType: "calendar",
-      daysOfWeek: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+      daysOfWeek: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
       months: [
         { name: "Jan", value: 1 },
         { name: "Feb", value: 2 },
@@ -218,7 +218,9 @@ export default {
       }
       if (week.length) daysArray.push(week);
 
-      return daysArray;
+      return daysArray.filter(week => week.some(day => day.dayNumber !== ""));
+      //Original code
+      //return daysArray;
     },
   },
 
