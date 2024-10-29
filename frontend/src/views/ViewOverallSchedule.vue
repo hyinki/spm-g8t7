@@ -235,7 +235,7 @@ export default {
       console.log('Selected month before fetching:', this.selectedMonth)
       var params = { month: this.selectedMonth, dept: this.selectedDept }
       console.log(params)
-      axios.get("http://localhost:5000/api/hr_view_calendar", { params:params, withCredentials:true})
+      axios.get("https://spm-g8t7-flask.onrender.com/api/hr_view_calendar", { params:params, withCredentials:true})
       .then(response => {
       this.wfh_calendar= response.data
       
@@ -256,7 +256,7 @@ export default {
       console.log('Selected month before fetching:', this.selectedMonth)
       var params = { month: this.selectedMonth, dept: this.selectedDept }
       console.log(params)
-      axios.get("http://localhost:5000/api/hr_view", { params:params, withCredentials:true})
+      axios.get("https://spm-g8t7-flask.onrender.com/api/hr_view", { params:params, withCredentials:true})
       .then(response => {
       this.wfh= response.data
       console.log("wfh is this ",this.wfh)
@@ -273,7 +273,7 @@ export default {
       console.log('Selected month before fetching:', this.selectedMonth)
       var params = { month: this.selectedMonth, dept: this.selectedDept }
       console.log("these are the " , params)
-      axios.get("http://localhost:5000/api/view_all_team_in_office_list", { params:params, withCredentials:true})
+      axios.get("https://spm-g8t7-flask.onrender.com/api/view_all_team_in_office_list", { params:params, withCredentials:true})
       .then(response => {
       this.inoffice = response.data
       // this.allschedule = response.data

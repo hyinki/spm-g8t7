@@ -91,7 +91,7 @@ export default {
 
     async fetchArrangements() {
       try {
-        const response = await axios.get("http://localhost:5000/viewownrequests", {
+        const response = await axios.get("https://spm-g8t7-flask.onrender.com/viewownrequests", {
           withCredentials: true, // Include cookies in the request
         });
         // console.log(response.data);
@@ -109,7 +109,7 @@ export default {
 
     async cancelRequest(requestId) {
     try {
-      const response = await axios.patch(`http://localhost:5000/withdrawrequest/${requestId}/${this.id}`, {
+      const response = await axios.patch(`https://spm-g8t7-flask.onrender.com/withdrawrequest/${requestId}/${this.id}`, {
         withCredentials: true, // Include cookies in the request
       });
 

@@ -81,7 +81,7 @@ export default {
 
     fetchRequests(){
       
-      axios.get("http://localhost:5000/manager_to_approve", {withCredentials:true}).then(response => {
+      axios.get("https://spm-g8t7-flask.onrender.com/manager_to_approve", {withCredentials:true}).then(response => {
         this.teamRequests = response.data
         console.log(response.data)
       
@@ -94,7 +94,7 @@ export default {
       var params = {request: request}
       console.log(params)
       // Placeholder for future API call
-      axios.get('http://localhost:5000/approve_request', {params:params, withCredentials:true}).then(response => {
+      axios.get('https://spm-g8t7-flask.onrender.com/approve_request', {params:params, withCredentials:true}).then(response => {
 
         Toastify({
           text: response.data.message,
@@ -117,7 +117,7 @@ export default {
       var params = {request: request}
       console.log(params)
       // Placeholder for future API call
-      axios.get('http://localhost:5000/reject_request', {params:params, withCredentials:true}).then(response => {
+      axios.get('https://spm-g8t7-flask.onrender.com/reject_request', {params:params, withCredentials:true}).then(response => {
         Toastify({
           text: response.data.message,
           duration: 3000, // Duration in milliseconds
