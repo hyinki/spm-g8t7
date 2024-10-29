@@ -8,3 +8,4 @@ Cloudinary==1.26.0
 SQLAlchemy==2.0.31
 werkzeug==3.0.4
 requests==2.32.3
+gunicorn==20.1.0
