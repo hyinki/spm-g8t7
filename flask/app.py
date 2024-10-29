@@ -446,6 +446,11 @@ def retrieve_dept_calendar_data():
     print(type(returned_stuff))
     return jsonify(returned_stuff)
 
+#cloud testing
+@app.route('/basic_api/hello_world', methods=["GET"])
+def hello_world():
+    return jsonify({"Hello":"World"})
+
 
 if __name__ == '__main__':
     with app.app_context():
