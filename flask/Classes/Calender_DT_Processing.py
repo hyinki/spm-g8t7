@@ -143,11 +143,6 @@ def tally_people_in_office(staff_fullname_dict, approved_wfh_requests, month):
             #print("WFH Occurence of the day itself: ",current_day_name, day_status, "This is staff name: ", staff_name, "This is date: ", start_date)
             delete_person(dict_of_dicts, start_date, day_status, staff_name)
             start_date += timedelta(days=1)
-            #for day, timeblock in dict_of_dicts.items():
-            #    print(day, start_date)
-            #    if start_date == day:
-            #        print("THEY ARE THE SAME")
-        # print("Check if the start date and end date vars are properly assigned :",start_date, end_date)
 
     # print("This is the dictionary after delete: ", dict_of_dicts)
     #Convert back the date keys to strings with isoformat() for jsonify to work.
@@ -173,11 +168,6 @@ def tally_people_in_office(staff_fullname_dict, approved_wfh_requests, month):
 #    "11/04/24": {"AM": ["Michael", "Charles"], "PM": ["John", "Mark", "Michael"], "Whole Day": ["John", "Mark", "Michael"]},
 #    "12/04/24": {"AM": ["Michael", "Alice"], "PM": ["Mark", "Michael"], "Whole Day": ["John", "Mark", "Michael"]}
 #}
-
-#def delete_person(default_dictionary, date, timeblock, name_to_delete):
-#    if date in default_dictionary and timeblock in default_dictionary[date]:
-#        data[date][timeblock] = [name for name in data[date][timeblock] if name != name_to_delete]
-#        default_dictionary[date]["Whole Day"] = [name for name in default_dictionary[date]["Whole Day"] if name != name_to_delete]
 
 def delete_person(default_dictionary, date, timeblock, name_to_delete):
     if date in default_dictionary:

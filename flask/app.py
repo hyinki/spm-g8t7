@@ -430,7 +430,6 @@ def retrieve_hr_view():
 def retrieve_dept_calendar_data():
     selected_dept=request.args.get('dept')
     selected_month = request.args.get('month')
-    print(selected_month)
 
     sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and e.Dept = '"+str(selected_dept)+"'"
     sql = text(sql_stringie)
