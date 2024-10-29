@@ -21,7 +21,7 @@ cloudinary.config(
     api_secret='kxy0mseU1Qsz5G7UX31WElZ1hts'
 )
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://brandyn:root@34.80.185.149/spmtest1'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.urandom(24)  # Set a random secret key for security
 db.init_app(app)  # Initialize the db with the Flask app
