@@ -306,7 +306,8 @@ export default {
       .then(response =>{
         // this.calendar_data = response.data
         this.calendar_data = Object.entries(response.data).map(([key, value]) => ({
-        [key]: value
+        [key]: valueview
+      
         }));
         console.log(this.calendar_data)
         console.log(typeof this.calendar_data)

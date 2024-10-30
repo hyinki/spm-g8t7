@@ -34,7 +34,7 @@ db.init_app(app)  # Initialize the db with the Flask app
 #     expose_headers=["Content-Range", "X-Content-Range"])
 CORS(app, supports_credentials=True, 
      resources={r"/*": {"origins": '*'}}, 
-     allow_headers=["Content-Type", "Authorization", "X-userid", "X-Role", "X-Month", "X-Dept"],
+     allow_headers=["Content-Type", "Authorization", "X-userid", "X-Role", "X-Month", "X-Dept","X-supervisor"],
      expose_headers=["Content-Range", "X-Content-Range"])
 
 # Initialize Flask-Login
@@ -94,6 +94,7 @@ def login_route():
 def submit_wfh_request():
 
     data = request.get_json()
+    print(data)
 
     start_date = data.get('startDate')
     end_date = data.get('endDate')
