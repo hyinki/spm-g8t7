@@ -88,7 +88,7 @@ def login_route():
 
 
 
-
+#works
 @app.route("/submit_wfh_request", methods=["POST"])
 
 def submit_wfh_request():
@@ -142,16 +142,15 @@ def submit_wfh_request():
 
 
 
-
+#settled
 @app.route("/viewownrequests", methods=['GET'])
 def viewownrequests():
     # Retrieve employee_id from cookies
 
-    employee_id = request.cookies.get('userid')
+    employee_id = request.headers.get('X-userid')
     print(employee_id + " is the employee id")
     print()
-    print(session.get('test'))
-    
+
 
     # Check if 'Staff_ID' exists in the cookies
     if not employee_id:
@@ -167,7 +166,7 @@ def viewownrequests():
     # Return the data as JSON
     return jsonify(requests), 200
 
-
+#settled
 @app.route("/withdrawrequest/<int:request_id>/<int:userid>", methods=['patch'])
 
 def withdraw_request(request_id, userid):
@@ -199,7 +198,7 @@ def withdraw_request(request_id, userid):
 
     return jsonify({"status": "success", "message": "Request status updated to 'Withdrawn' successfully"}), 200
 
-
+#works
 @app.route("/approve_request", methods=['GET'])
 def approve_request():
     try:
@@ -223,7 +222,7 @@ def approve_request():
         print(f"Error updating request status: {e}")  # Debugging statement
         return jsonify({"status": "error", "message": str(e)}), 500
     
-
+#works
 @app.route("/reject_request", methods=['GET'])
 def reject_request():
     try:
@@ -248,6 +247,7 @@ def reject_request():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
+#settled
 @app.route("/manager_to_approve", methods=['GET'])
 def retrieve_manager_approve():
 
