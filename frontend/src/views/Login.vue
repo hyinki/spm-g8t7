@@ -70,6 +70,9 @@ export default {
         // Store the role in Vuex state
         this.login({ role: fetchedRole, username: name, userid: userid, dept: dept, email: email, supervisor: supervisor, position: position });
 
+
+        //set as localstorage
+        
         // Set a cookie for the role, which expires in 7 days
         Cookies.set("userRole", fetchedRole, { expires: 7, secure: true, sameSite: 'None' });
         Cookies.set("username", name, { expires: 7, secure: true, sameSite: 'None' });
