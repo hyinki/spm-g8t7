@@ -276,7 +276,7 @@ def retrieve_manager_view():
     print('Manager view user id is ' ,request.headers.get('X-userid'))
     selected_month = request.headers.get('X-Month')
     user_id_2_the_electric_boogaloo = request.headers.get('X-userid')
-
+    print(selected_month, user_id_2_the_electric_boogaloo)
     sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and w.Requester_Supervisor ="+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
