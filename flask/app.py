@@ -251,7 +251,7 @@ def reject_request():
 @app.route("/manager_to_approve", methods=['GET'])
 def retrieve_manager_approve():
 
-    user_id_2_the_electric_boogaloo = request.cookies.get("userid")
+    user_id_2_the_electric_boogaloo = request.headers.get("X-userid")
     # print(selected_month)
 
     sql_stringie =  "SELECT w.*, CONCAT(e.Staff_FName, ' ', e.Staff_LName) AS staff_name FROM wfh_requests w LEFT JOIN employee_list e ON w.Requester_ID = e.Staff_ID WHERE w.Requester_Supervisor ="+ str(user_id_2_the_electric_boogaloo)+" AND w.Request_Status = 'Pending'"
@@ -267,13 +267,10 @@ def retrieve_manager_approve():
 
 
 
-
+#settled
 @app.route("/api/manager_view", methods=['GET'])
 def retrieve_manager_view():
   
-    # user_id_2_the_electric_boogaloo = request.cookies.get("userid")
-    # selected_month = request.args.get('month')
-    #localsetstorage
     print('Manager view user id is ' ,request.headers.get('X-userid'))
     selected_month = request.headers.get('X-Month')
     user_id_2_the_electric_boogaloo = request.headers.get('X-userid')
@@ -288,15 +285,11 @@ def retrieve_manager_view():
     print(sql_processed_3)
     return jsonify(sql_processed_3)
 
+#settled
 @app.route("/manager_view_calendar", methods=['GET'])
 def retrieve_manager_calendar_data():
-
-  
     selected_month = request.headers.get('X-Month')
     user_id_2_the_electric_boogaloo = request.headers.get('X-userid')
-    # user_id_2_the_electric_boogaloo = request.cookies.get("userid")
-    # selected_month = request.args.get('month')
-    # print(selected_month)
     print('Manager view_calendar user id is ' ,user_id_2_the_electric_boogaloo, " selected month is  " + selected_month)
     sql_stringie = "Select * from wfh_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
     sql = text(sql_stringie)
@@ -312,10 +305,11 @@ def retrieve_manager_calendar_data():
     # print("this is the return things, ",returned_stuff,"\n\n\n")
     return jsonify(returned_stuff)
 
-
+#settled
 @app.route("/api/individual_view", methods=['GET'])
 def retrieve_individual_view():
     user_id = request.cookies.get("userid")
+    user_id=request.headers.get('X-userid')
     sql_stringie = "Select * from wfh_requests where Requester_ID = "+str(user_id)
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)
@@ -324,7 +318,7 @@ def retrieve_individual_view():
    
     return jsonify(sql_processed_2)
 
-
+#settled
 @app.route("/manager_list_in_office", methods=['GET'])
 def retrieve_list_in_office():
     # user_id = request.cookies.get("userid")
@@ -351,14 +345,13 @@ def retrieve_list_in_office():
     print("this is the returned json ",returned_json)
     return jsonify(returned_json)
     
-
+#settled
 @app.route("/api/view_own_team_schedule", methods=['GET'])
 def retrieve_own_team_view():
-        # response.set_cookie('userRole', 'admin', samesite='None', secure=True)
-        # response.set_cookie('username', 'example_user', samesite='None', secure=True)
-    user_supervisor = request.cookies.get("supervisor")
+    # request.headers.get('X-userid')
+    user_supervisor = request.headers.get("X-supervisor")
     print("The user's supervisor is: ",user_supervisor)
-    selected_month = request.args.get('month')
+    selected_month = request.headers.get('X-month')
 
     sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor ="+str(user_supervisor)+" or w.Requester_ID ="+str(user_supervisor)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
     sql = text(sql_stringie)
@@ -369,29 +362,31 @@ def retrieve_own_team_view():
 
     return jsonify(sql_processed_3)
 
-@app.route("/api/staff_team_view_calendar", methods=['GET'])
+#settled
+@app.route("/staff_team_view_calendar", methods=['GET'])
 def retrieve_staff_team_calendar_data():
-    user_supervisor = request.cookies.get("supervisor")
-    selected_month = request.args.get('month')
+    user_supervisor = request.headers.get("X-supervisor")
+    selected_month = request.headers.get("X-Month")
     print(selected_month)
-    #print(user_id_2_the_electric_boogaloo)
     sql_stringie = "Select * from wfh_requests where (Requester_Supervisor = "+str(user_supervisor)+" or Requester_ID = "+str(user_supervisor)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
     column_names = sql_processed.keys()
     sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]
-    #print(sql_processed_2)
+ 
     sql_2 = text("Select Count(Staff_ID) from employee_list where (Reporting_Manager =" + str(user_supervisor)+" or Staff_ID = " + str(user_supervisor)+")")
     result = db.session.execute(sql_2)
     total_managed_people = result.scalar()
     returned_stuff = calendar_count(sql_processed_2, total_managed_people, selected_month)
-    # print(type(returned_stuff))
+
     return jsonify(returned_stuff)
 
-@app.route("/api/view_own_team_in_office_list", methods=['GET'])
+
+#settled
+@app.route("/view_own_team_in_office_list", methods=['GET'])
 def retrieve_own_team_in_office_list():
-    user_supervisor = request.cookies.get("supervisor")
-    selected_month = request.args.get('month')
+    user_supervisor = request.headers.get("X-supervisor")
+    selected_month = request.headers.get('X-month')
 
     sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor ="+str(user_supervisor)+" or w.Requester_ID ="+str(user_supervisor)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
     sql = text(sql_stringie)

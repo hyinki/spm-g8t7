@@ -214,7 +214,7 @@ export default {
     },
     // Fetch the WFH requests from the backend
     fetchWFHRequests() {
-      axios.get("https://spm-g8t7-flask.onrender.com/api/individual_view", { withCredentials: true })
+      axios.get("https://spm-g8t7-flask.onrender.com/api/individual_view",{ headers: { "X-userid": Cookies.get("userid")}}, { withCredentials: true })
         .then(response => {
           // console.log(response.data);
           this.wfhRequests = response.data.filter(req => req.Request_Status === 'Approved'); // Store only approved requests

@@ -366,14 +366,5 @@ export default {
   }
 };
 
-/*console.log("Checking")
-axios.get("http://localhost:5000/api/manager_view", { withCredentials:true})
-  .then(response => {
-    var pogchamp = response.data
-    console.log(pogchamp)
-    console.log(typeof pogchamp)
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  }) */
+
 </script>

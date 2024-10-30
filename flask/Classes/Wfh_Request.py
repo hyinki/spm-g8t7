@@ -1,7 +1,7 @@
 from .Database import db  # Import the shared db instance
 
 class WFHRequests(db.Model):
-    __tablename__ = 'WFH_Requests'
+    __tablename__ = 'wfh_requests'
 
 
     request_ID = db.Column(db.Integer, primary_key=True)

@@ -76,6 +76,10 @@ import HeaderStaff from '../components/HeaderStaff.vue';
           <button class="btn btn-primary" @click="submitArrangement">Submit</button>
         </div>
       </div>
+
+      <div>
+        
+      </div>
     </div>
   </div>
 </template>
@@ -215,7 +219,7 @@ export default {
             approved: "pending",
             cloudinary_link: imageUrl // Use imageUrl which will be null if no image was uploaded
           };
-
+          
           await axios.post('https://spm-g8t7-flask.onrender.com/submit_wfh_request', newArrangement);
           Toastify({
             text: `Request submitted successfully!`,
