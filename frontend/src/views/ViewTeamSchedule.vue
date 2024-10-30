@@ -300,7 +300,7 @@ export default {
       axios.get("https://spm-g8t7-flask.onrender.com/manager_view_calendar",
       { headers: {'X-Month': this.selectedMonth, "X-userid": Cookies.get("userid")}}
       //{ headers: {month: this.selectedMonth,}}
-   s
+   
   )
       
       .then(response =>{
@@ -318,7 +318,11 @@ export default {
 
     fetch_team_schedule_list(){
       var params = {month: this.selectedMonth}
-      axios.get("https://spm-g8t7-flask.onrender.com/api/manager_list_in_office", {params:params, withCredentials:true})
+      axios.get("https://spm-g8t7-flask.onrender.com/manager_list_in_office",
+      { headers: {'X-Month': this.selectedMonth, "X-userid": Cookies.get("userid")}}
+      
+      // {params:params, withCredentials:true}
+    )
       .then(response =>{
         this.inoffice = response.data
         console.log(this.inoffice)
