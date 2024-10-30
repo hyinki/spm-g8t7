@@ -348,8 +348,8 @@ def retrieve_list_in_office():
 
 @app.route("/api/view_own_team_schedule", methods=['GET'])
 def retrieve_own_team_view():
-    response.set_cookie('userRole', 'admin', samesite='None', secure=True)
-    response.set_cookie('username', 'example_user', samesite='None', secure=True)
+        # response.set_cookie('userRole', 'admin', samesite='None', secure=True)
+        # response.set_cookie('username', 'example_user', samesite='None', secure=True)
     user_supervisor = request.cookies.get("supervisor")
     print("The user's supervisor is: ",user_supervisor)
     selected_month = request.args.get('month')
