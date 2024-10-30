@@ -272,7 +272,8 @@ def retrieve_manager_view():
   
     # user_id_2_the_electric_boogaloo = request.cookies.get("userid")
     # selected_month = request.args.get('month')
-    localsetstorage
+    #localsetstorage
+    print('Manager view user id is ' ,request.headers.get('X-userid'))
     selected_month = request.headers.get('X-Month')
     user_id_2_the_electric_boogaloo = request.headers.get('X-userid')
 
