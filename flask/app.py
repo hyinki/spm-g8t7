@@ -289,10 +289,14 @@ def retrieve_manager_view():
 
 @app.route("/api/manager_view_calendar", methods=['GET'])
 def retrieve_manager_calendar_data():
-    user_id_2_the_electric_boogaloo = request.cookies.get("userid")
-    selected_month = request.args.get('month')
-    print(selected_month)
 
+  
+    selected_month = request.headers.get('X-Month')
+    user_id_2_the_electric_boogaloo = request.headers.get('X-userid')
+    # user_id_2_the_electric_boogaloo = request.cookies.get("userid")
+    # selected_month = request.args.get('month')
+    # print(selected_month)
+    print('Manager view_calendar user id is ' ,user_id_2_the_electric_boogaloo, " selected month is  " + selected_month)
     sql_stringie = "Select * from wfh_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
