@@ -279,7 +279,10 @@ export default {
       console.log('Selected month before fetching:', this.selectedMonth)
       var params = { month: this.selectedMonth }
       console.log(params)
-      axios.get("https://spm-g8t7-flask.onrender.com/api/manager_view", { params:params, withCredentials:true})
+      axios.get("https://spm-g8t7-flask.onrender.com/api/manager_view", 
+      { headers: {'X-Month': this.selectedMonth, "X-userid": Cookies.get("userid")}}
+      // {params:params, withCredentials:true}
+    )
       .then(response => {
       this.teamschedule = response.data
       console.log( this.teamschedule)
@@ -292,10 +295,9 @@ export default {
 
     fetch_calendar_data(){
       var params = {month: this.selectedMonth}
-      axios.get("https://spm-g8t7-flask.onrender.com/api/manager_view_calendar",{ headers: {
-        month: this.selectedMonth,}
-    }
-    //{params:params, withCredentials:true}
+      axios.get("https://spm-g8t7-flask.onrender.com/api/manager_view_calendar",
+      //{ headers: {month: this.selectedMonth,}}
+    {params:params, withCredentials:true}
   )
       
       .then(response =>{
