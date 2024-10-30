@@ -260,7 +260,7 @@ export default {
 
     fetchstaffteamdata(){
       var params = {month: this.selectedMonth}
-      axios.get("https://spm-g8t7-flask.onrender.com/staff_team_view_calendar",{ headers: {'X-Month': this.selectedMonth,"X-supervisor":Cookies.get()} },{params:params, withCredentials:true})
+      axios.get("https://spm-g8t7-flask.onrender.com/staff_team_view_calendar",{ headers: {'X-Month': this.selectedMonth,"X-supervisor":Cookies.get("supervisor")} },{params:params, withCredentials:true})
       .then(response =>{
         // this.calendar_data = response.data
         this.own_team_calendar_data = Object.entries(response.data).map(([key, value]) => ({
@@ -276,7 +276,7 @@ export default {
 
     fetchteaminofficelist(){
       var params = {month: this.selectedMonth}
-      axios.get("https://spm-g8t7-flask.onrender.com/view_own_team_in_office_list", {params:params, withCredentials:true})
+      axios.get("https://spm-g8t7-flask.onrender.com/view_own_team_in_office_list",{ headers: {'X-Month': this.selectedMonth,"X-supervisor":Cookies.get("supervisor")} }, {params:params, withCredentials:true})
       .then(response =>{
         this.ownteaminoffice = response.data
         console.log(this.ownteaminoffice)
