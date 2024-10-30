@@ -275,7 +275,7 @@ def retrieve_manager_view():
     selected_month = request.headers.get('X-Month')
     user_id_2_the_electric_boogaloo = request.headers.get('X-userid')
     print(selected_month, user_id_2_the_electric_boogaloo)
-    sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and w.Requester_Supervisor ="+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+    sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor ="+str(user_id_2_the_electric_boogaloo)+" or w.Requester_ID ="+str(user_id_2_the_electric_boogaloo)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
     column_names = sql_processed.keys()
@@ -291,7 +291,7 @@ def retrieve_manager_calendar_data():
     selected_month = request.headers.get('X-Month')
     user_id_2_the_electric_boogaloo = request.headers.get('X-userid')
     print('Manager view_calendar user id is ' ,user_id_2_the_electric_boogaloo, " selected month is  " + selected_month)
-    sql_stringie = "Select * from wfh_requests where Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
+    sql_stringie = "Select * from wfh_requests where (Requester_Supervisor = "+str(user_id_2_the_electric_boogaloo)+"or Requester_ID = "+str+(user_id_2_the_electric_boogaloo)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)+" and Request_Status = 'Approved';"
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)  
     print("This is sql processed 1 ",sql_processed)
@@ -329,7 +329,7 @@ def retrieve_list_in_office():
     print(selected_month, user_id)
 
 
-    sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and w.Requester_Supervisor ="+str(user_id)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
+    sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor ="+str(user_id)+" or w.Requester_ID ="+str(user_id)+") and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)
     column_names = sql_processed.keys()
