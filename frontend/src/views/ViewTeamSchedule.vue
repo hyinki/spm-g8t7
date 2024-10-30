@@ -279,8 +279,6 @@ export default {
       console.log('Selected month before fetching:', this.selectedMonth)
       var params = { month: this.selectedMonth }
       console.log(params)
-      console.log("User id is ",Cookies.get("userid"))
-      
       axios.get("https://spm-g8t7-flask.onrender.com/api/manager_view", 
       { headers: {'X-Month': this.selectedMonth, "X-userid": Cookies.get("userid")}}
       // {params:params, withCredentials:true}
