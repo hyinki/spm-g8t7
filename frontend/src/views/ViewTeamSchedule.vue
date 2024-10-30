@@ -156,6 +156,7 @@ import HeaderManager from '../components/HeaderManager.vue';
 <script>
 import { mapGetters } from "vuex";
 import axios, { HttpStatusCode } from 'axios';
+import Cookies from 'js-cookie'
 
 export default {
   name: "ViewOwnSchedule",
