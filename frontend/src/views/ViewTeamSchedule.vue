@@ -297,7 +297,7 @@ export default {
 
     fetch_calendar_data(){
       var params = {month: this.selectedMonth}
-      axios.get("https://spm-g8t7-flask.onrender.com/api/manager_view_calendar",
+      axios.get("https://spm-g8t7-flask.onrender.com/manager_view_calendar",
       { headers: {'X-Month': this.selectedMonth, "X-userid": Cookies.get("userid")}}
       //{ headers: {month: this.selectedMonth,}}
    s

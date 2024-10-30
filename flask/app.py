@@ -287,7 +287,7 @@ def retrieve_manager_view():
     print(sql_processed_3)
     return jsonify(sql_processed_3)
 
-@app.route("/api/manager_view_calendar", methods=['GET'])
+@app.route("/manager_view_calendar", methods=['GET'])
 def retrieve_manager_calendar_data():
 
   
