@@ -61,6 +61,7 @@ import HeaderManager from '../components/HeaderManager.vue';
 import { mapGetters } from "vuex";
 import axios, { HttpStatusCode } from 'axios';
 import Toastify from "toastify-js";
+import Cookies from "js-cookie";
 
 export default {
   name: "Arrangement",

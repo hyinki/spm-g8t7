@@ -72,7 +72,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
 
 <script>
 import axios from 'axios';
-
+import Cookies from 'js-cookie';
 export default {
   name: "ViewOwnSchedule",
   data() {
