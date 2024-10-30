@@ -91,7 +91,7 @@ export default {
 
     async fetchArrangements() {
       try {
-        const response = await axios.get("https://spm-g8t7-flask.onrender.com/viewownrequests",{ headers: { "X-userid": Cookies.get("userid")}}, {
+        const response = await axios.get("https://spm-g8t7-flask.onrender.com/viewownrequests", {
           withCredentials: true, // Include cookies in the request
         });
         // console.log(response.data);
