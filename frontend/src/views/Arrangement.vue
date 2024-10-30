@@ -81,7 +81,7 @@ export default {
 
     fetchRequests(){
       
-      axios.get("https://spm-g8t7-flask.onrender.com/manager_to_approve", {withCredentials:true}).then(response => {
+      axios.get("https://spm-g8t7-flask.onrender.com/manager_to_approve",{ headers: { "X-userid": Cookies.get("userid")}},{withCredentials:true}).then(response => {
         this.teamRequests = response.data
         console.log(response.data)
       
