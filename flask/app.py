@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 app.config.update(
     SESSION_COOKIE_SECURE=True,      # Required for HTTPS
-    SESSION_COOKIE_SAMESITE='None',   # Recommended for security
+    SESSION_COOKIE_SAMESITE='Lax',   # Recommended for security
 )
 
 cloudinary.config(
@@ -30,7 +30,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://brandyn:root@34.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.urandom(24)  # Set a random secret key for security
 db.init_app(app)  # Initialize the db with the Flask app
-CORS(app, supports_credentials=True, origins=["https://spm-g8t7-vue.onrender.com"], allow_headers=["Content-Type", "Authorization","X-staff-ID","X-Role","X-Month","X-Dept"],
+CORS(app, supports_credentials=True, origins=["https://spm-g8t7-vue.onrender.com"], allow_headers=["Content-Type", "Authorization"],
     expose_headers=["Content-Range", "X-Content-Range"])
 
 
@@ -142,6 +142,12 @@ def submit_wfh_request():
 @app.route("/viewownrequests", methods=['GET'])
 def viewownrequests():
     # Retrieve employee_id from cookies
+    response.set_cookie(
+        'userid',
+        'your_user_id_value',
+        samesite='None',  # Required for cross-origin cookies
+        secure=True       # Required for HTTPS
+    )
 
     employee_id = request.cookies.get('userid')
     print(employee_id + " is the employee id")
@@ -267,11 +273,8 @@ def retrieve_manager_approve():
 @app.route("/api/manager_view", methods=['GET'])
 def retrieve_manager_view():
   
-    # user_id_2_the_electric_boogaloo = request.cookies.get("userid")
-    # selected_month = request.args.get('month')
-
-    selected_month = request.headers.get('X-Month')
-    user_id_2_the_electric_boogaloo = request.headers.get('X-userid')
+    user_id_2_the_electric_boogaloo = request.cookies.get("userid")
+    selected_month = request.args.get('month')
 
     sql_stringie = "select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and w.Requester_Supervisor ="+str(user_id_2_the_electric_boogaloo)+" and month(start_date) <="+str(selected_month)+" and month(end_date) >= "+str(selected_month)
     sql = text(sql_stringie)
@@ -340,8 +343,7 @@ def retrieve_list_in_office():
 
 @app.route("/api/view_own_team_schedule", methods=['GET'])
 def retrieve_own_team_view():
-    response.set_cookie('userRole', 'admin', samesite='None', secure=True)
-    response.set_cookie('username', 'example_user', samesite='None', secure=True)
+
     user_supervisor = request.cookies.get("supervisor")
     print("The user's supervisor is: ",user_supervisor)
     selected_month = request.args.get('month')
