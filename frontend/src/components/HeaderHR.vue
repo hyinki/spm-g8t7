@@ -23,7 +23,7 @@
               <a class="nav-link active" aria-current="page" href="/homepage">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/viewoverallschedule">View Overall Schedulet</a>
+              <a class="nav-link" href="/viewoverallschedule">View Overall Schedule</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/viewteamschedule">View Team Schedule</a>
