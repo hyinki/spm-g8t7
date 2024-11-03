@@ -58,7 +58,46 @@ import HeaderStaff from '../components/HeaderStaff.vue';
 
     <!-- List View -->
     <div v-else>
-      
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Activity</th>
+            <th>Office/WFH</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="event in dummyEvents" :key="event.name">
+            <td>{{ formatDate(event.date) }}</td>
+            <td>1pm - 2pm</td> <!-- You can customize the time format -->
+            <td>Meeting</td>
+            <td>
+              <div v-if="event.type === 'office'">
+                {{ event.name }} - Office
+              </div>
+              <div v-else>
+                {{ event.name }} - WFH
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Timeblock</th>
+            <th>Staff Name</th>
+          </tr>
+          <tr v-for="requests in ownteamschedule" :key="requests.request_ID">
+            <td>{{requests.Date}}</td>
+            <td>{{requests.Timeblock}}</td>
+            <td>{{requests.staff_name}}</td>
+          </tr>
+        </thead>
+      </table>
       
       <h3>In Office list</h3>
       <div v-for="(dictionary, date_time) in ownteaminoffice">
