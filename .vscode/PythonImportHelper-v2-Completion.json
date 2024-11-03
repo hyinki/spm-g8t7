@@ -1055,7 +1055,7 @@
         "kind": 6,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "class User(UserMixin):\n    pass\n@login_manager.user_loader\ndef load_user(user_id):\n    return Employees.query.get(user_id)\n# Route for login\n@app.route(\"/login\", methods=[\"POST\"])\ndef login_route():\n    user_id = request.json.get('username')  # Get the user ID from the JSON body\n    print(user_id)",
+        "peekOfCode": "class User(UserMixin):\n    pass\n@login_manager.user_loader\ndef load_user(user_id):\n    return Employees.query.get(user_id)\n# Route for login\n@app.route(\"/login\", methods=[\"POST\"])\ndef login_route():\n    user_id = request.json.get('username')  # Get the user ID from the JSON body \n    print(user_id)",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -1064,7 +1064,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def load_user(user_id):\n    return Employees.query.get(user_id)\n# Route for login\n@app.route(\"/login\", methods=[\"POST\"])\ndef login_route():\n    user_id = request.json.get('username')  # Get the user ID from the JSON body\n    print(user_id)\n    input_password = request.json.get('password') \n    print(input_password) # Get the password from the JSON body\n    print(\"password is \"+ input_password)",
+        "peekOfCode": "def load_user(user_id):\n    return Employees.query.get(user_id)\n# Route for login\n@app.route(\"/login\", methods=[\"POST\"])\ndef login_route():\n    user_id = request.json.get('username')  # Get the user ID from the JSON body \n    print(user_id)\n    input_password = request.json.get('password') \n    print(input_password) # Get the password from the JSON body\n    print(\"password is \"+ input_password)",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -1073,7 +1073,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def login_route():\n    user_id = request.json.get('username')  # Get the user ID from the JSON body\n    print(user_id)\n    input_password = request.json.get('password') \n    print(input_password) # Get the password from the JSON body\n    print(\"password is \"+ input_password)\n    # Create an instance of Login to check user credentials\n    login1 = Login()\n    if login1.check_user_password(user_id, input_password):\n        # Optionally return the user's role or other information",
+        "peekOfCode": "def login_route():\n    user_id = request.json.get('username')  # Get the user ID from the JSON body \n    print(user_id)\n    input_password = request.json.get('password') \n    print(input_password) # Get the password from the JSON body\n    print(\"password is \"+ input_password)\n    # Create an instance of Login to check user credentials\n    login1 = Login()\n    if login1.check_user_password(user_id, input_password):\n        # Optionally return the user's role or other information",
         "detail": "flask.app",
         "documentation": {}
     },
