@@ -68,7 +68,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
       <th>Timeblock</th>
       <th>Staff Name</th>
       </tr>
-      <!-- This dictionary here represents the AM:"Array names" -->
+      <!-- This dictionary here represents the AM:"Array names" , specifically for am-->
       <tbody>
       <tr v-for="(names, time_block) in dictionary" :key="time_block">
         <td>{{ time_block }}</td>
