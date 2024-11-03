@@ -91,9 +91,12 @@
               position: "center", // Center horizontally
               backgroundColor: "#4caf50",  // Green for success
             }).showToast();
-  
+
+          // Redirect to homepage after successful login
+          
           this.$router.push("/homepage"); // Redirect after login
         } catch (error) {
+          // Handle login error
           // this.error = error.response.data.msg || "Login failed."; // Capture error message
           // alert(this.error); // Display error message
   
@@ -108,6 +111,7 @@
         }
       },
       forgotPassword() {
+        // Functionality for password recovery
         if (this.username) {
           alert(`Password reset link has been sent to ${this.username}`);
         } else {
@@ -120,8 +124,8 @@
   
   <style scoped>
   .container {
-    max-width: 400px;
-    margin-top: 50px;
+    max-width: 400px; /* Set maximum width for the login form */
+    margin-top: 50px; /* Add margin to top for spacing */
   }
   </style>
   
