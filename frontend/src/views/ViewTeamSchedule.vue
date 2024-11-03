@@ -7,7 +7,7 @@ import HeaderManager from '../components/HeaderManager.vue';
 
 <template>
   <!-- Staff Section -->
-  <div v-if="isStaff">
+  <div v-if="isStaff"> 
     <HeaderStaff/>
     
     <div>

@@ -121,6 +121,7 @@ export default {
         });
 
         return wfhDays;
+        
       })
       .flat(); // Flatten the array to avoid nested arrays
   },

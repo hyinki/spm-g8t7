@@ -60,7 +60,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
     <div v-else>
       
       
-      <h3>In office list</h3>
+      <h3>In Office list</h3>
       <div v-for="(dictionary, date_time) in ownteaminoffice">
       <h5>{{ date_time }}</h5>
       <table class="table table-striped">
