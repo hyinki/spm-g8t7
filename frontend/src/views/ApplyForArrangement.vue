@@ -17,6 +17,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
           <input type="date" id="datePickerStart" v-model="selectedDateStart" class="form-control" :min="currentDate"/>
         </div>
 
+        
         <div class="col">
           <h4>End date</h4>
           <input type="date" id="datePickerEnd" v-model="selectedDateEnd" class="form-control" :min="selectedDateStart || currentDate" />

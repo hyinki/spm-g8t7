@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WFH Requests</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Work From Home Requests</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Selected Date</th>
+                    <th>Day of Week</th>
+                    <th>Requester ID</th>
+                    <th>Requester Supervisor</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for wfh in wfh_li %}
+                <tr>
+                    <td>{{ wfh.request_ID }}</td>
+                    <td>{{ wfh.selected_date }}</td>
+                    <td>{{ wfh.day_of_week }}</td>
+                    <td>{{ wfh.Requester_ID }}</td>
+                    <td>{{ wfh.Requester_Supervisor }}</td>
+                    <td>{{ wfh.Request_Status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-primary">Go back to Employee List</a>
+    </div>
+</body>
+</html>
