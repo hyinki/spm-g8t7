@@ -82,7 +82,7 @@
         this.loggingOut = true; // Set logging out state
         await this.logout(); // Call the Vuex logout action
         this.clearAllCookies(); // Clear all cookies
-        this.$router.push("/login"); // Redirect to the login page
+        this.$router.push("/"); // Redirect to the login page
       },
   
       clearAllCookies() {

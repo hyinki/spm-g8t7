@@ -6,7 +6,7 @@ import Footer from './components/Footer.vue';
 
 
 <template>
-  <header>
+  <!-- <header>
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Login</router-link> |
@@ -14,7 +14,7 @@ import Footer from './components/Footer.vue';
       <router-link to="/viewteamschedule">viewteamschedule </router-link> | 
       <router-link to="/logout">log Out</router-link> 
     </nav>
-  </header>
+  </header> -->
 
   <main>
     <!-- Display the current page here -->

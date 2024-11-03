@@ -13,8 +13,8 @@ import ViewOwnTeamSchedule from '../views/ViewOwnTeamSchedule.vue';
 import store from '../store/store.js';
 
 const routes = [
-  { path: '/', name: 'Home', component: Home },
-  { path: '/login', name: 'Login', component: Login },
+  { path: '/', name: 'Login', component: Login },
+  // { path: '/login', name: 'Login', component: Login },
   { path: '/homepage', name: 'Homepage', component: Homepage, meta: { requiresAuth: true }},
   { path: '/viewteamschedule', name: 'ViewTeamSchedule', component: ViewTeamSchedule, meta: { requiresAuth: true }},
   { path: '/viewownschedule', name: 'ViewOwnSchedule', component: ViewOwnSchedule, meta: { requiresAuth: true }},
