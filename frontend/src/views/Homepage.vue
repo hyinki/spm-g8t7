@@ -1,7 +1,7 @@
 <script setup>
-import HeaderStaff from '../components/HeaderStaff.vue';
-import HeaderHR from '../components/HeaderHR.vue';
-import HeaderManager from '../components/HeaderManager.vue';
+import HeaderStaff from '../components/HeaderStaff.vue'; // Import the Staff header component
+import HeaderHR from '../components/HeaderHR.vue'; // Import the HR header component
+import HeaderManager from '../components/HeaderManager.vue'; // Import the Manager header component
 </script>
 
 <template>
@@ -191,7 +191,7 @@ export default {
 
 <style scoped>
 .container {
-  max-width: 400px;
-  margin-top: 50px;
+  max-width: 400px; /* Set maximum width for any container elements if needed */
+  margin-top: 50px;  /* Add margin to top for spacing */
 }
 </style>
