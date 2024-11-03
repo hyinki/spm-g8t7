@@ -1,10 +1,10 @@
 <template>
-  <div>Logging out...</div>
+  <div>Logging out...</div> <!-- Simple message displayed during logout process -->
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'; // Import js-cookie to manage cookies
 
 export default {
   name: 'Logout',
@@ -19,9 +19,9 @@ export default {
       this.$router.push('/login'); // Redirect to login page
     },
     clearAllCookies() {
-      const allCookies = Cookies.get();
+      const allCookies = Cookies.get(); // Retrieve all cookies
       for (const cookieName in allCookies) {
-        Cookies.remove(cookieName);
+        Cookies.remove(cookieName); // Remove the cookie by name
       }
     },
   },
