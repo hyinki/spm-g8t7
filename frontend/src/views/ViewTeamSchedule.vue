@@ -184,8 +184,27 @@ export default {
         // Add more events here
       ],
       teamschedule: [],
-      calendar_data:[{1:{"AM": 4, "PM": 3, "wholeday": 5}}],
-      inoffice: {"11/04/24":{"AM":["Michael", "Charles"], "PM":["Michael"], "Whole Day":["Michael", "Charles"]}, "12/04/24":{"AM":["Michael", "Charles"], "PM":["Michael", "Charles"], "Whole Day":["Michael", "Charles"]}},
+calendar_data: [
+    {
+        1: {
+            "AM": 999,
+            "PM": 999,
+            "wholeday": 999
+        }
+    }
+],
+inoffice: {
+    "11/04/24": {
+        "AM": ["Michael", "Charles"],
+        "PM": ["Michael"],
+        "Whole Day": ["Michael", "Charles"]
+    },
+    "12/04/24": {
+        "AM": ["Michael", "Charles"],
+        "PM": ["Michael", "Charles"],
+        "Whole Day": ["Michael", "Charles"]
+    }
+},
     };
   },
 
