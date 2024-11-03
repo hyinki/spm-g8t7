@@ -54,6 +54,7 @@ import HeaderManager from '../components/HeaderManager.vue';
       </div>
     </div>
 
+
     <!-- Calendar View -->
     <div v-if="viewType === 'calendar'" class="calendar">
       <table class="table table-bordered">
@@ -105,7 +106,7 @@ import HeaderManager from '../components/HeaderManager.vue';
           <tr v-for="event in dummyEvents" :key="event.name">
             <td>{{ formatDate(event.date) }}</td>
             <td>1pm - 2pm</td>
-            <!-- You can customize the time format -->
+            <!-- You can customize the time format to match what is needed-->
             <td>Meeting</td>
             <td>
               <div v-if="event.type === 'office'">
