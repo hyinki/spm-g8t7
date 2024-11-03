@@ -13,6 +13,7 @@ import HeaderManager from '../components/HeaderManager.vue';
     <h1 class="mb-3 mt-2 mx-5"> Welcome to the HomePage, {{username}}, {{dept}} (Staff) </h1>
     </div>
 
+    
     <div>
       <router-link to="/viewownteamschedule">
         <button type="button" class="btn btn-primary btn-lg m-5">
