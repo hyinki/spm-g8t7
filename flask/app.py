@@ -53,7 +53,7 @@ def load_user(user_id):
 # Route for login
 @app.route("/login", methods=["POST"])
 def login_route():
-    user_id = request.json.get('username')  # Get the user ID from the JSON body
+    user_id = request.json.get('username')  # Get the user ID from the JSON body 
     print(user_id)
     input_password = request.json.get('password') 
     print(input_password) # Get the password from the JSON body
