@@ -18,6 +18,8 @@
     color: black;
     padding: 20px 0;
     text-align: center;
+    
+
   }
   
   .footer a {

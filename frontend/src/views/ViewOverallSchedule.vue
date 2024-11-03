@@ -3,8 +3,9 @@ import HeaderHR from '../components/HeaderHR.vue';
 </script>
 <template>
   <HeaderHR/>
+  <div class="container">
   <div>
-    <h1>Welcome to the viewoverallschedule</h1>
+    <h1 class="mb-3 mt-2">View Overall Schedule</h1>
   </div>
 
   <div class="d-flex justify-content-between mb-3">
@@ -101,6 +102,7 @@ import HeaderHR from '../components/HeaderHR.vue';
       </table>
       </div>
     </div>
+  </div>
 </template>
 
 <script>

@@ -57,7 +57,7 @@ import HeaderManager from '../components/HeaderManager.vue';
     <HeaderManager/>
 
     <div>
-      <h1>Welcome to the HomePage, {{username}} (Manager)</h1>
+      <h1 class="mb-3 mt-2 mx-5">Welcome to the HomePage, {{username}} (Manager)</h1>
     </div>
 
     <div>
@@ -75,30 +75,9 @@ import HeaderManager from '../components/HeaderManager.vue';
         </button>
       </router-link>
     </div>
+    <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br>
 
-    <div>
-      <router-link to="/viewownschedule">
-        <button type="button" class="btn btn-primary btn-lg m-5">
-          View Own Schedule
-        </button>
-      </router-link>
-    </div>
-
-    <div>
-      <router-link to="/applyforarrangement">
-        <button type="button" class="btn btn-primary btn-lg m-5">
-          Apply For Arrangement
-        </button>
-      </router-link>
-    </div>
-
-    <div>
-      <router-link to="/viewownteamschedule">
-        <button type="button" class="btn btn-primary btn-lg m-5">
-          View Own Team Schedule
-        </button>
-      </router-link>
-    </div>
+   
 
   </div>
 
@@ -108,59 +87,30 @@ import HeaderManager from '../components/HeaderManager.vue';
 
 
     <div>
-      <h1 >Welcome to the HomePage, {{ username }} (HR)</h1>
+      <h1 class="mb-3 mt-2 mx-5" >Welcome to the HomePage, {{ username }} (HR)</h1>
     
     </div>
 
     <div>
-      
-      <router-link to="/viewteamschedule">
-        <button type="button" class="btn btn-primary btn-lg m-5">
-          View Your Managed Team's Schedule
-        </button>
-      </router-link>
-    </div>
 
-    <div>
+      <div>
       <router-link to="/viewoverallschedule">
         <button type="button" class="btn btn-primary btn-lg m-5">
           View Overall Schedule
         </button>
       </router-link>
     </div>
-
-    <div>
-      <router-link to="/viewownschedule">
+      
+      <router-link to="/viewteamschedule">
         <button type="button" class="btn btn-primary btn-lg m-5">
-          View Own Schedule
+          View Team Schedule
         </button>
       </router-link>
     </div>
 
-    <div>
-      <router-link to="/applyforarrangement">
-        <button type="button" class="btn btn-primary btn-lg m-5">
-          Apply For Arrangement
-        </button>
-      </router-link>
-    </div>
+    <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br>
 
-    <div>
-      <router-link to="/viewownteamschedule">
-        <button type="button" class="btn btn-primary btn-lg m-5">
-          View Own Team Schedule
-        </button>
-      </router-link>
-    </div>
     
-    <div>
-      <router-link to="/arrangement">
-        <button type="button" class="btn btn-primary btn-lg m-5">
-          Approve/Reject Arrangement
-        </button>
-      </router-link>
-    </div>
-
   </div>
 </template>
 

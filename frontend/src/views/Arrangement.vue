@@ -7,8 +7,8 @@ import HeaderManager from '../components/HeaderManager.vue';
   <HeaderManager/>
 
   <!-- Title -->
-  <div>
-    <h1>Pending Work Arrangements</h1>
+  <div class="container">
+    <h1 class="mb-3 mt-2">Pending Work Arrangements</h1>
   </div>
 
   <!-- Table of Pending Requests -->

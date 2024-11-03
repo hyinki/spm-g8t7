@@ -18,8 +18,8 @@ import HeaderManager from '../components/HeaderManager.vue';
   <!-- Manager Section -->
   <div v-if="isManager">
     <HeaderManager/>
-    <div>
-      <h1>Welcome to the view team schedule (Manager)</h1>
+    <div class="container">
+      <h1 class="mb-3 mt-2">View Team Schedule (Manager)</h1>
     </div>
   </div>
 
@@ -27,8 +27,8 @@ import HeaderManager from '../components/HeaderManager.vue';
   <div v-if="isHR">
     <HeaderHR/>
 
-    <div>
-      <h1>Welcome to the view team schedule (HR)</h1>
+    <div class="container">
+      <h1 class="mb-3 mt-2">View Team Schedule (HR)</h1>
     </div>
   </div>
 
