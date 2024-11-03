@@ -6,7 +6,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
   <HeaderStaff />
   <div class="container">
     <div>
-      <h1 class="mt-3 mb-3">Welcome to apply for arrangement</h1>
+      <h1 class="mt-3 mb-3">Apply for arrangement</h1>
     </div>
 
     <div class="container">

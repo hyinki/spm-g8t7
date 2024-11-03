@@ -7,7 +7,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
   <HeaderStaff />
   <div class="container">
     <div>
-      <h1>View Arrangement</h1>
+      <h1 class="mb-3 mt-2">View Arrangement</h1>
     </div>
 
     <!-- Arrangements Table -->

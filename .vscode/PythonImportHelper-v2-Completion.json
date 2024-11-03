@@ -24,12 +24,60 @@
         "documentation": {}
     },
     {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "date",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "date",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "calendar",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "calendar",
         "description": "calendar",
         "detail": "calendar",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
         "documentation": {}
     },
     {
@@ -58,6 +106,46 @@
     },
     {
         "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
         "importPath": "flask",
         "description": "flask",
         "isExtraImport": true,
@@ -89,46 +177,6 @@
         "documentation": {}
     },
     {
-        "label": "render_template",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "redirect",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "url_for",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "session",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "Flask",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
         "label": "session",
         "importPath": "flask",
         "description": "flask",
@@ -150,6 +198,14 @@
         "description": "sqlalchemy",
         "isExtraImport": true,
         "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
         "documentation": {}
     },
     {
@@ -182,6 +238,250 @@
         "description": "werkzeug.security",
         "isExtraImport": true,
         "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "pytest",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pytest",
+        "description": "pytest",
+        "detail": "pytest",
+        "documentation": {}
+    },
+    {
+        "label": "patch",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "patch",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "patch",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "MagicMock",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "patch",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "MagicMock",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "calendar_count",
+        "importPath": "Classes.Calender_DT_Processing",
+        "description": "Classes.Calender_DT_Processing",
+        "isExtraImport": true,
+        "detail": "Classes.Calender_DT_Processing",
+        "documentation": {}
+    },
+    {
+        "label": "sql_to_indiv_row",
+        "importPath": "Classes.Calender_DT_Processing",
+        "description": "Classes.Calender_DT_Processing",
+        "isExtraImport": true,
+        "detail": "Classes.Calender_DT_Processing",
+        "documentation": {}
+    },
+    {
+        "label": "tally_people_in_office",
+        "importPath": "Classes.Calender_DT_Processing",
+        "description": "Classes.Calender_DT_Processing",
+        "isExtraImport": true,
+        "detail": "Classes.Calender_DT_Processing",
+        "documentation": {}
+    },
+    {
+        "label": "delete_person",
+        "importPath": "Classes.Calender_DT_Processing",
+        "description": "Classes.Calender_DT_Processing",
+        "isExtraImport": true,
+        "detail": "Classes.Calender_DT_Processing",
+        "documentation": {}
+    },
+    {
+        "label": "calendar_count",
+        "importPath": "Classes.Calender_DT_Processing",
+        "description": "Classes.Calender_DT_Processing",
+        "isExtraImport": true,
+        "detail": "Classes.Calender_DT_Processing",
+        "documentation": {}
+    },
+    {
+        "label": "sql_to_indiv_row",
+        "importPath": "Classes.Calender_DT_Processing",
+        "description": "Classes.Calender_DT_Processing",
+        "isExtraImport": true,
+        "detail": "Classes.Calender_DT_Processing",
+        "documentation": {}
+    },
+    {
+        "label": "tally_people_in_office",
+        "importPath": "Classes.Calender_DT_Processing",
+        "description": "Classes.Calender_DT_Processing",
+        "isExtraImport": true,
+        "detail": "Classes.Calender_DT_Processing",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "Employees",
+        "importPath": "Classes.Employees",
+        "description": "Classes.Employees",
+        "isExtraImport": true,
+        "detail": "Classes.Employees",
+        "documentation": {}
+    },
+    {
+        "label": "Employees",
+        "importPath": "Classes.Employees",
+        "description": "Classes.Employees",
+        "isExtraImport": true,
+        "detail": "Classes.Employees",
+        "documentation": {}
+    },
+    {
+        "label": "Employees",
+        "importPath": "Classes.Employees",
+        "description": "Classes.Employees",
+        "isExtraImport": true,
+        "detail": "Classes.Employees",
+        "documentation": {}
+    },
+    {
+        "label": "Employees",
+        "importPath": "Classes.Employees",
+        "description": "Classes.Employees",
+        "isExtraImport": true,
+        "detail": "Classes.Employees",
+        "documentation": {}
+    },
+    {
+        "label": "Employees",
+        "importPath": "Classes.Employees",
+        "description": "Classes.Employees",
+        "isExtraImport": true,
+        "detail": "Classes.Employees",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "requests",
+        "description": "requests",
+        "isExtraImport": true,
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "based on your actual module structure",
+        "importPath": "Classes.Login import Login  # Adjust the",
+        "description": "Classes.Login import Login  # Adjust the",
+        "isExtraImport": true,
+        "detail": "Classes.Login import Login  # Adjust the",
+        "documentation": {}
+    },
+    {
+        "label": "WFHRequests",
+        "importPath": "Classes.Wfh_Request",
+        "description": "Classes.Wfh_Request",
+        "isExtraImport": true,
+        "detail": "Classes.Wfh_Request",
+        "documentation": {}
+    },
+    {
+        "label": "WFHRequests",
+        "importPath": "Classes.Wfh_Request",
+        "description": "Classes.Wfh_Request",
+        "isExtraImport": true,
+        "detail": "Classes.Wfh_Request",
+        "documentation": {}
+    },
+    {
+        "label": "WFHRequests",
+        "importPath": "Classes.Wfh_Request",
+        "description": "Classes.Wfh_Request",
+        "isExtraImport": true,
+        "detail": "Classes.Wfh_Request",
+        "documentation": {}
+    },
+    {
+        "label": "WFHRequests",
+        "importPath": "Classes.Wfh_Request",
+        "description": "Classes.Wfh_Request",
+        "isExtraImport": true,
+        "detail": "Classes.Wfh_Request",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "Classes.Database",
+        "description": "Classes.Database",
+        "isExtraImport": true,
+        "detail": "Classes.Database",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "Classes.Database",
+        "description": "Classes.Database",
+        "isExtraImport": true,
+        "detail": "Classes.Database",
         "documentation": {}
     },
     {
@@ -241,54 +541,6 @@
         "documentation": {}
     },
     {
-        "label": "db",
-        "importPath": "Classes.Database",
-        "description": "Classes.Database",
-        "isExtraImport": true,
-        "detail": "Classes.Database",
-        "documentation": {}
-    },
-    {
-        "label": "Employees",
-        "importPath": "Classes.Employees",
-        "description": "Classes.Employees",
-        "isExtraImport": true,
-        "detail": "Classes.Employees",
-        "documentation": {}
-    },
-    {
-        "label": "Employees",
-        "importPath": "Classes.Employees",
-        "description": "Classes.Employees",
-        "isExtraImport": true,
-        "detail": "Classes.Employees",
-        "documentation": {}
-    },
-    {
-        "label": "Employees",
-        "importPath": "Classes.Employees",
-        "description": "Classes.Employees",
-        "isExtraImport": true,
-        "detail": "Classes.Employees",
-        "documentation": {}
-    },
-    {
-        "label": "WFHRequests",
-        "importPath": "Classes.Wfh_Request",
-        "description": "Classes.Wfh_Request",
-        "isExtraImport": true,
-        "detail": "Classes.Wfh_Request",
-        "documentation": {}
-    },
-    {
-        "label": "WFHRequests",
-        "importPath": "Classes.Wfh_Request",
-        "description": "Classes.Wfh_Request",
-        "isExtraImport": true,
-        "detail": "Classes.Wfh_Request",
-        "documentation": {}
-    },
-    {
         "label": "Login",
         "importPath": "Classes.Login",
         "description": "Classes.Login",
@@ -305,27 +557,11 @@
         "documentation": {}
     },
     {
-        "label": "calendar_count",
-        "importPath": "Classes.Calender_DT_Processing",
-        "description": "Classes.Calender_DT_Processing",
+        "label": "Login",
+        "importPath": "Classes.Login",
+        "description": "Classes.Login",
         "isExtraImport": true,
-        "detail": "Classes.Calender_DT_Processing",
-        "documentation": {}
-    },
-    {
-        "label": "sql_to_indiv_row",
-        "importPath": "Classes.Calender_DT_Processing",
-        "description": "Classes.Calender_DT_Processing",
-        "isExtraImport": true,
-        "detail": "Classes.Calender_DT_Processing",
-        "documentation": {}
-    },
-    {
-        "label": "tally_people_in_office",
-        "importPath": "Classes.Calender_DT_Processing",
-        "description": "Classes.Calender_DT_Processing",
-        "isExtraImport": true,
-        "detail": "Classes.Calender_DT_Processing",
+        "detail": "Classes.Login",
         "documentation": {}
     },
     {
@@ -335,15 +571,6 @@
         "importPath": "mysql.connector",
         "description": "mysql.connector",
         "detail": "mysql.connector",
-        "documentation": {}
-    },
-    {
-        "label": "os",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
         "documentation": {}
     },
     {
@@ -374,44 +601,11 @@
         "documentation": {}
     },
     {
-        "label": "unittest",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "unittest",
-        "description": "unittest",
-        "detail": "unittest",
-        "documentation": {}
-    },
-    {
-        "label": "patch",
-        "importPath": "unittest.mock",
-        "description": "unittest.mock",
-        "isExtraImport": true,
-        "detail": "unittest.mock",
-        "documentation": {}
-    },
-    {
-        "label": "MagicMock",
-        "importPath": "unittest.mock",
-        "description": "unittest.mock",
-        "isExtraImport": true,
-        "detail": "unittest.mock",
-        "documentation": {}
-    },
-    {
-        "label": "Session",
-        "importPath": "requests",
-        "description": "requests",
-        "isExtraImport": true,
-        "detail": "requests",
-        "documentation": {}
-    },
-    {
         "label": "calendar_count",
         "kind": 2,
         "importPath": "flask.Classes.Calender_DT_Processing",
         "description": "flask.Classes.Calender_DT_Processing",
-        "peekOfCode": "def calendar_count(request_dict, total_people, month):\n    processed_dict_for_jsonify = {}\n    processed_dict_for_jsonify_2 = {}\n    #print(total_people)\n    #print(month)\n    total_days_in_current_month = calendar.monthrange(2024, int(month))[1]\n    #print(\"Month :\",month,\" has \",total_days_in_current_month,\" days\")\n    total_days_for_ranging = total_days_in_current_month + 1\n    # i in range starts with 0 and ends at the number before the end, so add 1 for the range to get a dict with the days.\n    for i in range(total_days_for_ranging):",
+        "peekOfCode": "def calendar_count(request_dict, total_people, month):\n    print(request_dict)\n    processed_dict_for_jsonify = {}\n    processed_dict_for_jsonify_2 = {}\n    #print(total_people)\n    #print(month)\n    total_days_in_current_month = calendar.monthrange(2024, int(month))[1]\n    #print(\"Month :\",month,\" has \",total_days_in_current_month,\" days\")\n    total_days_for_ranging = total_days_in_current_month + 1\n    # i in range starts with 0 and ends at the number before the end, so add 1 for the range to get a dict with the days.",
         "detail": "flask.Classes.Calender_DT_Processing",
         "documentation": {}
     },
@@ -447,7 +641,7 @@
         "kind": 5,
         "importPath": "flask.Classes.Calender_DT_Processing",
         "description": "flask.Classes.Calender_DT_Processing",
-        "peekOfCode": "#trial_total_people = 10\n#month = 7\n#Trial_dict = [{'request_ID': 1, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Pending'}, {'request_ID': 2, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Approved'}, {'request_ID': 4, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Pending'}]\ndef calendar_count(request_dict, total_people, month):\n    processed_dict_for_jsonify = {}\n    processed_dict_for_jsonify_2 = {}\n    #print(total_people)\n    #print(month)\n    total_days_in_current_month = calendar.monthrange(2024, int(month))[1]\n    #print(\"Month :\",month,\" has \",total_days_in_current_month,\" days\")",
+        "peekOfCode": "#trial_total_people = 10\n#month = 7\n#Trial_dict = [{'request_ID': 28, 'start_date': datetime.date(2024, 10, 29), 'end_date': datetime.date(2024, 10, 31), 'Requester_ID': 140002, 'Requester_Supervisor': 140894, 'Monday': 'NULL', 'Tuesday': 'PM', 'Wednesday': 'AM', 'Thursday': 'AM', 'Friday': 'NULL', 'Saturday': 'NULL', 'Sunday': 'NULL', 'Request_Status': 'Approved', 'cloudinary_link': None, 'repeating': 0}, {'request_ID': 29, 'start_date': datetime.date(2024, 10, 25), 'end_date': datetime.date(2024, 10, 25), 'Requester_ID': 140004, 'Requester_Supervisor': 140894, 'Monday': 'NULL', 'Tuesday': 'NULL', 'Wednesday': 'NULL', 'Thursday': 'NULL', 'Friday': 'PM', 'Saturday': 'NULL', 'Sunday': 'NULL', 'Request_Status': 'Approved', 'cloudinary_link': None, 'repeating': 0}]\ndef calendar_count(request_dict, total_people, month):\n    print(request_dict)\n    processed_dict_for_jsonify = {}\n    processed_dict_for_jsonify_2 = {}\n    #print(total_people)\n    #print(month)\n    total_days_in_current_month = calendar.monthrange(2024, int(month))[1]",
         "detail": "flask.Classes.Calender_DT_Processing",
         "documentation": {}
     },
@@ -456,7 +650,7 @@
         "kind": 5,
         "importPath": "flask.Classes.Calender_DT_Processing",
         "description": "flask.Classes.Calender_DT_Processing",
-        "peekOfCode": "#month = 7\n#Trial_dict = [{'request_ID': 1, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Pending'}, {'request_ID': 2, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Approved'}, {'request_ID': 4, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Pending'}]\ndef calendar_count(request_dict, total_people, month):\n    processed_dict_for_jsonify = {}\n    processed_dict_for_jsonify_2 = {}\n    #print(total_people)\n    #print(month)\n    total_days_in_current_month = calendar.monthrange(2024, int(month))[1]\n    #print(\"Month :\",month,\" has \",total_days_in_current_month,\" days\")\n    total_days_for_ranging = total_days_in_current_month + 1",
+        "peekOfCode": "#month = 7\n#Trial_dict = [{'request_ID': 28, 'start_date': datetime.date(2024, 10, 29), 'end_date': datetime.date(2024, 10, 31), 'Requester_ID': 140002, 'Requester_Supervisor': 140894, 'Monday': 'NULL', 'Tuesday': 'PM', 'Wednesday': 'AM', 'Thursday': 'AM', 'Friday': 'NULL', 'Saturday': 'NULL', 'Sunday': 'NULL', 'Request_Status': 'Approved', 'cloudinary_link': None, 'repeating': 0}, {'request_ID': 29, 'start_date': datetime.date(2024, 10, 25), 'end_date': datetime.date(2024, 10, 25), 'Requester_ID': 140004, 'Requester_Supervisor': 140894, 'Monday': 'NULL', 'Tuesday': 'NULL', 'Wednesday': 'NULL', 'Thursday': 'NULL', 'Friday': 'PM', 'Saturday': 'NULL', 'Sunday': 'NULL', 'Request_Status': 'Approved', 'cloudinary_link': None, 'repeating': 0}]\ndef calendar_count(request_dict, total_people, month):\n    print(request_dict)\n    processed_dict_for_jsonify = {}\n    processed_dict_for_jsonify_2 = {}\n    #print(total_people)\n    #print(month)\n    total_days_in_current_month = calendar.monthrange(2024, int(month))[1]\n    #print(\"Month :\",month,\" has \",total_days_in_current_month,\" days\")",
         "detail": "flask.Classes.Calender_DT_Processing",
         "documentation": {}
     },
@@ -465,7 +659,7 @@
         "kind": 5,
         "importPath": "flask.Classes.Calender_DT_Processing",
         "description": "flask.Classes.Calender_DT_Processing",
-        "peekOfCode": "#Trial_dict = [{'request_ID': 1, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Pending'}, {'request_ID': 2, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Approved'}, {'request_ID': 4, 'start_date': datetime.date(2024, 7, 24), 'end_date': datetime.date(2024, 7, 29), 'Requester_ID': 150192, 'Requester_Supervisor': 151408, 'Monday': 'AM', 'Tuesday': 'AM', 'Wednesday': 'AM', 'Thursday': 'PM', 'Friday': 'AM', 'Saturday': 'PM', 'Sunday': 'Whole Day', 'Request_Status': 'Pending'}]\ndef calendar_count(request_dict, total_people, month):\n    processed_dict_for_jsonify = {}\n    processed_dict_for_jsonify_2 = {}\n    #print(total_people)\n    #print(month)\n    total_days_in_current_month = calendar.monthrange(2024, int(month))[1]\n    #print(\"Month :\",month,\" has \",total_days_in_current_month,\" days\")\n    total_days_for_ranging = total_days_in_current_month + 1\n    # i in range starts with 0 and ends at the number before the end, so add 1 for the range to get a dict with the days.",
+        "peekOfCode": "#Trial_dict = [{'request_ID': 28, 'start_date': datetime.date(2024, 10, 29), 'end_date': datetime.date(2024, 10, 31), 'Requester_ID': 140002, 'Requester_Supervisor': 140894, 'Monday': 'NULL', 'Tuesday': 'PM', 'Wednesday': 'AM', 'Thursday': 'AM', 'Friday': 'NULL', 'Saturday': 'NULL', 'Sunday': 'NULL', 'Request_Status': 'Approved', 'cloudinary_link': None, 'repeating': 0}, {'request_ID': 29, 'start_date': datetime.date(2024, 10, 25), 'end_date': datetime.date(2024, 10, 25), 'Requester_ID': 140004, 'Requester_Supervisor': 140894, 'Monday': 'NULL', 'Tuesday': 'NULL', 'Wednesday': 'NULL', 'Thursday': 'NULL', 'Friday': 'PM', 'Saturday': 'NULL', 'Sunday': 'NULL', 'Request_Status': 'Approved', 'cloudinary_link': None, 'repeating': 0}]\ndef calendar_count(request_dict, total_people, month):\n    print(request_dict)\n    processed_dict_for_jsonify = {}\n    processed_dict_for_jsonify_2 = {}\n    #print(total_people)\n    #print(month)\n    total_days_in_current_month = calendar.monthrange(2024, int(month))[1]\n    #print(\"Month :\",month,\" has \",total_days_in_current_month,\" days\")\n    total_days_for_ranging = total_days_in_current_month + 1",
         "detail": "flask.Classes.Calender_DT_Processing",
         "documentation": {}
     },
@@ -474,7 +668,7 @@
         "kind": 5,
         "importPath": "flask.Classes.Calender_DT_Processing",
         "description": "flask.Classes.Calender_DT_Processing",
-        "peekOfCode": "#data = {\n#    \"11/04/24\": {\"AM\": [\"Michael\", \"Charles\"], \"PM\": [\"John\", \"Mark\", \"Michael\"], \"Whole Day\": [\"John\", \"Mark\", \"Michael\"]},\n#    \"12/04/24\": {\"AM\": [\"Michael\", \"Alice\"], \"PM\": [\"Mark\", \"Michael\"], \"Whole Day\": [\"John\", \"Mark\", \"Michael\"]}\n#}\n#def delete_person(default_dictionary, date, timeblock, name_to_delete):\n#    if date in default_dictionary and timeblock in default_dictionary[date]:\n#        data[date][timeblock] = [name for name in data[date][timeblock] if name != name_to_delete]\n#        default_dictionary[date][\"Whole Day\"] = [name for name in default_dictionary[date][\"Whole Day\"] if name != name_to_delete]\ndef delete_person(default_dictionary, date, timeblock, name_to_delete):\n    if date in default_dictionary:",
+        "peekOfCode": "#data = {\n#    \"11/04/24\": {\"AM\": [\"Michael\", \"Charles\"], \"PM\": [\"John\", \"Mark\", \"Michael\"], \"Whole Day\": [\"John\", \"Mark\", \"Michael\"]},\n#    \"12/04/24\": {\"AM\": [\"Michael\", \"Alice\"], \"PM\": [\"Mark\", \"Michael\"], \"Whole Day\": [\"John\", \"Mark\", \"Michael\"]}\n#}\ndef delete_person(default_dictionary, date, timeblock, name_to_delete):\n    if date in default_dictionary:\n        if timeblock == \"Whole Day\":\n            for tb in [\"AM\", \"PM\"]:\n                if tb in default_dictionary[date]:\n                    default_dictionary[date][tb] = [name for name in default_dictionary[date][tb] if name != name_to_delete]",
         "detail": "flask.Classes.Calender_DT_Processing",
         "documentation": {}
     },
@@ -510,7 +704,7 @@
         "kind": 6,
         "importPath": "flask.Classes.Wfh_Request",
         "description": "flask.Classes.Wfh_Request",
-        "peekOfCode": "class WFHRequests(db.Model):\n    __tablename__ = 'WFH_Requests'\n    #request_ID = db.Column(db.Integer, primary_key=True)\n    #selected_date = db.Column(db.Date, nullable=False)\n    #day_of_week = db.Column(db.String(50), nullable=False)\n    #Requester_ID = db.Column(db.Integer, nullable=False)\n    #Requester_Supervisor = db.Column(db.Integer, nullable=False)\n    #Request_Status = db.Column(db.Enum('Approved', 'Pending', 'Withdrawn', 'Rejected'), default='Pending')\n    request_ID = db.Column(db.Integer, primary_key=True)\n    start_date = db.Column(db.Date, nullable=False)",
+        "peekOfCode": "class WFHRequests(db.Model):\n    __tablename__ = 'wfh_requests'\n    request_ID = db.Column(db.Integer, primary_key=True)\n    start_date = db.Column(db.Date, nullable=False)\n    end_date = db.Column(db.Date, nullable=False)\n    Requester_ID = db.Column(db.Integer, nullable=False)\n    Requester_Supervisor = db.Column(db.Integer, nullable=False)\n    Monday = db.Column(db.Enum('AM', 'PM', 'Whole Day', 'NULL'), nullable=True, default='NULL')\n    Tuesday = db.Column(db.Enum('AM', 'PM', 'Whole Day', 'NULL'), nullable=True, default='NULL')\n    Wednesday = db.Column(db.Enum('AM', 'PM', 'Whole Day', 'NULL'), nullable=True, default='NULL')",
         "detail": "flask.Classes.Wfh_Request",
         "documentation": {}
     },
@@ -521,6 +715,339 @@
         "description": "flask.Classes.retrieve_employees",
         "peekOfCode": "def retrieve_employees(Employees):\n    \"\"\"Retrieve and display all employees.\"\"\"\n    employees_list = Employees.get_all()  # Retrieve all employees from the database\n    return render_template('employees.html', employees=employees_list)  # Render the employees in the template",
         "detail": "flask.Classes.retrieve_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_calendar_no_wfh_requests",
+        "kind": 2,
+        "importPath": "flask.tests.test_calendar_DT",
+        "description": "flask.tests.test_calendar_DT",
+        "peekOfCode": "def test_calendar_no_wfh_requests():\n    request_dict = []\n    total_people = 10\n    month = 7\n    result = calendar_count(request_dict, total_people, month)\n    expected = {i: {\"AM\": 0, \"PM\": 0, \"wholeday\": 0} for i in range(1, 32)}\n    assert result == expected\ndef test_calendar_single_wfh_request():\n    request_dict = [\n        {",
+        "detail": "flask.tests.test_calendar_DT",
+        "documentation": {}
+    },
+    {
+        "label": "test_calendar_single_wfh_request",
+        "kind": 2,
+        "importPath": "flask.tests.test_calendar_DT",
+        "description": "flask.tests.test_calendar_DT",
+        "peekOfCode": "def test_calendar_single_wfh_request():\n    request_dict = [\n        {\n            'request_ID': 1,\n            'start_date': datetime(2024, 7, 24),\n            'end_date': datetime(2024, 7, 24),\n            'Requester_ID': 150192,\n            'Requester_Supervisor': 151408,\n            'Monday': 'NULL',\n            'Tuesday': 'NULL',",
+        "detail": "flask.tests.test_calendar_DT",
+        "documentation": {}
+    },
+    {
+        "label": "test_calendar_multiple_wfh_requests",
+        "kind": 2,
+        "importPath": "flask.tests.test_calendar_DT",
+        "description": "flask.tests.test_calendar_DT",
+        "peekOfCode": "def test_calendar_multiple_wfh_requests():\n    # First scenario: Multiple WFH requests within the same month\n    request_dict = [\n        {\n            'request_ID': 1,\n            'start_date': datetime(2024, 7, 24),\n            'end_date': datetime(2024, 7, 24),\n            'Requester_ID': 150192,\n            'Requester_Supervisor': 151408,\n            'Monday': 'NULL',",
+        "detail": "flask.tests.test_calendar_DT",
+        "documentation": {}
+    },
+    {
+        "label": "test_calendar_overlapping_wfh_requests",
+        "kind": 2,
+        "importPath": "flask.tests.test_calendar_DT",
+        "description": "flask.tests.test_calendar_DT",
+        "peekOfCode": "def test_calendar_overlapping_wfh_requests():\n    request_dict = [\n        {\n            'request_ID': 1,\n            'start_date': datetime(2024, 7, 24),\n            'end_date': datetime(2024, 7, 24),\n            'Requester_ID': 150192,\n            'Requester_Supervisor': 151408,\n            'Monday': 'NULL',\n            'Tuesday': 'NULL',",
+        "detail": "flask.tests.test_calendar_DT",
+        "documentation": {}
+    },
+    {
+        "label": "test_sql_to_indiv_row",
+        "kind": 2,
+        "importPath": "flask.tests.test_calendar_DT",
+        "description": "flask.tests.test_calendar_DT",
+        "peekOfCode": "def test_sql_to_indiv_row():\n    request_dict = [\n        {\n            'request_ID': 30,\n            'start_date': date(2024, 10, 25),\n            'end_date': date(2024, 10, 25),\n            'Requester_ID': 140894,\n            'Requester_Supervisor': 140001,\n            'Monday': 'NULL',\n            'Tuesday': 'NULL',",
+        "detail": "flask.tests.test_calendar_DT",
+        "documentation": {}
+    },
+    {
+        "label": "test_sql_to_indiv_row_empty",
+        "kind": 2,
+        "importPath": "flask.tests.test_calendar_DT",
+        "description": "flask.tests.test_calendar_DT",
+        "peekOfCode": "def test_sql_to_indiv_row_empty():\n    request_dict = []\n    selected_month = 10  # October\n    result = sql_to_indiv_row(request_dict, selected_month)\n    expected = []\n    assert result == expected\ndef test_tally_no_wfh_requests():\n    staff_fullname_dict = [\n        {'staff_name': 'Susan Goh'},{'staff_name': 'Janice Chan'},{'staff_name': 'Mary Teo'}]\n    approved_wfh_requests = []",
+        "detail": "flask.tests.test_calendar_DT",
+        "documentation": {}
+    },
+    {
+        "label": "test_tally_no_wfh_requests",
+        "kind": 2,
+        "importPath": "flask.tests.test_calendar_DT",
+        "description": "flask.tests.test_calendar_DT",
+        "peekOfCode": "def test_tally_no_wfh_requests():\n    staff_fullname_dict = [\n        {'staff_name': 'Susan Goh'},{'staff_name': 'Janice Chan'},{'staff_name': 'Mary Teo'}]\n    approved_wfh_requests = []\n    month = 10  # October\n    result = tally_people_in_office(staff_fullname_dict, approved_wfh_requests, month)\n    total_days_in_month = calendar.monthrange(2024, month)[1]\n    expected = {\n        date(2024, month, day).isoformat(): {\n            \"AM\": ['Susan Goh','Janice Chan','Mary Teo'],",
+        "detail": "flask.tests.test_calendar_DT",
+        "documentation": {}
+    },
+    {
+        "label": "test_tally_multiple_wfh_request",
+        "kind": 2,
+        "importPath": "flask.tests.test_calendar_DT",
+        "description": "flask.tests.test_calendar_DT",
+        "peekOfCode": "def test_tally_multiple_wfh_request():\n    staff_fullname_dict = [\n        {'staff_name': 'Susan Goh'}, {'staff_name': 'Janice Chan'}\n    ]\n    approved_wfh_requests = [\n        {\n            'start_date': date(2024, 10, 25),\n            'end_date': date(2024, 10, 25),\n            'staff_name': 'Susan Goh',\n            'Monday': 'NULL',",
+        "detail": "flask.tests.test_calendar_DT",
+        "documentation": {}
+    },
+    {
+        "label": "app_context",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def app_context():\n    ctx = app.app_context()\n    ctx.push()\n    yield ctx\n    ctx.pop()\n@pytest.fixture\ndef request_context():\n    with app.test_request_context():\n        yield\n@patch('Classes.Employees.Employees.query')  # Ensure this matches your import path",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "request_context",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def request_context():\n    with app.test_request_context():\n        yield\n@patch('Classes.Employees.Employees.query')  # Ensure this matches your import path\ndef test_get_by_id_success(mock_query, app_context):\n    # Create a mock employee instance\n    mock_employee = Employees(\n        Staff_ID=1,\n        Staff_FName='John',\n        Staff_LName='Doe',",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_get_by_id_success",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def test_get_by_id_success(mock_query, app_context):\n    # Create a mock employee instance\n    mock_employee = Employees(\n        Staff_ID=1,\n        Staff_FName='John',\n        Staff_LName='Doe',\n        Dept='HR',\n        Position='Manager',\n        Country='USA',\n        Email='john.doe@example.com',",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_get_by_id_fail",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def test_get_by_id_fail(mock_query, app_context):\n    # Create a mock employee instance\n    # Mock the return value of the query\n    mock_query.get.return_value = None\n    # Call the method to get the employee by ID\n    employee1 = Employees.get_by_id(99)\n    # Assertions for employee details\n    assert employee1 is None\n@patch('Classes.Employees.Employees.query')\n@patch('Classes.Employees.db.session.execute')",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_check_password_pass",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def test_check_password_pass(mock_execute, mock_query, app_context, request_context):\n    # Create a mock employee instance\n    mock_employee = Employees(\n        Staff_ID=1,\n        Staff_FName='John',\n        Staff_LName='Doe',\n        Dept='HR',\n        Position='Manager',\n        Country='USA',\n        Email='john.doe@example.com',",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_check_password_fail",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def test_check_password_fail(mock_query):\n    # Mock the return value of the query to be None (employee not found)\n    mock_query.get.return_value = None\n    password = Employees.check_pword(1)\n    assert password == \"nope\"\ndef test_check_HR_roles():\n    role = 1\n    actualRole= Employees.get_role(role)\n    assert actualRole == \"HR\"\ndef test_check_Staff_roles():",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_check_HR_roles",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def test_check_HR_roles():\n    role = 1\n    actualRole= Employees.get_role(role)\n    assert actualRole == \"HR\"\ndef test_check_Staff_roles():\n    role = 2\n    actualRole= Employees.get_role(role)\n    assert actualRole == \"Staff\"\ndef test_check_Manager_roles():\n    role = 3",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_check_Staff_roles",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def test_check_Staff_roles():\n    role = 2\n    actualRole= Employees.get_role(role)\n    assert actualRole == \"Staff\"\ndef test_check_Manager_roles():\n    role = 3\n    actualRole= Employees.get_role(role)\n    assert actualRole == \"Manager\"\ndef test_check_invalid_roles():\n    role1 = 4",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_check_Manager_roles",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def test_check_Manager_roles():\n    role = 3\n    actualRole= Employees.get_role(role)\n    assert actualRole == \"Manager\"\ndef test_check_invalid_roles():\n    role1 = 4\n    role2=7\n    role3=45\n    role4=\"nope\"\n    role5=None",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_check_invalid_roles",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def test_check_invalid_roles():\n    role1 = 4\n    role2=7\n    role3=45\n    role4=\"nope\"\n    role5=None\n    actualRole1= Employees.get_role(role1)\n    actualRole2= Employees.get_role(role2)\n    actualRole3= Employees.get_role(role3)\n    actualRole4= Employees.get_role(role4)",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_get_all_empty",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def test_get_all_empty(mock_query):\n    # Mock the return value of the query to be an empty list\n    mock_query.all.return_value = []\n    # Call the method to get all employees\n    employees = Employees.get_all()\n    # Assertions for an empty list\n    assert employees == []\n@patch('Classes.Employees.Employees.query')  # Ensure this matches your import path\ndef test_get_all_multiple(mock_query):\n    # Create mock employee instances",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_get_all_multiple",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def test_get_all_multiple(mock_query):\n    # Create mock employee instances\n    mock_employee1 = Employees(\n        Staff_ID=1,\n        Staff_FName='John',\n        Staff_LName='Doe',\n        Dept='HR',\n        Position='Manager',\n        Country='USA',\n        Email='john.doe@example.com',",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_get_all_single",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def test_get_all_single(mock_query):\n    # Create a mock employee instance\n    mock_employee = Employees(\n        Staff_ID=1,\n        Staff_FName='John',\n        Staff_LName='Doe',\n        Dept='HR',\n        Position='Manager',\n        Country='SG',\n        Email='john.doe@example.com',",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "test_get_all_order",
+        "kind": 2,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "def test_get_all_order(mock_query):\n    # Create mock employee instances\n    mock_employee1 = Employees(\n        Staff_ID=1,\n        Staff_FName='John',\n        Staff_LName='Doe',\n        Dept='HR',\n        Position='Manager',\n        Country='USA',\n        Email='john.doe@example.com',",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "app = Flask(__name__)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # Use an in-memory database for testing\napp.secret_key = 'test'  # Set a secret key for session management\ndb = SQLAlchemy()\n# Initialize the SQLAlchemy instance with the Flask app\ndb.init_app(app)\n# Create the database tables\nwith app.app_context():\n    db.create_all()\n@pytest.fixture(scope='module')",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['SQLALCHEMY_DATABASE_URI']",
+        "kind": 5,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # Use an in-memory database for testing\napp.secret_key = 'test'  # Set a secret key for session management\ndb = SQLAlchemy()\n# Initialize the SQLAlchemy instance with the Flask app\ndb.init_app(app)\n# Create the database tables\nwith app.app_context():\n    db.create_all()\n@pytest.fixture(scope='module')\ndef app_context():",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "app.secret_key",
+        "kind": 5,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "app.secret_key = 'test'  # Set a secret key for session management\ndb = SQLAlchemy()\n# Initialize the SQLAlchemy instance with the Flask app\ndb.init_app(app)\n# Create the database tables\nwith app.app_context():\n    db.create_all()\n@pytest.fixture(scope='module')\ndef app_context():\n    ctx = app.app_context()",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "flask.tests.test_employees",
+        "description": "flask.tests.test_employees",
+        "peekOfCode": "db = SQLAlchemy()\n# Initialize the SQLAlchemy instance with the Flask app\ndb.init_app(app)\n# Create the database tables\nwith app.app_context():\n    db.create_all()\n@pytest.fixture(scope='module')\ndef app_context():\n    ctx = app.app_context()\n    ctx.push()",
+        "detail": "flask.tests.test_employees",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "flask.tests.test_login",
+        "description": "flask.tests.test_login",
+        "peekOfCode": "def login():\n    return Login()\n@patch('Classes.Employees.Employees.check_pword')\n@patch('werkzeug.security.check_password_hash')\ndef test_check_user_password_valid(mock_check_password_hash, mock_check_pword, login):\n    # Mock the return value of check_pword to be a valid password hash\n    mock_check_pword.return_value = 'scrypt:32768:8:1$jTN66XjbtEr5yO1p$1a515bd1b025a48f9fb82e292fe6c52bcd4df7ea366bf272ddab298756b909cc7dcab9fc2589be231c270edbfbacc7f5ace2da9693c95fcbbbef05cad0f8bf77'\n    # Mock the return value of check_password_hash to be True\n    mock_check_password_hash.return_value = True\n    # Call the method with a valid user ID and correct password",
+        "detail": "flask.tests.test_login",
+        "documentation": {}
+    },
+    {
+        "label": "test_check_user_password_valid",
+        "kind": 2,
+        "importPath": "flask.tests.test_login",
+        "description": "flask.tests.test_login",
+        "peekOfCode": "def test_check_user_password_valid(mock_check_password_hash, mock_check_pword, login):\n    # Mock the return value of check_pword to be a valid password hash\n    mock_check_pword.return_value = 'scrypt:32768:8:1$jTN66XjbtEr5yO1p$1a515bd1b025a48f9fb82e292fe6c52bcd4df7ea366bf272ddab298756b909cc7dcab9fc2589be231c270edbfbacc7f5ace2da9693c95fcbbbef05cad0f8bf77'\n    # Mock the return value of check_password_hash to be True\n    mock_check_password_hash.return_value = True\n    # Call the method with a valid user ID and correct password\n    result = login.check_user_password(1, 'abcdefg123456')\n    # Assertions\n    assert result is True\n@patch('Classes.Employees.Employees.check_pword')",
+        "detail": "flask.tests.test_login",
+        "documentation": {}
+    },
+    {
+        "label": "test_check_user_password_invalid_password",
+        "kind": 2,
+        "importPath": "flask.tests.test_login",
+        "description": "flask.tests.test_login",
+        "peekOfCode": "def test_check_user_password_invalid_password(mock_check_password_hash, mock_check_pword, login):\n    # Mock the return value of check_pword to be a valid password hash\n    mock_check_pword.return_value = 'scrypt:32768:8:1$jTN66XjbtEr5yO1p$1a515bd1b025a48f9fb82e292fe6c52bcd4df7ea366bf272ddab298756b909cc7dcab9fc2589be231c270edbfbacc7f5ace2da9693c95fcbbbef05cad0f8bf77'\n    mock_check_password_hash.return_value = False\n    # Call the method with a valid user ID and incorrect password\n    result = login.check_user_password(1, 'abcdefg123453')\n    # Assertions\n    assert result is False\n@patch('Classes.Employees.Employees.check_pword')\ndef test_check_user_password_invalid_user(mock_check_pword, login):",
+        "detail": "flask.tests.test_login",
+        "documentation": {}
+    },
+    {
+        "label": "test_check_user_password_invalid_user",
+        "kind": 2,
+        "importPath": "flask.tests.test_login",
+        "description": "flask.tests.test_login",
+        "peekOfCode": "def test_check_user_password_invalid_user(mock_check_pword, login):\n    # Mock the return value of check_pword to be None (invalid user ID)\n    mock_check_pword.return_value = None\n    # Call the method with an invalid user ID\n    result = login.check_user_password(999, 'any_password')\n    # Assertions\n    assert result is False\n@patch('Classes.Employees.Employees.check_pword')\n@patch('werkzeug.security.check_password_hash')\ndef test_check_user_password_empty_password(mock_check_password_hash, mock_check_pword, login):",
+        "detail": "flask.tests.test_login",
+        "documentation": {}
+    },
+    {
+        "label": "test_check_user_password_empty_password",
+        "kind": 2,
+        "importPath": "flask.tests.test_login",
+        "description": "flask.tests.test_login",
+        "peekOfCode": "def test_check_user_password_empty_password(mock_check_password_hash, mock_check_pword, login):\n    # Mock the return value of check_pword to be a valid password hash\n    mock_check_pword.return_value = 'hashed_password'\n    # Mock the return value of check_password_hash to be False\n    mock_check_password_hash.return_value = False\n    # Call the method with a valid user ID and empty password\n    result = login.check_user_password(1, '')\n    # Assertions\n    assert result is False",
+        "detail": "flask.tests.test_login",
+        "documentation": {}
+    },
+    {
+        "label": "test_app",
+        "kind": 2,
+        "importPath": "flask.tests.test_wfh",
+        "description": "flask.tests.test_wfh",
+        "peekOfCode": "def test_app():\n    app = Flask(__name__)\n    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'\n    app.config['TESTING'] = True\n    db.init_app(app)\n    with app.app_context():\n        db.create_all()\n        yield app\n        db.drop_all()\n@pytest.fixture",
+        "detail": "flask.tests.test_wfh",
+        "documentation": {}
+    },
+    {
+        "label": "wfh_request",
+        "kind": 2,
+        "importPath": "flask.tests.test_wfh",
+        "description": "flask.tests.test_wfh",
+        "peekOfCode": "def wfh_request():\n    return WFHRequests(\n        request_ID=1,\n        start_date=date(2024, 7, 24),\n        end_date=date(2024, 7, 29),\n        Requester_ID=150192,\n        Requester_Supervisor=151408,\n        Monday='AM',\n        Tuesday='AM',\n        Wednesday='AM',",
+        "detail": "flask.tests.test_wfh",
+        "documentation": {}
+    },
+    {
+        "label": "test_get_by_id_existing",
+        "kind": 2,
+        "importPath": "flask.tests.test_wfh",
+        "description": "flask.tests.test_wfh",
+        "peekOfCode": "def test_get_by_id_existing(mock_query, wfh_request, test_app):\n    # Mock the return value of query.get to return the wfh_request instance\n    mock_query.get.return_value = wfh_request\n    # Call the method to get the request by ID\n    with test_app.app_context():\n        result = WFHRequests.get_by_id(1)\n    # Assertions\n    assert result is not None\n    assert result.request_ID == 1\n    assert result.Requester_ID == 150192",
+        "detail": "flask.tests.test_wfh",
+        "documentation": {}
+    },
+    {
+        "label": "test_get_by_id_non_existent",
+        "kind": 2,
+        "importPath": "flask.tests.test_wfh",
+        "description": "flask.tests.test_wfh",
+        "peekOfCode": "def test_get_by_id_non_existent(mock_query, test_app):\n    # Mock the return value of query.get to return None\n    mock_query.get.return_value = None\n    # Call the method to get the request by ID\n    with test_app.app_context():\n        result = WFHRequests.get_by_id(999)\n    # Assertions\n    assert result is None\n@patch('Classes.Wfh_Request.WFHRequests.query')  # Ensure this matches your import path\ndef test_get_all_empty(mock_query, test_app):",
+        "detail": "flask.tests.test_wfh",
+        "documentation": {}
+    },
+    {
+        "label": "test_get_all_empty",
+        "kind": 2,
+        "importPath": "flask.tests.test_wfh",
+        "description": "flask.tests.test_wfh",
+        "peekOfCode": "def test_get_all_empty(mock_query, test_app):\n    # Mock the return value of query.all to return an empty list\n    mock_query.all.return_value = []\n    # Call the method to get all requests\n    with test_app.app_context():\n        result = WFHRequests.get_all()\n    # Assertions\n    assert result == []\n@patch('Classes.Wfh_Request.WFHRequests.query')  # Ensure this matches your import path\ndef test_get_all_multiple(mock_query, test_app):",
+        "detail": "flask.tests.test_wfh",
+        "documentation": {}
+    },
+    {
+        "label": "test_get_all_multiple",
+        "kind": 2,
+        "importPath": "flask.tests.test_wfh",
+        "description": "flask.tests.test_wfh",
+        "peekOfCode": "def test_get_all_multiple(mock_query, test_app):\n    # Mock the return value of query.all to return a list of wfh_request instances\n    wfh_request1 = WFHRequests(\n        request_ID=1,\n        start_date=date(2024, 7, 24),\n        end_date=date(2024, 7, 29),\n        Requester_ID=150192,\n        Requester_Supervisor=151408,\n        Monday='AM',\n        Tuesday='AM',",
+        "detail": "flask.tests.test_wfh",
         "documentation": {}
     },
     {
@@ -551,38 +1078,11 @@
         "documentation": {}
     },
     {
-        "label": "retrieve_employees",
-        "kind": 2,
-        "importPath": "flask.app",
-        "description": "flask.app",
-        "peekOfCode": "def retrieve_employees():\n    \"\"\"Retrieve and display all employees.\"\"\"\n    emp_name=session['name']\n    #employees_list = Employees.get_all()  # Retrieve all employees from the database\n    sql = text(\"SELECT * FROM employee_list where Reporting_Manager =\" + str(session['supervisor']))\n    employees_list = db.session.execute(sql)\n    return render_template('employees.html', employees=employees_list, emp_name=emp_name)  # Render the employees in the template\n@app.route(\"/wfh_request\")\n@login_required\ndef wfh_request():",
-        "detail": "flask.app",
-        "documentation": {}
-    },
-    {
-        "label": "wfh_request",
-        "kind": 2,
-        "importPath": "flask.app",
-        "description": "flask.app",
-        "peekOfCode": "def wfh_request():\n    emp_name=session['name']\n    emp_sup=session['supervisor']\n    emp_id=session['employee_id']\n    return render_template(\"wfh_request.html\", emp_name=emp_name, emp_sup=emp_sup,emp_id=emp_id)\n@app.route(\"/submit_wfh_request\", methods=[\"POST\"])\ndef submit_wfh_request():\n    data = request.get_json()\n    start_date = data.get('startDate')\n    end_date = data.get('endDate')",
-        "detail": "flask.app",
-        "documentation": {}
-    },
-    {
         "label": "submit_wfh_request",
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def submit_wfh_request():\n    data = request.get_json()\n    start_date = data.get('startDate')\n    end_date = data.get('endDate')\n    requester_id = data.get('userId')\n    requester_supervisor = data.get('supervisor')\n    request_status = \"pending\"  # or however you determine the initial status\n    cloudinary_link = data.get('cloudinary_link')\n    repeating= data.get('repeating')\n    # Get selected days and timeslots",
-        "detail": "flask.app",
-        "documentation": {}
-    },
-    {
-        "label": "update_wfh_request",
-        "kind": 2,
-        "importPath": "flask.app",
-        "description": "flask.app",
-        "peekOfCode": "def update_wfh_request(request_id):\n    \"\"\"Update a WFH request.\"\"\"\n    wfh_request = WFHRequests.get_by_id(request_id)\n    if request.method == \"POST\":\n        # Update the WFH request with the form data\n        selected_date = request.form['selected_date']\n        day_of_week = request.form['day_of_week']\n        requester_id = request.form['requester_id']\n        requester_supervisor = request.form['requester_supervisor']\n        request_status = request.form['request_status']",
+        "peekOfCode": "def submit_wfh_request():\n    data = request.get_json()\n    print(data)\n    start_date = data.get('startDate')\n    end_date = data.get('endDate')\n    requester_id = data.get('userId')\n    requester_supervisor = data.get('supervisor')\n    request_status = \"pending\"  # or however you determine the initial status\n    cloudinary_link = data.get('cloudinary_link')\n    repeating= data.get('repeating')",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -591,7 +1091,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def viewownrequests():\n    # Retrieve employee_id from cookies\n    employee_id = request.cookies.get('userid')\n    print(employee_id + \" is the employee id\")\n    print()\n    print(session.get('test'))\n    # Check if 'Staff_ID' exists in the cookies\n    if not employee_id:\n        return jsonify({\"status\": \"failure\", \"message\": \"User not logged in\"}), 401\n    # Fetch the requests from the database",
+        "peekOfCode": "def viewownrequests():\n    # Retrieve employee_id from cookies\n    employee_id = request.headers.get('X-userid')\n    print(employee_id + \" is the employee id\")\n    print()\n    # Check if 'Staff_ID' exists in the cookies\n    if not employee_id:\n        return jsonify({\"status\": \"failure\", \"message\": \"User not logged in\"}), 401\n    # Fetch the requests from the database\n    sql = text(\"SELECT * FROM wfh_requests WHERE Requester_ID = :requester_id\")",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -627,7 +1127,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_manager_approve():\n    user_id_2_the_electric_boogaloo = request.cookies.get(\"userid\")\n    # print(selected_month)\n    sql_stringie =  \"SELECT w.*, CONCAT(e.Staff_FName, ' ', e.Staff_LName) AS staff_name FROM wfh_requests w LEFT JOIN employee_list e ON w.Requester_ID = e.Staff_ID WHERE w.Requester_Supervisor =\"+ str(user_id_2_the_electric_boogaloo)+\" AND w.Request_Status = 'Pending'\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    print(sql_processed_2)\n    return jsonify(sql_processed_2)",
+        "peekOfCode": "def retrieve_manager_approve():\n    user_id_2_the_electric_boogaloo = request.headers.get(\"X-userid\")\n    # print(selected_month)\n    sql_stringie =  \"SELECT w.*, CONCAT(e.Staff_FName, ' ', e.Staff_LName) AS staff_name FROM wfh_requests w LEFT JOIN employee_list e ON w.Requester_ID = e.Staff_ID WHERE w.Requester_Supervisor =\"+ str(user_id_2_the_electric_boogaloo)+\" AND w.Request_Status = 'Pending'\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    print(sql_processed_2)\n    return jsonify(sql_processed_2)",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -636,7 +1136,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_manager_view():\n    user_id_2_the_electric_boogaloo = request.cookies.get(\"userid\")\n    selected_month = request.args.get('month')\n    # print(selected_month)\n    #print(user_id_2_the_electric_boogaloo)\n    #sql_stringie = \"Select * from WFH_requests where Requester_Supervisor = \"+str(user_id_2_the_electric_boogaloo)+\" and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and w.Requester_Supervisor =\"+str(user_id_2_the_electric_boogaloo)+\" and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()",
+        "peekOfCode": "def retrieve_manager_view():\n    print('Manager view user id is ' ,request.headers.get('X-userid'))\n    selected_month = request.headers.get('X-Month')\n    user_id_2_the_electric_boogaloo = request.headers.get('X-userid')\n    print(selected_month, user_id_2_the_electric_boogaloo)\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor =\"+str(user_id_2_the_electric_boogaloo)+\" or w.Requester_ID =\"+str(user_id_2_the_electric_boogaloo)+\") and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -645,7 +1145,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_manager_calendar_data():\n    user_id_2_the_electric_boogaloo = request.cookies.get(\"userid\")\n    selected_month = request.args.get('month')\n    print(selected_month)\n    #print(user_id_2_the_electric_boogaloo)\n    sql_stringie = \"Select * from WFH_requests where Requester_Supervisor = \"+str(user_id_2_the_electric_boogaloo)+\" and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)+\" and Request_Status = 'Approved';\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]",
+        "peekOfCode": "def retrieve_manager_calendar_data():\n    selected_month = request.headers.get('X-Month')\n    user_id_2_the_electric_boogaloo = request.headers.get('X-userid')\n    print('Manager view_calendar user id is ' ,user_id_2_the_electric_boogaloo, \" selected month is  \" + selected_month)\n    sql_stringie = \"Select * from wfh_requests where (Requester_Supervisor = \"+str(user_id_2_the_electric_boogaloo)+\" or Requester_ID = \"+str(user_id_2_the_electric_boogaloo)+\") and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)+\" and Request_Status = 'Approved';\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    print(\"This is sql processed 1 \",sql_processed)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -654,7 +1154,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_individual_view():\n    user_id = request.cookies.get(\"userid\")\n    sql_stringie = \"Select * from WFH_requests where Requester_ID = \"+str(user_id)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    print(sql_processed_2)\n    return jsonify(sql_processed_2)\n@app.route(\"/api/manager_list_in_office\", methods=['GET'])",
+        "peekOfCode": "def retrieve_individual_view():\n    user_id = request.cookies.get(\"userid\")\n    user_id=request.headers.get('X-userid')\n    sql_stringie = \"Select * from wfh_requests where Requester_ID = \"+str(user_id)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    return jsonify(sql_processed_2)\n#settled",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -663,7 +1163,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_list_in_office():\n    user_id = request.cookies.get(\"userid\")\n    selected_month = request.args.get('month')\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and w.Requester_Supervisor =\"+str(user_id)+\" and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    sql_stringie_2 = \"select concat(Staff_Fname, ' ', Staff_LName) as staff_name from employee_list where Reporting_Manager = \"+str(user_id)\n    sql_2 = text(sql_stringie_2)",
+        "peekOfCode": "def retrieve_list_in_office():\n    # user_id = request.cookies.get(\"userid\")\n    # selected_month = request.args.get('month')\n    print('Manager list view user id is ' ,request.headers.get('X-userid'))\n    selected_month = request.headers.get('X-Month')\n    user_id = request.headers.get('X-userid')\n    print(selected_month, user_id)\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor =\"+str(user_id)+\" or w.Requester_ID =\"+str(user_id)+\") and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -672,7 +1172,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_own_team_view():\n    user_supervisor = request.cookies.get(\"supervisor\")\n    print(\"The user's supervisor is: \",user_supervisor)\n    selected_month = request.args.get('month')\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor =\"+str(user_supervisor)+\" or w.Requester_ID =\"+str(user_supervisor)+\") and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    sql_processed_3 = sql_to_indiv_row(sql_processed_2, selected_month)",
+        "peekOfCode": "def retrieve_own_team_view():\n    # request.headers.get('X-userid')\n    user_supervisor = request.headers.get(\"X-supervisor\")\n    print(\"The user's supervisor is: \",user_supervisor)\n    selected_month = request.headers.get('X-month')\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor =\"+str(user_supervisor)+\" or w.Requester_ID =\"+str(user_supervisor)+\") and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -681,7 +1181,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_staff_team_calendar_data():\n    user_supervisor = request.cookies.get(\"supervisor\")\n    selected_month = request.args.get('month')\n    print(selected_month)\n    #print(user_id_2_the_electric_boogaloo)\n    sql_stringie = \"Select * from WFH_requests where (Requester_Supervisor = \"+str(user_supervisor)+\" or Requester_ID = \"+str(user_supervisor)+\") and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)+\" and Request_Status = 'Approved';\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]",
+        "peekOfCode": "def retrieve_staff_team_calendar_data():\n    user_supervisor = request.headers.get(\"X-supervisor\")\n    selected_month = request.headers.get(\"X-Month\")\n    print(selected_month)\n    sql_stringie = \"Select * from wfh_requests where (Requester_Supervisor = \"+str(user_supervisor)+\" or Requester_ID = \"+str(user_supervisor)+\") and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)+\" and Request_Status = 'Approved';\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    sql_2 = text(\"Select Count(Staff_ID) from employee_list where (Reporting_Manager =\" + str(user_supervisor)+\" or Staff_ID = \" + str(user_supervisor)+\")\")",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -690,7 +1190,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_own_team_in_office_list():\n    user_supervisor = request.cookies.get(\"supervisor\")\n    selected_month = request.args.get('month')\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor =\"+str(user_supervisor)+\" or w.Requester_ID =\"+str(user_supervisor)+\") and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    sql_stringie_2 = \"select concat(Staff_Fname, ' ', Staff_LName) as staff_name from employee_list where (Reporting_Manager = \"+str(user_supervisor)+ \" or Staff_ID = \"+str(user_supervisor)+\")\"\n    sql_2 = text(sql_stringie_2)",
+        "peekOfCode": "def retrieve_own_team_in_office_list():\n    user_supervisor = request.headers.get(\"X-supervisor\")\n    selected_month = request.headers.get('X-month')\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and (w.Requester_Supervisor =\"+str(user_supervisor)+\" or w.Requester_ID =\"+str(user_supervisor)+\") and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    sql_stringie_2 = \"select concat(Staff_Fname, ' ', Staff_LName) as staff_name from employee_list where (Reporting_Manager = \"+str(user_supervisor)+ \" or Staff_ID = \"+str(user_supervisor)+\")\"\n    sql_2 = text(sql_stringie_2)",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -708,7 +1208,25 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_hr_view():\n    selected_dept=request.args.get('dept')\n    selected_month = request.args.get('month')\n    # print(selected_month)\n    #print(user_id_2_the_electric_boogaloo)\n    #sql_stringie = \"Select * from WFH_requests where Requester_Supervisor = \"+str(user_id_2_the_electric_boogaloo)+\" and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month) +\" and e.Dept = '\"+str(selected_dept)+\"'\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()",
+        "peekOfCode": "def retrieve_hr_view():\n    selected_dept=request.args.get('dept')\n    selected_month = request.args.get('month')\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month) +\" and e.Dept = '\"+str(selected_dept)+\"'\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    sql_processed_3 = sql_to_indiv_row(sql_processed_2, selected_month)\n    return jsonify(sql_processed_3)",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "retrieve_dept_calendar_data",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def retrieve_dept_calendar_data():\n    selected_dept=request.args.get('dept')\n    selected_month = request.args.get('month')\n    sql_stringie = \"select w.*, concat(e.Staff_FName, ' ', e.Staff_LName) as staff_name from wfh_requests w left join employee_list e on w.Requester_ID = e.Staff_ID where w.Request_Status = 'Approved' and month(start_date) <=\"+str(selected_month)+\" and month(end_date) >= \"+str(selected_month)+\" and e.Dept = '\"+str(selected_dept)+\"'\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)  \n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    #print(sql_processed_2)\n    sql_stringie_2 = \"select concat(Staff_Fname, ' ', Staff_LName) as staff_name from employee_list where Dept = '\"+str(selected_dept)+\"'\"",
+        "detail": "flask.app",
+        "documentation": {}
+    },
+    {
+        "label": "hello_world",
+        "kind": 2,
+        "importPath": "flask.app",
+        "description": "flask.app",
+        "peekOfCode": "def hello_world():\n    return jsonify({\"Hello\":\"World\"})\nif __name__ == '__main__':\n    with app.app_context():\n        db.create_all()  # Create tables if they don't exist\n    app.run(host='0.0.0.0', port=5000, debug=True)",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -717,7 +1235,7 @@
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "app = Flask(__name__)\ncloudinary.config(\n    cloud_name='dofj7bkm3',\n    api_key='844945974877343',\n    api_secret='kxy0mseU1Qsz5G7UX31WElZ1hts'\n)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app",
+        "peekOfCode": "app = Flask(__name__)\napp.config.update(\n    SESSION_COOKIE_SECURE=True,      # Required for HTTPS\n    SESSION_COOKIE_SAMESITE='None',   # Recommended for security\n)\ncloudinary.config(\n    cloud_name='dofj7bkm3',\n    api_key='844945974877343',\n    api_secret='kxy0mseU1Qsz5G7UX31WElZ1hts'\n)",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -726,7 +1244,7 @@
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app, supports_credentials=True, origins=[\"*\"])\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class",
+        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://brandyn:root@34.80.185.149/spmtest1'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\n# CORS(app, supports_credentials=True, origins=[\"https://spm-g8t7-vue.onrender.com\"], allow_headers=[\"Content-Type\", \"Authorization\",\"X-staff-ID\",\"X-Role\",\"X-Month\",\"X-Dept\"],\n#     expose_headers=[\"Content-Range\", \"X-Content-Range\"])\nCORS(app, supports_credentials=True, \n     resources={r\"/*\": {\"origins\": '*'}}, \n     allow_headers=[\"Content-Type\", \"Authorization\", \"X-userid\", \"X-Role\", \"X-Month\", \"X-Dept\",\"X-supervisor\"],\n     expose_headers=[\"Content-Range\", \"X-Content-Range\"])",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -735,7 +1253,7 @@
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app, supports_credentials=True, origins=[\"*\"])\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class\nclass User(UserMixin):",
+        "peekOfCode": "app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\napp.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\n# CORS(app, supports_credentials=True, origins=[\"https://spm-g8t7-vue.onrender.com\"], allow_headers=[\"Content-Type\", \"Authorization\",\"X-staff-ID\",\"X-Role\",\"X-Month\",\"X-Dept\"],\n#     expose_headers=[\"Content-Range\", \"X-Content-Range\"])\nCORS(app, supports_credentials=True, \n     resources={r\"/*\": {\"origins\": '*'}}, \n     allow_headers=[\"Content-Type\", \"Authorization\", \"X-userid\", \"X-Role\", \"X-Month\", \"X-Dept\",\"X-supervisor\"],\n     expose_headers=[\"Content-Range\", \"X-Content-Range\"])\n# Initialize Flask-Login",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -744,7 +1262,7 @@
         "kind": 5,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "app.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\nCORS(app, supports_credentials=True, origins=[\"*\"])\n# Initialize Flask-Login\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\nlogin_manager.login_view = 'login_route'  # Redirect to login if not authenticated\n# Define User class\nclass User(UserMixin):\n    pass",
+        "peekOfCode": "app.secret_key = os.urandom(24)  # Set a random secret key for security\ndb.init_app(app)  # Initialize the db with the Flask app\n# CORS(app, supports_credentials=True, origins=[\"https://spm-g8t7-vue.onrender.com\"], allow_headers=[\"Content-Type\", \"Authorization\",\"X-staff-ID\",\"X-Role\",\"X-Month\",\"X-Dept\"],\n#     expose_headers=[\"Content-Range\", \"X-Content-Range\"])\nCORS(app, supports_credentials=True, \n     resources={r\"/*\": {\"origins\": '*'}}, \n     allow_headers=[\"Content-Type\", \"Authorization\", \"X-userid\", \"X-Role\", \"X-Month\", \"X-Dept\",\"X-supervisor\"],\n     expose_headers=[\"Content-Range\", \"X-Content-Range\"])\n# Initialize Flask-Login\nlogin_manager = LoginManager()",
         "detail": "flask.app",
         "documentation": {}
     },
@@ -771,7 +1289,7 @@
         "kind": 5,
         "importPath": "flask.hashing_pword",
         "description": "flask.hashing_pword",
-        "peekOfCode": "password = '123456'\nhashed_password = generate_password_hash(password)\nprint(hashed_password)\nunhashed_password=check_password_hash(hashed_password,\"123456\")\nprint(\"Unhashed pword is \",unhashed_password)",
+        "peekOfCode": "password = 'abcdefg123456'\nhashed_password = generate_password_hash(password)\nprint(hashed_password)\nunhashed_password=check_password_hash(hashed_password,\"abcdefg123456\")\nprint(\"Unhashed pword is \",unhashed_password)",
         "detail": "flask.hashing_pword",
         "documentation": {}
     },
@@ -780,7 +1298,7 @@
         "kind": 5,
         "importPath": "flask.hashing_pword",
         "description": "flask.hashing_pword",
-        "peekOfCode": "hashed_password = generate_password_hash(password)\nprint(hashed_password)\nunhashed_password=check_password_hash(hashed_password,\"123456\")\nprint(\"Unhashed pword is \",unhashed_password)",
+        "peekOfCode": "hashed_password = generate_password_hash(password)\nprint(hashed_password)\nunhashed_password=check_password_hash(hashed_password,\"abcdefg123456\")\nprint(\"Unhashed pword is \",unhashed_password)",
         "detail": "flask.hashing_pword",
         "documentation": {}
     },
@@ -794,47 +1312,11 @@
         "documentation": {}
     },
     {
-        "label": "TestEmployeesModel",
+        "label": "TestLogin",
         "kind": 6,
         "importPath": "flask.test_unit",
         "description": "flask.test_unit",
-        "peekOfCode": "class TestEmployeesModel(unittest.TestCase):\n    def setUp(self):\n        self.app_context = app.app_context()\n        self.app_context.push()\n    def tearDown(self):\n        self.app_context.pop()\n    @patch('Classes.Employees.Employees.query')  # Ensure this matches your import path\n    def test_get_by_id(self, mock_query):\n        # Create a mock employee instance\n        mock_employee = Employees(",
-        "detail": "flask.test_unit",
-        "documentation": {}
-    },
-    {
-        "label": "app",
-        "kind": 5,
-        "importPath": "flask.test_unit",
-        "description": "flask.test_unit",
-        "peekOfCode": "app = Flask(__name__)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # Use an in-memory database for testing\napp.secret_key = 'test'  # Set a secret key for session management\ndb = SQLAlchemy(app)\n# Create the database tables\nwith app.app_context():\n    db.create_all()\nclass TestEmployeesModel(unittest.TestCase):\n    def setUp(self):\n        self.app_context = app.app_context()",
-        "detail": "flask.test_unit",
-        "documentation": {}
-    },
-    {
-        "label": "app.config['SQLALCHEMY_DATABASE_URI']",
-        "kind": 5,
-        "importPath": "flask.test_unit",
-        "description": "flask.test_unit",
-        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # Use an in-memory database for testing\napp.secret_key = 'test'  # Set a secret key for session management\ndb = SQLAlchemy(app)\n# Create the database tables\nwith app.app_context():\n    db.create_all()\nclass TestEmployeesModel(unittest.TestCase):\n    def setUp(self):\n        self.app_context = app.app_context()\n        self.app_context.push()",
-        "detail": "flask.test_unit",
-        "documentation": {}
-    },
-    {
-        "label": "app.secret_key",
-        "kind": 5,
-        "importPath": "flask.test_unit",
-        "description": "flask.test_unit",
-        "peekOfCode": "app.secret_key = 'test'  # Set a secret key for session management\ndb = SQLAlchemy(app)\n# Create the database tables\nwith app.app_context():\n    db.create_all()\nclass TestEmployeesModel(unittest.TestCase):\n    def setUp(self):\n        self.app_context = app.app_context()\n        self.app_context.push()\n    def tearDown(self):",
-        "detail": "flask.test_unit",
-        "documentation": {}
-    },
-    {
-        "label": "db",
-        "kind": 5,
-        "importPath": "flask.test_unit",
-        "description": "flask.test_unit",
-        "peekOfCode": "db = SQLAlchemy(app)\n# Create the database tables\nwith app.app_context():\n    db.create_all()\nclass TestEmployeesModel(unittest.TestCase):\n    def setUp(self):\n        self.app_context = app.app_context()\n        self.app_context.push()\n    def tearDown(self):\n        self.app_context.pop()",
+        "peekOfCode": "class TestLogin(unittest.TestCase):\n    pass",
         "detail": "flask.test_unit",
         "documentation": {}
     }

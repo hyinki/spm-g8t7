@@ -11,7 +11,7 @@ import HeaderManager from '../components/HeaderManager.vue';
     <HeaderStaff/>
     
     <div>
-      <h1>Welcome to the view team schedule (Staff)</h1>
+      <h1 >Welcome to the view team schedule (Staff)</h1>
     </div>
   </div>
   

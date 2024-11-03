@@ -4,11 +4,13 @@ import HeaderStaff from '../components/HeaderStaff.vue';
 </script>
 
 <template>
+  
   <HeaderStaff/>
+  <div class="container">
  
 
   <div>
-    <h1>Welcome {{ username }}</h1>
+    <h1 class="mb-3 mt-2">Team Schedule</h1>
   </div>
 
   <div class="container">
@@ -38,6 +40,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
             <td v-for="day in week" :key="day.date">
               <div :class="['calendar-day', { 'today': isToday(day.date) }]">
                 <span>{{ day.dayNumber }}</span>
+                
                 <div v-if="day.dayNumber >= 1">AM: {{ day.AM }}</div>
                 <div v-if="day.dayNumber >= 1">PM: {{ day.PM }}</div>
                 <div v-if="day.dayNumber >= 1">Full Day: {{ day.wholeday }}</div>
@@ -115,6 +118,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>

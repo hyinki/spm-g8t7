@@ -4,9 +4,10 @@ import HeaderStaff from '../components/HeaderStaff.vue';
 
 <template>
   <HeaderStaff/>
+  <div class="container">
  
   <div>
-    <h1>Welcome to the view own schedule</h1>
+    <h1 class="mb-3 mt-2">Own schedule</h1>
   </div>
 
   <div class="container">
@@ -68,6 +69,8 @@ import HeaderStaff from '../components/HeaderStaff.vue';
       </table>
     </div>
   </div>
+</div>
+<br><br><br>
 </template>
 
 <script>

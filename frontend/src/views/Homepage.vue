@@ -8,19 +8,19 @@ import HeaderManager from '../components/HeaderManager.vue';
   <!-- Staff Section -->
   <div v-if="isStaff">
     <HeaderStaff/>
-    
-
+  
     <div>
-    <h1> Welcome to the HomePage, {{username}}, {{id}},{{ userID }} , {{dept}} (Staff) </h1>
+    <h1 class="mb-3 mt-2 mx-5"> Welcome to the HomePage, {{username}}, {{id}},{{ userID }} , {{dept}} (Staff) </h1>
     </div>
 
     <div>
-      <router-link to="/viewteamschedule">
+      <router-link to="/viewownteamschedule">
         <button type="button" class="btn btn-primary btn-lg m-5">
-          View Your Managed Team's Schedule
+          View Own Team Schedule
         </button>
       </router-link>
     </div>
+  
 
     <div>
       <router-link to="/viewownschedule">
@@ -39,13 +39,16 @@ import HeaderManager from '../components/HeaderManager.vue';
     </div>
 
     <div>
-      <router-link to="/viewownteamschedule">
+      <router-link to="/viewarrangement">
         <button type="button" class="btn btn-primary btn-lg m-5">
-          View Own Team Schedule
+          View Arrangement
         </button>
       </router-link>
     </div>
+
+    
   </div>
+
 
   
 
