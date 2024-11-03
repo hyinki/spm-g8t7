@@ -208,6 +208,7 @@ inoffice: {
     };
   },
 
+
   computed: {
     ...mapGetters(["userRole"]), // Access the user's role from Vuex
     isStaff() {
@@ -306,7 +307,7 @@ inoffice: {
     )
       .then(response => {
       this.teamschedule = response.data
-      console.log( this.teamschedule)
+      console.log(this.teamschedule)
       console.log(typeof teamschedule)
     })
     .catch(error => {
