@@ -7,7 +7,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
   <HeaderStaff />
   <div class="container">
     <div>
-      <h1 class="mb-3 mt-2">View Arrangement</h1>
+      <h1 class="mb-3 mt-2">View Arrangement</h1> <!-- Main heading for the View Arrangement page -->
     </div>
 
     <!-- Arrangements Table -->
@@ -69,15 +69,15 @@ import "toastify-js/src/toastify.css";  // Import Toastify CSS
 import Cookies from 'js-cookie';
 
 export default {
-  name: "ViewArrangement",
+  name: "ViewArrangement", // Component name
   data() {
     return {
-      arrangements: [],
-      id: Cookies.get('userid'),
+      arrangements: [], // Array to hold the arrangements
+      id: Cookies.get('userid'), // Get the user ID from cookies
     };
   },
   computed: {
-    ...mapGetters(["userRole"]),
+    ...mapGetters(["userRole"]), // Access user role from Vuex
   },
   methods: {
     formatDate(dateString) {
@@ -95,18 +95,20 @@ export default {
           withCredentials: true, // Include cookies in the request
         });
         // console.log(response.data);
-        this.arrangements = response.data;
+        this.arrangements = response.data; // Set the arrangements data
       } catch (error) {
-        console.error("Error fetching arrangements:", error);
+        console.error("Error fetching arrangements:", error); // Log any fetch errors
       }
     },
 
+    // Confirm cancellation of an arrangement
     confirmCancel(requestId) {
       if (confirm("Are you sure you want to cancel this arrangement?")) {
         this.cancelRequest(requestId);
       }
     },
 
+    // Cancel an arrangement request
     async cancelRequest(requestId) {
     try {
       const response = await axios.patch(`https://spm-g8t7-flask.onrender.com/withdrawrequest/${requestId}/${this.id}`, {
