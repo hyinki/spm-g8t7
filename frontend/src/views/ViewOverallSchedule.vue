@@ -1,11 +1,11 @@
 <script setup>
-import HeaderHR from '../components/HeaderHR.vue';
+import HeaderHR from '../components/HeaderHR.vue'; // Import the HR header component
 </script>
 <template>
   <HeaderHR/>
   <div class="container">
   <div>
-    <h1 class="mb-3 mt-2">View Overall Schedule</h1>
+    <h1 class="mb-3 mt-2">View Overall Schedule</h1> <!-- Main heading for the View Overall Schedule page -->
   </div>
 
   <div class="d-flex justify-content-between mb-3">
@@ -306,18 +306,20 @@ export default {
   },
 
   created(){
-    this.fetchallschedule();
-    this.fetchwfhschedule();
-    this.fetchcalendarview();
+    this.fetchallschedule(); // Fetch all schedules on component creation
+    this.fetchwfhschedule(); // Fetch WFH schedules on component creation
+    this.fetchcalendarview(); // Fetch calendar view data on component creation
   },
 
   watch:{
     selectedDept(){
+      // Watch for changes in selected department and fetch updated data
       this.fetchallschedule();
       this.fetchwfhschedule();
       this.fetchcalendarview()
     },
     selectedMonth(){
+      // Watch for changes in selected month and fetch updated data
       this.fetchallschedule();
       this.fetchwfhschedule();
       this.fetchcalendarview();
