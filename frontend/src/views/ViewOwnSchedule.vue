@@ -214,6 +214,7 @@ export default {
 },
     formatDate(dateStr) {
       const date = new Date(dateStr);
+      console.log("this is date: ",date)
       return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     },
     // Fetch the WFH requests from the backend
