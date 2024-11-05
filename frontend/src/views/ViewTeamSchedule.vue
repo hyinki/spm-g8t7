@@ -6,20 +6,13 @@ import HeaderManager from '../components/HeaderManager.vue';
 </script>
 
 <template>
-  <!-- Staff Section -->
-  <div v-if="isStaff"> 
-    <HeaderStaff/>
-    
-    <div>
-      <h1 >Welcome to the view team schedule (Staff)</h1>
-    </div>
-  </div>
+
   
   <!-- Manager Section -->
   <div v-if="isManager">
     <HeaderManager/>
     <div class="container">
-      <h1 class="mb-3 mt-2">View Team Schedule (Manager)</h1>
+      <h1 class="mb-3 mt-2">View Managed Team Schedule (Manager)</h1>
     </div>
   </div>
 
@@ -28,7 +21,7 @@ import HeaderManager from '../components/HeaderManager.vue';
     <HeaderHR/>
 
     <div class="container">
-      <h1 class="mb-3 mt-2">View Team Schedule (HR)</h1>
+      <h1 class="mb-3 mt-2">View Managed Team Schedule (HR)</h1>
     </div>
   </div>
 
