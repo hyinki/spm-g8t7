@@ -52,7 +52,11 @@ def load_user(user_id):
 
 # Route for login
 @app.route("/login", methods=["POST"])
+
 def login_route():
+    if not request.json or 'username' not in request.json or 'password' not in request.json:
+        return jsonify({"msg": "Missing credentials."}), 400
+    
     user_id = request.json.get('username')  # Get the user ID from the JSON body 
     print(user_id)
     input_password = request.json.get('password') 
