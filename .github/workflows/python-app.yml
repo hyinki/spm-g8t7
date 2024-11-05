@@ -37,5 +37,5 @@ jobs:
           pytest tests
       - name: Generate coverage report 
         run: |
-          pytest --cov=Classes tests/
+          pytest --cov=Classes --cov-report=html tests/
 
