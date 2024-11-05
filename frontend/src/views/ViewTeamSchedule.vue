@@ -158,6 +158,7 @@ import HeaderManager from '../components/HeaderManager.vue';
 import { mapGetters } from "vuex";
 import axios, { HttpStatusCode } from 'axios';
 import Cookies from 'js-cookie'
+import toastify from 'toastify-js';
 
 export default {
   name: "ViewOwnSchedule",
@@ -313,6 +314,15 @@ inoffice: {
     })
     .catch(error => {
       console.error('Error fetching data:', error);
+
+      Toastify({
+        text: "Error fetching data. Please try again later.",
+        duration: -1,  // Keeps the toast displayed until closed manually
+        close: true,   // Shows close button
+        gravity: "top", // Position top or bottom
+        position: "right", // Position left or right
+        backgroundColor: "#ff0000",  // Optional: red color for error
+      }).showToast();
     })
     },
 
@@ -335,6 +345,15 @@ inoffice: {
       })
       .catch(error=>{
         console.error('Error fetching data:', error)
+
+        Toastify({
+        text: "Error fetching data. Please try again later.",
+        duration: -1,  // Keeps the toast displayed until closed manually
+        close: true,   // Shows close button
+        gravity: "top", // Position top or bottom
+        position: "right", // Position left or right
+        backgroundColor: "#ff0000",  // Optional: red color for error
+      }).showToast();
       })
     },
 
@@ -352,6 +371,15 @@ inoffice: {
       })
       .catch(error=>{
         console.error('Error fetching data:', error)
+
+        Toastify({
+        text: "Error fetching data. Please try again later.",
+        duration: -1,  // Keeps the toast displayed until closed manually
+        close: true,   // Shows close button
+        gravity: "top", // Position top or bottom
+        position: "right", // Position left or right
+        backgroundColor: "#ff0000",  // Optional: red color for error
+      }).showToast();
       })
     },
 
