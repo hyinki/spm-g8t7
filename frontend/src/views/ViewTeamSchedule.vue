@@ -87,14 +87,7 @@ import HeaderManager from '../components/HeaderManager.vue';
     <!-- List View -->
     <div v-else>
       <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Activity</th>
-            <th>Office/WFH</th>
-          </tr>
-        </thead>
+        
         <tbody>
           <tr v-for="event in dummyEvents" :key="event.name">
             <td>{{ formatDate(event.date) }}</td>
@@ -110,7 +103,10 @@ import HeaderManager from '../components/HeaderManager.vue';
           </tr>
         </tbody>
       </table>
+      <h4>Work From Home List</h4>
+
       <table class="table table-striped">
+        
         <thead>
           <tr>
             <th>Date</th>

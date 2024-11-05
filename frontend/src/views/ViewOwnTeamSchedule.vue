@@ -77,14 +77,7 @@ import HeaderHR from '../components/HeaderHR.vue'; // Import the HR header compo
     <div v-else>
 
       <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Activity</th>
-            <th>Office/WFH</th>
-          </tr>
-        </thead>
+        
         <tbody>
           <tr v-for="event in dummyEvents" :key="event.name">
             <td>{{ formatDate(event.date) }}</td>
@@ -101,7 +94,9 @@ import HeaderHR from '../components/HeaderHR.vue'; // Import the HR header compo
           </tr>
         </tbody>
       </table>
+      <h3>Work From Home List</h3>
       <table class="table table-striped">
+        
         <thead>
           <tr>
             <th>Date</th>
@@ -116,7 +111,8 @@ import HeaderHR from '../components/HeaderHR.vue'; // Import the HR header compo
         </thead>
       </table>
       
-      <h3>In Office list</h3>
+      <h3>In Office List</h3>
+      
       <div v-for="(dictionary, date_time) in ownteaminoffice">
       <h5>{{ date_time }}</h5>
       <table class="table table-striped">
