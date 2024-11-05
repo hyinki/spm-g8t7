@@ -360,7 +360,7 @@ inoffice: {
     fetch_team_schedule_list(){
       var params = {month: this.selectedMonth}
       axios.get("https://spm-g8t7-flask.onrender.com/manager_list_in_office",
-      { headers: {'X-Month': this.selectedMonth, "X-userid": Cookies.get("userid")}}
+      { headers: {'X-Month': this.selectedMonth, "X-userid": Cookies.get("userid")}},{withCredentials:true}
       
       // {params:params, withCredentials:true}
     )
