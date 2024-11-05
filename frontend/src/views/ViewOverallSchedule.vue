@@ -108,6 +108,7 @@ import HeaderHR from '../components/HeaderHR.vue'; // Import the HR header compo
 <script>
 import { mapGetters } from "vuex";
 import axios from 'axios';
+import Toastify from 'toastify-js';
 
 export default {
   name: "viewoverallschedule",
@@ -251,6 +252,15 @@ export default {
     })
     .catch(error => {
       console.error('Error fetching data:', error);
+
+      Toastify({
+        text: "Error fetching calendar. Please try again later.",
+        duration: -1,      // Keeps the toast displayed until closed manually
+        close: true,       // Shows close button
+        gravity: "top",    // Positions the toast at the top
+        position: "right", // Aligns the toast to the top right
+        backgroundColor: "#ff0000",  // Optional: red color for error indication
+      }).showToast();
     })
     },
 
@@ -266,6 +276,14 @@ export default {
     })
     .catch(error => {
       console.error('Error fetching data:', error);
+      Toastify({
+        text: "Error fetching schedule. Please try again later.",
+        duration: -1,      // Keeps the toast displayed until closed manually
+        close: true,       // Shows close button
+        gravity: "top",    // Positions the toast at the top
+        position: "right", // Aligns the toast to the top right
+        backgroundColor: "#ff0000",  // Optional: red color for error indication
+      }).showToast();
     })
     },
 
@@ -283,6 +301,14 @@ export default {
     })
     .catch(error => {
       console.error('Error fetching data:', error);
+      Toastify({
+        text: "Error fetching schedule. Please try again later.",
+        duration: -1,      // Keeps the toast displayed until closed manually
+        close: true,       // Shows close button
+        gravity: "top",    // Positions the toast at the top
+        position: "right", // Aligns the toast to the top right
+        backgroundColor: "#ff0000",  // Optional: red color for error indication
+      }).showToast();
     })
     },
 

@@ -97,7 +97,17 @@ export default {
         // console.log(response.data);
         this.arrangements = response.data; // Set the arrangements data
       } catch (error) {
-        console.error("Error fetching arrangements:", error); // Log any fetch errors
+        console.error("Error fetching arrangements:", error);
+        
+        Toastify({
+        text: "Error fetching arrangements. Please try again later.",
+        duration: -1,      // Keeps the toast displayed until closed manually
+        close: true,       // Shows close button
+        gravity: "top",    // Positions the toast at the top
+        position: "right", // Aligns the toast to the top right
+        backgroundColor: "#ff0000",  // Optional: red color for error indication
+      }).showToast();
+        // Log any fetch errors
       }
     },
 
