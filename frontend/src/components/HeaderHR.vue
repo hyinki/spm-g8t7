@@ -1,7 +1,7 @@
 <template>
    
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
+      <div class="container-fluid m-5">
         
         <a class="navbar-brand" href="/homepage">
           <img :src="calendarIcon" alt="Calendar Icon" style="width: 20px; margin-right: 5px" />
@@ -109,5 +109,9 @@
   
   <style scoped>
   /* Add any additional styles for the navbar here if needed */
+
+  .navbar{
+    height: 75px;
+  }
   </style>
   
