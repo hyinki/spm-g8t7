@@ -123,11 +123,11 @@ import HeaderManager from '../components/HeaderManager.vue'; // Import the Manag
 
     <div>
       <div v-if=" position== 'MD' ||position=='Director'">
-    <router-link to="/viewownteamschedule">
-      <button type="button" class="btn btn-primary btn-lg m-5">
-        View Own Team Schedule
-      </button>
-    </router-link>
+        <router-link to="/viewteamschedule">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          View Managed Team Schedule
+        </button>
+      </router-link>
   </div>
 
       <div>
@@ -137,12 +137,12 @@ import HeaderManager from '../components/HeaderManager.vue'; // Import the Manag
         </button>
       </router-link>
     </div>
+    <router-link to="/viewownteamschedule">
+      <button type="button" class="btn btn-primary btn-lg m-5">
+        View Own Team Schedule
+      </button>
+    </router-link>
       
-      <router-link to="/viewteamschedule">
-        <button type="button" class="btn btn-primary btn-lg m-5">
-          View Team Schedule
-        </button>
-      </router-link>
     </div>
 
     <div>
