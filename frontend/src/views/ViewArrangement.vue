@@ -1,10 +1,24 @@
 <script setup>
 import HeaderStaff from '../components/HeaderStaff.vue';
-
+import HeaderManager from '../components/HeaderManager.vue';
+import HeaderHR from '../components/HeaderHR.vue'; // Import the HR header component
 </script>
 
 <template>
-  <HeaderStaff />
+   <div v-if="isManager">
+    <HeaderManager/>
+  
+  </div>
+
+  <div v-if="isStaff">
+    <HeaderStaff/>
+  
+  </div>
+
+  <div v-if="isHR">
+    <HeaderHR/>
+  
+  </div>
   <div class="container">
     <div>
       <h1 class="mb-3 mt-2">View Arrangement</h1> <!-- Main heading for the View Arrangement page -->
@@ -76,8 +90,23 @@ export default {
       id: Cookies.get('userid'), // Get the user ID from cookies
     };
   },
+  created(){
+    this.userRole = Cookies.get('userRole'); // Assuming role is stored in cookies
+    console.log('User role:', this.userRole);
+  },
   computed: {
     ...mapGetters(["userRole"]), // Access user role from Vuex
+    isStaff() {
+    
+    return this.userRole === "Staff"; // Only true if the user's role is 'Staff'
+    
+  },
+  isManager() {
+    return this.userRole === "Manager"; // Only true if the user's role is 'Manager'
+  },
+  isHR() {
+    return this.userRole === "HR"; // Only true if the user's role is 'HR'
+  },
   },
   methods: {
     formatDate(dateString) {
