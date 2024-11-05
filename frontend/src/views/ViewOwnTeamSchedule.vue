@@ -1,11 +1,28 @@
 <script setup>
 import Cookies from 'js-cookie';
 import HeaderStaff from '../components/HeaderStaff.vue';
+import HeaderManager from '../components/HeaderManager.vue';
+import HeaderHR from '../components/HeaderHR.vue'; // Import the HR header component
+
 </script>
 
 <template>
+  <div v-if="isManager">
+    <HeaderManager/>
   
-  <HeaderStaff/>
+  </div>
+
+  <div v-if="isStaff">
+    <HeaderStaff/>
+  
+  </div>
+
+  <div v-if="isHR">
+    <HeaderHR/>
+  
+  </div>
+  
+  
   <div class="container">
  
 
@@ -127,6 +144,7 @@ import HeaderStaff from '../components/HeaderStaff.vue';
 <script>
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import Toastify from 'toastify-js';
 
 export default {
   name: "ViewOwnTeamSchedule",
@@ -160,6 +178,19 @@ export default {
     };
   },
   computed: {
+    
+    
+    isStaff() {
+    
+    return this.userRole === "Staff"; // Only true if the user's role is 'Staff'
+    
+  },
+  isManager() {
+    return this.userRole === "Manager"; // Only true if the user's role is 'Manager'
+  },
+  isHR() {
+    return this.userRole === "HR"; // Only true if the user's role is 'HR'
+  },
     calendarWeeks() {
       const firstDayOfMonth = new Date(
         new Date().getFullYear(),
@@ -250,7 +281,7 @@ export default {
       console.log('Selected month before fetching:', this.selectedMonth)
       var params = { month: this.selectedMonth }
       console.log(params)
-      axios.get("https://spm-g8t7-flask.onrender.com/view_own_team_schedule", { headers: {'X-Month': this.selectedMonth,'X-supervisor':Cookies.get("supervisor")}},{withCredentials:true})
+      axios.get("https://spm-g8t7-flask.onrender.com/api/view_own_team_schedule", { headers: {'X-Month': this.selectedMonth,'X-supervisor':Cookies.get("supervisor")}},{withCredentials:true})
       .then(response => {
       this.ownteamschedule = response.data
       console.log(this.ownteamschedule)
@@ -258,6 +289,14 @@ export default {
     })
     .catch(error => {
       console.error('Error fetching data:', error);
+      Toastify({
+        text: "Error fetching schedule. Please try again later.",
+        duration: -1,      // Keeps the toast displayed until closed manually
+        close: true,       // Shows close button
+        gravity: "top",    // Positions the toast at the top
+        position: "right", // Aligns the toast to the top right
+        backgroundColor: "#ff0000",  // Optional: red color for error indication
+      }).showToast();
     })
     },
 
@@ -278,6 +317,15 @@ export default {
       })
       .catch(error=>{
         console.error('Error fetching data:', error)
+
+        Toastify({
+        text: "Error fetching calendar. Please try again later.",
+        duration: -1,      // Keeps the toast displayed until closed manually
+        close: true,       // Shows close button
+        gravity: "top",    // Positions the toast at the top
+        position: "right", // Aligns the toast to the top right
+        backgroundColor: "#ff0000",  // Optional: red color for error indication
+      }).showToast();
       })
     },
 
@@ -291,6 +339,15 @@ export default {
       })
       .catch(error=>{
         console.error('Error fetching data:', error)
+
+        Toastify({
+        text: "Error fetching list. Please try again later.",
+        duration: -1,      // Keeps the toast displayed until closed manually
+        close: true,       // Shows close button
+        gravity: "top",    // Positions the toast at the top
+        position: "right", // Aligns the toast to the top right
+        backgroundColor: "#ff0000",  // Optional: red color for error indication
+      }).showToast();
       })
     }
 
@@ -301,6 +358,10 @@ export default {
     this.usernameassign();
     this.fetchstaffteamdata();
     this.fetchteaminofficelist();
+
+    this.userRole = Cookies.get('userRole'); // Assuming role is stored in cookies
+    console.log('User role:', this.userRole);
+   
   },
 
   watch:{

@@ -1,7 +1,7 @@
 <template>
    
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
+      <div class="container-fluid m-5">
         
         <a class="navbar-brand" href="/homepage">
           <img :src="calendarIcon" alt="Calendar Icon" style="width: 20px; margin-right: 5px" />
@@ -22,12 +22,26 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/homepage">Home</a>
             </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/viewteamschedule">Managed Team Schedule</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="/viewoverallschedule">View Overall Schedule</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/viewteamschedule">View Team Schedule</a>
+              <a class="nav-link" href="/viewownteamschedule">Own Team Schedule</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/viewownschedule">Own Schedule</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/applyforarrangement">Apply For Arrangement</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/viewarrangement">View Arrangement</a>
+            </li>
+            
             
           </ul>
   
@@ -90,7 +104,7 @@
   
     computed: {
       userRole() {
-        return Cookies.get("userRole") || "Guest"; // Display user role from cookies or default to "Guest"
+        return Cookies.get("username") || "Guest"; // Display user role from cookies or default to "Guest"
       },
     },
   };
@@ -98,5 +112,9 @@
   
   <style scoped>
   /* Add any additional styles for the navbar here if needed */
+
+  .navbar{
+    height: 75px;
+  }
   </style>
   

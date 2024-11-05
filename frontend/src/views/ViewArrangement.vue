@@ -1,13 +1,27 @@
 <script setup>
 import HeaderStaff from '../components/HeaderStaff.vue';
-
+import HeaderManager from '../components/HeaderManager.vue';
+import HeaderHR from '../components/HeaderHR.vue'; // Import the HR header component
 </script>
 
 <template>
-  <HeaderStaff />
+   <div v-if="isManager">
+    <HeaderManager/>
+  
+  </div>
+
+  <div v-if="isStaff">
+    <HeaderStaff/>
+  
+  </div>
+
+  <div v-if="isHR">
+    <HeaderHR/>
+  
+  </div>
   <div class="container">
     <div>
-      <h1 class="mb-3 mt-2">View Arrangement</h1>
+      <h1 class="mb-3 mt-2">View Arrangement</h1> <!-- Main heading for the View Arrangement page -->
     </div>
 
     <!-- Arrangements Table -->
@@ -69,15 +83,30 @@ import "toastify-js/src/toastify.css";  // Import Toastify CSS
 import Cookies from 'js-cookie';
 
 export default {
-  name: "ViewArrangement",
+  name: "ViewArrangement", // Component name
   data() {
     return {
-      arrangements: [],
-      id: Cookies.get('userid'),
+      arrangements: [], // Array to hold the arrangements
+      id: Cookies.get('userid'), // Get the user ID from cookies
     };
   },
+  created(){
+    this.userRole = Cookies.get('userRole'); // Assuming role is stored in cookies
+    console.log('User role:', this.userRole);
+  },
   computed: {
-    ...mapGetters(["userRole"]),
+    ...mapGetters(["userRole"]), // Access user role from Vuex
+    isStaff() {
+    
+    return this.userRole === "Staff"; // Only true if the user's role is 'Staff'
+    
+  },
+  isManager() {
+    return this.userRole === "Manager"; // Only true if the user's role is 'Manager'
+  },
+  isHR() {
+    return this.userRole === "HR"; // Only true if the user's role is 'HR'
+  },
   },
   methods: {
     formatDate(dateString) {
@@ -95,18 +124,30 @@ export default {
           withCredentials: true, // Include cookies in the request
         });
         // console.log(response.data);
-        this.arrangements = response.data;
+        this.arrangements = response.data; // Set the arrangements data
       } catch (error) {
         console.error("Error fetching arrangements:", error);
+        
+        Toastify({
+        text: "Error fetching arrangements. Please try again later.",
+        duration: -1,      // Keeps the toast displayed until closed manually
+        close: true,       // Shows close button
+        gravity: "top",    // Positions the toast at the top
+        position: "right", // Aligns the toast to the top right
+        backgroundColor: "#ff0000",  // Optional: red color for error indication
+      }).showToast();
+        // Log any fetch errors
       }
     },
 
+    // Confirm cancellation of an arrangement
     confirmCancel(requestId) {
       if (confirm("Are you sure you want to cancel this arrangement?")) {
         this.cancelRequest(requestId);
       }
     },
 
+    // Cancel an arrangement request
     async cancelRequest(requestId) {
     try {
       const response = await axios.patch(`https://spm-g8t7-flask.onrender.com/withdrawrequest/${requestId}/${this.id}`, {

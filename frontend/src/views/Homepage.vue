@@ -62,6 +62,14 @@ import HeaderManager from '../components/HeaderManager.vue'; // Import the Manag
     </div>
 
     <div>
+      <router-link to="/viewownteamschedule">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          View Own Team Schedule
+        </button>
+      </router-link>
+    </div>
+
+    <div>
       <router-link to="/viewteamschedule">
         <button type="button" class="btn btn-primary btn-lg m-5">
           View Your Managed Team's Schedule
@@ -109,11 +117,18 @@ import HeaderManager from '../components/HeaderManager.vue'; // Import the Manag
 
 
     <div>
-      <h1 class="mb-3 mt-2 mx-5" >Welcome to the HomePage, {{ username }} (HR)</h1>
+      <h1 class="mb-3 mt-2 mx-5" >Welcome to the HomePage, {{ username }} ( {{dept}} )</h1>
     
     </div>
 
     <div>
+      <div v-if=" position== 'MD' ||position=='Director'">
+        <router-link to="/viewteamschedule">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          View Managed Team Schedule
+        </button>
+      </router-link>
+  </div>
 
       <div>
       <router-link to="/viewoverallschedule">
@@ -122,12 +137,12 @@ import HeaderManager from '../components/HeaderManager.vue'; // Import the Manag
         </button>
       </router-link>
     </div>
+    <router-link to="/viewownteamschedule">
+      <button type="button" class="btn btn-primary btn-lg m-5">
+        View Own Team Schedule
+      </button>
+    </router-link>
       
-      <router-link to="/viewteamschedule">
-        <button type="button" class="btn btn-primary btn-lg m-5">
-          View Team Schedule
-        </button>
-      </router-link>
     </div>
 
     <div>
@@ -171,7 +186,7 @@ export default {
     this.userID = Cookies.get('userid') || 'Cookie not found';
   },
   computed: {
-    ...mapGetters(["userRole","username","id","dept","email","supervisor"]), // Access the user's role, username from Vuex
+    ...mapGetters(["userRole","username","id","dept","email","supervisor","position"]), // Access the user's role, username from Vuex
    
 
     isStaff() {

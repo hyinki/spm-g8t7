@@ -6,20 +6,13 @@ import HeaderManager from '../components/HeaderManager.vue';
 </script>
 
 <template>
-  <!-- Staff Section -->
-  <div v-if="isStaff"> 
-    <HeaderStaff/>
-    
-    <div>
-      <h1 >Welcome to the view team schedule (Staff)</h1>
-    </div>
-  </div>
+
   
   <!-- Manager Section -->
   <div v-if="isManager">
     <HeaderManager/>
     <div class="container">
-      <h1 class="mb-3 mt-2">View Team Schedule (Manager)</h1>
+      <h1 class="mb-3 mt-2">View Managed Team Schedule (Manager)</h1>
     </div>
   </div>
 
@@ -28,7 +21,7 @@ import HeaderManager from '../components/HeaderManager.vue';
     <HeaderHR/>
 
     <div class="container">
-      <h1 class="mb-3 mt-2">View Team Schedule (HR)</h1>
+      <h1 class="mb-3 mt-2">View Managed Team Schedule (HR)</h1>
     </div>
   </div>
 
@@ -158,6 +151,7 @@ import HeaderManager from '../components/HeaderManager.vue';
 import { mapGetters } from "vuex";
 import axios, { HttpStatusCode } from 'axios';
 import Cookies from 'js-cookie'
+import Toastify from 'toastify-js';
 
 export default {
   name: "ViewOwnSchedule",
@@ -313,6 +307,15 @@ inoffice: {
     })
     .catch(error => {
       console.error('Error fetching data:', error);
+
+      Toastify({
+        text: "Error fetching data. Please try again later.",
+        duration: -1,  // Keeps the toast displayed until closed manually
+        close: true,   // Shows close button
+        gravity: "top", // Position top or bottom
+        position: "right", // Position left or right
+        backgroundColor: "#ff0000",  // Optional: red color for error
+      }).showToast();
     })
     },
 
@@ -335,13 +338,22 @@ inoffice: {
       })
       .catch(error=>{
         console.error('Error fetching data:', error)
+
+        Toastify({
+        text: "Error fetching data. Please try again later.",
+        duration: -1,  // Keeps the toast displayed until closed manually
+        close: true,   // Shows close button
+        gravity: "top", // Position top or bottom
+        position: "right", // Position left or right
+        backgroundColor: "#ff0000",  // Optional: red color for error
+      }).showToast();
       })
     },
 
     fetch_team_schedule_list(){
       var params = {month: this.selectedMonth}
       axios.get("https://spm-g8t7-flask.onrender.com/manager_list_in_office",
-      { headers: {'X-Month': this.selectedMonth, "X-userid": Cookies.get("userid")}}
+      { headers: {'X-Month': this.selectedMonth, "X-userid": Cookies.get("userid")}},{withCredentials:true}
       
       // {params:params, withCredentials:true}
     )
@@ -352,6 +364,15 @@ inoffice: {
       })
       .catch(error=>{
         console.error('Error fetching data:', error)
+
+        Toastify({
+        text: "Error fetching data. Please try again later.",
+        duration: -1,  // Keeps the toast displayed until closed manually
+        close: true,   // Shows close button
+        gravity: "top", // Position top or bottom
+        position: "right", // Position left or right
+        backgroundColor: "#ff0000",  // Optional: red color for error
+      }).showToast();
       })
     },
 

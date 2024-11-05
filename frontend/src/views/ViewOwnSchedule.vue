@@ -1,9 +1,26 @@
 <script setup>
 import HeaderStaff from '../components/HeaderStaff.vue';
+import HeaderManager from '../components/HeaderManager.vue';
+import HeaderHR from '../components/HeaderHR.vue'; // Import the HR header component
+
 </script>
 
 <template>
-  <HeaderStaff/>
+  <div v-if="isManager">
+    <HeaderManager/>
+  
+  </div>
+
+  <div v-if="isStaff">
+    <HeaderStaff/>
+  
+  </div>
+
+  <div v-if="isHR">
+    <HeaderHR/>
+  
+  </div>
+  
   <div class="container">
  
   <div>
@@ -102,26 +119,43 @@ export default {
   },
   created() {
     this.fetchWFHRequests(); // Fetch WFH requests when the component is created
+    this.userRole = Cookies.get('userRole'); // Assuming role is stored in cookies
+    console.log('User role:', this.userRole);
   },
   computed: {
+    isStaff() {
+    
+    return this.userRole === "Staff"; // Only true if the user's role is 'Staff'
+    
+  },
+  isManager() {
+    return this.userRole === "Manager"; // Only true if the user's role is 'Manager'
+  },
+  isHR() {
+    return this.userRole === "HR"; // Only true if the user's role is 'HR'
+  },
     filteredWFHDays() {
-    return this.wfhRequests
-      .filter(req => req.Request_Status === 'Approved') // Only approved requests
-      .map(req => {
-        const wfhDays = [];
+  return this.wfhRequests
+    .filter(req => req.Request_Status === 'Approved') // Only approved requests
+    .map(req => {
+      const wfhDays = [];
 
-        // Get WFH status for each day of the week
-        ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].forEach(day => {
-          if (req[day] && req[day] !== 'NULL') {
-            wfhDays.push({
-              date: this.formatDate(new Date(req.start_date)), // Format the date
-              event: `WFH (${req[day]})`
-            });
-          }
-        });
+      // Convert start and end dates into JavaScript Date objects
+      const startDate = new Date(req.start_date);
+      const endDate = new Date(req.end_date);
 
-        return wfhDays;
-        
+      // Iterate from startDate to endDate, checking each day
+      for (let day = startDate; day <= endDate; day.setDate(day.getDate() + 1)) {
+        const dayOfWeek = day.toLocaleDateString('en-US', { weekday: 'long' });
+        if (req[dayOfWeek] && req[dayOfWeek] !== 'NULL') {
+          wfhDays.push({
+            date: new Date(day), // Store the actual date object here
+            event: `WFH (${req[dayOfWeek]})`
+          });
+        }
+      }
+
+      return wfhDays;
       })
       .flat(); // Flatten the array to avoid nested arrays
   },
@@ -214,6 +248,7 @@ export default {
 },
     formatDate(dateStr) {
       const date = new Date(dateStr);
+      // console.log("this is date: ",date)
       return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     },
     // Fetch the WFH requests from the backend
@@ -223,7 +258,7 @@ export default {
         .then(response => {
           // console.log(response.data);
           this.wfhRequests = response.data.filter(req => req.Request_Status === 'Approved'); // Store only approved requests
-          console.log(this.wfhRequests)
+          // console.log(this.wfhRequests)
         })
         .catch(error => {
           console.error('Error fetching WFH requests:', error);

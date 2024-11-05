@@ -308,9 +308,9 @@ def retrieve_manager_calendar_data():
 #settled
 @app.route("/api/individual_view", methods=['GET'])
 def retrieve_individual_view():
-    user_id = request.cookies.get("userid")
+    
     user_id=request.headers.get('X-userid')
-    sql_stringie = "Select * from wfh_requests where Requester_ID = "+str(user_id)
+    sql_stringie = "Select * from wfh_requests where Requester_ID = "+str(user_id) +" and Request_Status = 'Approved';"
     sql = text(sql_stringie)
     sql_processed = db.session.execute(sql)
     column_names = sql_processed.keys()
