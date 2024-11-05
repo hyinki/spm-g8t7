@@ -1,9 +1,24 @@
 <script setup>
 import HeaderStaff from '../components/HeaderStaff.vue';
+import HeaderManager from '../components/HeaderManager.vue';
+import HeaderHR from '../components/HeaderHR.vue'; // Import the HR header component
 </script>
 
 <template>
-  <HeaderStaff />
+  <div v-if="isManager">
+    <HeaderManager/>
+  
+  </div>
+
+  <div v-if="isStaff">
+    <HeaderStaff/>
+  
+  </div>
+
+  <div v-if="isHR">
+    <HeaderHR/>
+  
+  </div>
   <div class="container">
     <div>
       <h1 class="mt-3 mb-3">Apply for arrangement</h1>
@@ -121,10 +136,23 @@ export default {
     this.dept = Cookies.get('dept');
     this.supervisor = Cookies.get('supervisor');
     console.log(this.userID);
+    this.userRole = Cookies.get('userRole'); // Assuming role is stored in cookies
+    console.log('User role:', this.userRole);
   },
   computed: {
     ...mapState(['supervisor', "dept", 'userid']),
-    ...mapGetters(['supervisor', "dept", 'userid']) // Access state variables // Access getters
+    ...mapGetters(['supervisor', "dept", 'userid']), // Access state variables // Access getters
+    isStaff() {
+    
+    return this.userRole === "Staff"; // Only true if the user's role is 'Staff'
+    
+  },
+  isManager() {
+    return this.userRole === "Manager"; // Only true if the user's role is 'Manager'
+  },
+  isHR() {
+    return this.userRole === "HR"; // Only true if the user's role is 'HR'
+  },
   },
   methods: {
     getDayIndex(day) {

@@ -1,11 +1,28 @@
 <script setup>
 import Cookies from 'js-cookie';
 import HeaderStaff from '../components/HeaderStaff.vue';
+import HeaderManager from '../components/HeaderManager.vue';
+import HeaderHR from '../components/HeaderHR.vue'; // Import the HR header component
+
 </script>
 
 <template>
+  <div v-if="isManager">
+    <HeaderManager/>
   
-  <HeaderStaff/>
+  </div>
+
+  <div v-if="isStaff">
+    <HeaderStaff/>
+  
+  </div>
+
+  <div v-if="isHR">
+    <HeaderHR/>
+  
+  </div>
+  
+  
   <div class="container">
  
 
@@ -161,6 +178,19 @@ export default {
     };
   },
   computed: {
+    
+    
+    isStaff() {
+    
+    return this.userRole === "Staff"; // Only true if the user's role is 'Staff'
+    
+  },
+  isManager() {
+    return this.userRole === "Manager"; // Only true if the user's role is 'Manager'
+  },
+  isHR() {
+    return this.userRole === "HR"; // Only true if the user's role is 'HR'
+  },
     calendarWeeks() {
       const firstDayOfMonth = new Date(
         new Date().getFullYear(),
@@ -328,6 +358,10 @@ export default {
     this.usernameassign();
     this.fetchstaffteamdata();
     this.fetchteaminofficelist();
+
+    this.userRole = Cookies.get('userRole'); // Assuming role is stored in cookies
+    console.log('User role:', this.userRole);
+   
   },
 
   watch:{
