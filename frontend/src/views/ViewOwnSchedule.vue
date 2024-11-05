@@ -105,23 +105,27 @@ export default {
   },
   computed: {
     filteredWFHDays() {
-    return this.wfhRequests
-      .filter(req => req.Request_Status === 'Approved') // Only approved requests
-      .map(req => {
-        const wfhDays = [];
+  return this.wfhRequests
+    .filter(req => req.Request_Status === 'Approved') // Only approved requests
+    .map(req => {
+      const wfhDays = [];
 
-        // Get WFH status for each day of the week
-        ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].forEach(day => {
-          if (req[day] && req[day] !== 'NULL') {
-            wfhDays.push({
-              date: this.formatDate(new Date(req.start_date)), // Format the date
-              event: `WFH (${req[day]})`
-            });
-          }
-        });
+      // Convert start and end dates into JavaScript Date objects
+      const startDate = new Date(req.start_date);
+      const endDate = new Date(req.end_date);
 
-        return wfhDays;
-        
+      // Iterate from startDate to endDate, checking each day
+      for (let day = startDate; day <= endDate; day.setDate(day.getDate() + 1)) {
+        const dayOfWeek = day.toLocaleDateString('en-US', { weekday: 'long' });
+        if (req[dayOfWeek] && req[dayOfWeek] !== 'NULL') {
+          wfhDays.push({
+            date: new Date(day), // Store the actual date object here
+            event: `WFH (${req[dayOfWeek]})`
+          });
+        }
+      }
+
+      return wfhDays;
       })
       .flat(); // Flatten the array to avoid nested arrays
   },
@@ -214,7 +218,7 @@ export default {
 },
     formatDate(dateStr) {
       const date = new Date(dateStr);
-      console.log("this is date: ",date)
+      // console.log("this is date: ",date)
       return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     },
     // Fetch the WFH requests from the backend
@@ -224,7 +228,7 @@ export default {
         .then(response => {
           // console.log(response.data);
           this.wfhRequests = response.data.filter(req => req.Request_Status === 'Approved'); // Store only approved requests
-          console.log(this.wfhRequests)
+          // console.log(this.wfhRequests)
         })
         .catch(error => {
           console.error('Error fetching WFH requests:', error);
