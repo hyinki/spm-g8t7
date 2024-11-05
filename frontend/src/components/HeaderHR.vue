@@ -90,7 +90,7 @@
   
     computed: {
       userRole() {
-        return Cookies.get("userRole") || "Guest"; // Display user role from cookies or default to "Guest"
+        return Cookies.get("username") || "Guest"; // Display user role from cookies or default to "Guest"
       },
     },
   };
