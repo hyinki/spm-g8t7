@@ -117,7 +117,7 @@ import HeaderManager from '../components/HeaderManager.vue'; // Import the Manag
 
 
     <div>
-      <h1 class="mb-3 mt-2 mx-5" >Welcome to the HomePage, {{ username }} {{dept}}</h1>
+      <h1 class="mb-3 mt-2 mx-5" >Welcome to the HomePage, {{ username }} ({{dept}})</h1>
     
     </div>
 
