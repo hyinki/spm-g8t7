@@ -62,6 +62,14 @@ import HeaderManager from '../components/HeaderManager.vue'; // Import the Manag
     </div>
 
     <div>
+      <router-link to="/viewownteamschedule">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          View Own Team Schedule
+        </button>
+      </router-link>
+    </div>
+
+    <div>
       <router-link to="/viewteamschedule">
         <button type="button" class="btn btn-primary btn-lg m-5">
           View Your Managed Team's Schedule

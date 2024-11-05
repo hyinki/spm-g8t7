@@ -158,7 +158,7 @@ import HeaderManager from '../components/HeaderManager.vue';
 import { mapGetters } from "vuex";
 import axios, { HttpStatusCode } from 'axios';
 import Cookies from 'js-cookie'
-import toastify from 'toastify-js';
+import Toastify from 'toastify-js';
 
 export default {
   name: "ViewOwnSchedule",
