@@ -117,12 +117,19 @@ import HeaderManager from '../components/HeaderManager.vue'; // Import the Manag
 
 
     <div>
-      <h1 class="mb-3 mt-2 mx-5" >Welcome to the HomePage, {{ username }} (HR)</h1>
+      <h1 class="mb-3 mt-2 mx-5" >Welcome to the HomePage, {{ username }} {{dept}}</h1>
     
     </div>
 
     <div>
-
+      <div v-if="userRole === 'MD' || userRole === 'CEO'">
+    <router-link to="/viewownteamschedule">
+      <button type="button" class="btn btn-primary btn-lg m-5">
+        View Own Team Schedule
+      </button>
+    </router-link>
+  </div>
+  
       <div>
       <router-link to="/viewoverallschedule">
         <button type="button" class="btn btn-primary btn-lg m-5">
@@ -179,7 +186,7 @@ export default {
     this.userID = Cookies.get('userid') || 'Cookie not found';
   },
   computed: {
-    ...mapGetters(["userRole","username","id","dept","email","supervisor"]), // Access the user's role, username from Vuex
+    ...mapGetters(["userRole","username","id","dept","email","supervisor","userRole"]), // Access the user's role, username from Vuex
    
 
     isStaff() {
