@@ -60,6 +60,8 @@ import HeaderStaff from '../components/HeaderStaff.vue';
         </thead>
         <tbody>
           <tr v-for="wfhDay in filteredWFHDays" :key="wfhDay.date">
+            <td>{{ wfhDay.date }}</td>
+            <td>{{ wfhDay }}</td>
             <td>{{ formatDate(wfhDay.date) }}</td>
             <td :class="wfhDay.event.includes('WFH') ? 'text-success' : 'text-warning'">
               {{ wfhDay.event }}
