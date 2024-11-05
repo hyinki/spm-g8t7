@@ -35,7 +35,9 @@ jobs:
         run: |
           cd flask
           pytest tests
-      - name: Generate coverage report 
+      - name: Generate coverage report
         run: |
+          cd flask
           pytest --cov=Classes --cov-report=html tests/
+
 
