@@ -145,6 +145,14 @@ import HeaderManager from '../components/HeaderManager.vue'; // Import the Manag
       
     </div>
 
+    <div v-if=" position== 'MD' ||position=='Director'"">
+      <router-link to="/arrangement">
+        <button type="button" class="btn btn-primary btn-lg m-5">
+          Approve/Reject Arrangement
+        </button>
+      </router-link>
+    </div>
+
     <div>
       <router-link to="/viewownschedule">
         <button type="button" class="btn btn-primary btn-lg m-5">
