@@ -22,12 +22,23 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/homepage">Home</a>
             </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/viewteamschedule">Managed Team Schedule</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="/viewoverallschedule">View Overall Schedule</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/viewteamschedule">View Team Schedule</a>
+              <a class="nav-link" href="/viewownteamschedule">Own Team Schedule</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/applyforarrangement">Apply For Arrangement</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/viewarrangement">View Arrangement</a>
+            </li>
+            
             
           </ul>
   
