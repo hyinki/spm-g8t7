@@ -1154,7 +1154,7 @@
         "kind": 2,
         "importPath": "flask.app",
         "description": "flask.app",
-        "peekOfCode": "def retrieve_individual_view():\n    user_id = request.cookies.get(\"userid\")\n    user_id=request.headers.get('X-userid')\n    sql_stringie = \"Select * from wfh_requests where Requester_ID = \"+str(user_id)\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    return jsonify(sql_processed_2)\n#settled",
+        "peekOfCode": "def retrieve_individual_view():\n    user_id=request.headers.get('X-userid')\n    sql_stringie = \"Select * from wfh_requests where Requester_ID = \"+str(user_id) +\" and Request_Status = 'Approved';\"\n    sql = text(sql_stringie)\n    sql_processed = db.session.execute(sql)\n    column_names = sql_processed.keys()\n    sql_processed_2 = [dict(zip(column_names, row)) for row in sql_processed]\n    return jsonify(sql_processed_2)\n#settled\n@app.route(\"/manager_list_in_office\", methods=['GET'])",
         "detail": "flask.app",
         "documentation": {}
     },
