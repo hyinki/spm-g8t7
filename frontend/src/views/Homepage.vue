@@ -122,7 +122,7 @@ import HeaderManager from '../components/HeaderManager.vue'; // Import the Manag
     </div>
 
     <div>
-      <div v-if="dept == 'MD' || dept == 'CEO'">
+      <div v-if="dept == 'MD' || dept == 'CEO'||dept=='Director'">
     <router-link to="/viewownteamschedule">
       <button type="button" class="btn btn-primary btn-lg m-5">
         View Own Team Schedule
